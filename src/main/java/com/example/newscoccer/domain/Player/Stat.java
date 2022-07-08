@@ -1,6 +1,6 @@
 package com.example.newscoccer.domain.Player;
 
-import com.example.soccerleague.domain.BaseEntity;
+import com.example.newscoccer.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 

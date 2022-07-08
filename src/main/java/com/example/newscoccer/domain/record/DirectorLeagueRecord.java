@@ -1,17 +1,14 @@
 package com.example.newscoccer.domain.record;
 
 import lombok.Getter;
-import lombok.Setter;
+import org.yaml.snakeyaml.events.Event;
 
 import javax.persistence.*;
 
 @Getter
-@Setter
 @Entity
-public class TeamChampionsRecord extends TeamRecord{
+public class DirectorLeagueRecord extends DirectorRecord{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "team_champions_id")
+    @Column(name ="director_league_id")
     private Long id;
-    private int FirstOrSecond;
 }
-

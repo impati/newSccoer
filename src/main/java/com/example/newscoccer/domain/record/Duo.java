@@ -1,7 +1,8 @@
 package com.example.newscoccer.domain.record;
 
-import com.example.soccerleague.domain.BaseEntity;
-import com.example.soccerleague.domain.Round.Round;
+import com.example.newscoccer.domain.BaseEntity;
+import com.example.newscoccer.domain.Player.Player;
+import com.example.newscoccer.domain.Round.Round;
 import lombok.*;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ import javax.persistence.*;
 public class Duo extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "couple_id")
+    @Column(name = "duo_id")
     private Long id;
 
     private Long goalPlayerId;
@@ -27,10 +28,10 @@ public class Duo extends BaseEntity {
     @JoinColumn(name ="round_Id")
     private Round round;
 
-    public static Duo create(Long goalPlayerId,Long assistPlayerId,GoalType goalType,Round round){
+    public static Duo create(Long goalPlayer,Long assistPlayer,GoalType goalType,Round round){
         Duo duo = new Duo();
-        duo.setGoalPlayerId(goalPlayerId);
-        duo.setAssistPlayerId(assistPlayerId);
+        duo.setAssistPlayerId(assistPlayer);
+        duo.setGoalPlayerId(goalPlayer);
         duo.setGoalType(goalType);
         duo.setRound(round);
         return duo;

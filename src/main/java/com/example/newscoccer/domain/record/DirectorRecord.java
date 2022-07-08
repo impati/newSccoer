@@ -1,9 +1,9 @@
 package com.example.newscoccer.domain.record;
 
-import com.example.soccerleague.domain.BaseEntity;
-import com.example.soccerleague.domain.Round.Round;
-import com.example.soccerleague.domain.Team;
-import com.example.soccerleague.domain.director.Director;
+import com.example.newscoccer.domain.BaseEntity;
+import com.example.newscoccer.domain.Round.Round;
+import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.domain.director.Director;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,24 +15,22 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class DirectorRecord extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "director_league_record_id")
+    @Column(name = "director_record_id")
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="round_id")
     private Round round;
-
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "director_id")
     private Director director;
 
-
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 
@@ -40,7 +38,6 @@ public class DirectorRecord extends BaseEntity {
     private MatchResult mathResult;
 
     private int rank;
-
 
     public static DirectorRecord create(Round round , Director director){
         DirectorRecord directorRecord = new DirectorRecord();
@@ -52,17 +49,5 @@ public class DirectorRecord extends BaseEntity {
     public void update(MatchResult mathResult){
         this.mathResult = mathResult;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

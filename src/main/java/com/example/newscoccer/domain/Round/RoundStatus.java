@@ -1,5 +1,5 @@
 package com.example.newscoccer.domain.Round;
 
 public enum RoundStatus {
-    YET,ING,RECORD,DONE
+    INIT,YET,ING,RECORD,DONE
 }

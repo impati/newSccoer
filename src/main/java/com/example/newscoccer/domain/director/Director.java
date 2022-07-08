@@ -1,15 +1,17 @@
 package com.example.newscoccer.domain.director;
 
-import com.example.soccerleague.domain.BaseEntity;
-import com.example.soccerleague.domain.Team;
+import com.example.newscoccer.domain.BaseEntity;
+import com.example.newscoccer.domain.Team;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
-@Getter
-@NoArgsConstructor
+@Getter@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Director extends BaseEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="director_id")
@@ -20,23 +22,18 @@ public class Director extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="team_Id")
     private Team team;
-
     // 연관관계 편의 메서드
-    public void setTeam(Team team){
-
-        if(this.team != null) this.team.setDirector(null);
-        this.team = team;
-
-        if(team != null)
-            team.setDirector(this);
-
+    public void changeTeam(Team team){
+        if(team == null){
+            this.setTeam(null);
+        }
+        else {
+            this.setTeam(team);
+        }
     }
-
-    public Director(String name) {
-        this.name = name;
-    }
-    public void edit(String name,Team team){
-        this.name =  name;
-        setTeam(team);
+    public static Director createDirector(String name) {
+        Director director = new Director();
+        director.setName(name);
+        return director;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.newscoccer.domain;
 
-import com.example.soccerleague.domain.director.Director;
+import com.example.newscoccer.domain.director.Director;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,13 +19,10 @@ public class Team extends BaseEntity{
     private Long id;
     private String name;
     private double rating;
+
     @ManyToOne
     @JoinColumn(name ="league_id")
     private League league;
-
-    @OneToOne(mappedBy = "team",fetch = FetchType.LAZY)
-    @JoinColumn(name = "director_id")
-    private Director director;
 
     public static Team createTeam(League league,String name){
         Team team = new Team();

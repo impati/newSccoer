@@ -1,15 +1,22 @@
 package com.example.newscoccer.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+
+/**
+ *
+ *
+ */
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class League extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,17 +25,5 @@ public class League extends BaseEntity{
     private String name;
     private int rating;
 
-    private int currentSeason;
-    private int currentRoundSt;
-    private int currentChampionsRoundSt;
 
-
-    public League(String name){
-        this.name = name;
-    }
-
-    public League(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }

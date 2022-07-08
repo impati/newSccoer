@@ -7,12 +7,14 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+
+@Entity
 @Getter
 @Setter
-@Entity
-public class TeamLeagueRecord extends TeamRecord{
+public class PlayerChampionsRecord extends PlayerRecord{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "team_league_id")
+    @Column(name ="player_champions_id")
     private Long id;
+    private int FirstOrSecond;
 }

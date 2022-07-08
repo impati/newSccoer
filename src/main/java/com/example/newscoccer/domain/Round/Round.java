@@ -1,10 +1,8 @@
 package com.example.newscoccer.domain.Round;
 
-import com.example.soccerleague.domain.BaseEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.example.newscoccer.domain.BaseEntity;
+import com.example.newscoccer.domain.record.*;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -20,12 +18,44 @@ public abstract class Round extends BaseEntity {
     @Column(name ="round_Id")
     private Long id;
 
-    protected Long homeTeamId;
-    protected Long awayTeamId;
-    protected Long leagueId;
     protected int season;
     protected int roundSt;
 
     @Enumerated(EnumType.STRING)
     protected RoundStatus roundStatus;
+
+
+
+
+
+    public PlayerRecord playerRecordReturn(){
+            RoundTemplate roundTemplate = new RoundTemplate();
+            RoundFeature<PlayerRecord> roundFeature = new RoundFeature<PlayerRecord>() {
+                @Override
+                public PlayerRecord leagueSolved() {
+                    return new PlayerLeagueRecord();
+                }
+
+                @Override
+                public PlayerRecord championsSolved() {
+                    return new PlayerChampionsRecord();
+                }
+            };
+            return roundTemplate.action(this,roundFeature);
+    }
+    public TeamRecord  teamRecordReturn(){
+        RoundTemplate roundTemplate = new RoundTemplate();
+        RoundFeature<TeamRecord> roundFeature = new RoundFeature<TeamRecord>() {
+            @Override
+            public TeamRecord leagueSolved() {
+                return new TeamLeagueRecord();
+            }
+            @Override
+            public TeamRecord championsSolved() {
+                return new TeamChampionsRecord();
+            }
+        };
+        return roundTemplate.action(this,roundFeature);
+    }
+
 }
