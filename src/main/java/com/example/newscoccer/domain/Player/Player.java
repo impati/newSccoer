@@ -44,8 +44,17 @@ public class Player extends BaseEntity {
      * 선수를 생성하는 메서드
      * when : 선수를 생성할 떄 레이팅은 '1500'
      */
-    public static Player createPlayer(String name,Position position,Team team,Stat stat){
-        Player player = new Player();
+    public static Player createPlayer(String name,Position position,Team team,Stat stat) {
+        Player player = null;
+        if(position == Position.AM || position == Position.CM || position == Position.DM || position == Position.LM || position == Position.RM)
+             player = new Midfielder();
+        else if(position == Position.GK)
+             player = new Goalkeeper();
+        else if(position == Position.CF || position == Position.ST || position == Position.RF || position == Position.LF)
+             player = new Striker();
+        else
+             player = new Defender();
+
         player.setName(name);
         player.setPosition(position);
         player.setRating(1500);

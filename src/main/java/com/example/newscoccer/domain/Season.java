@@ -1,6 +1,8 @@
 package com.example.newscoccer.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -8,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public  class Season {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "season_id")
@@ -16,4 +19,11 @@ public  class Season {
     public  int LastLeagueRoundSt = 15; // 리그의 마지막 라운드 TODO: 45수정
     public  int CurrentLeagueRoundSt = 1; // 현재 리그 라운드를 의미함.
     public  int CurrentChampionsRoundSt = 16; // 현재 챔피언스 리그 라운드를 의미함,
+
+    public Season(int currentSeason, int lastLeagueRoundSt, int currentLeagueRoundSt, int currentChampionsRoundSt) {
+        this.currentSeason = currentSeason;
+        LastLeagueRoundSt = lastLeagueRoundSt;
+        CurrentLeagueRoundSt = currentLeagueRoundSt;
+        CurrentChampionsRoundSt = currentChampionsRoundSt;
+    }
 }

@@ -16,7 +16,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class League extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,5 +24,8 @@ public class League extends BaseEntity{
     private String name;
     private int rating;
 
-
+    public League(String name) {
+        this.name = name;
+        this.rating = 1500;
+    }
 }

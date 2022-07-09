@@ -28,6 +28,7 @@ public class Team extends BaseEntity{
         Team team = new Team();
         team.setLeague(league);
         team.setName(name);
+        team.setRating(1500);
         return team;
     }
 }
