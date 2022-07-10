@@ -3,6 +3,7 @@ package com.example.newscoccer.domain.Round;
 import com.example.newscoccer.domain.BaseEntity;
 import com.example.newscoccer.domain.record.*;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -13,6 +14,7 @@ import javax.persistence.*;
 @DiscriminatorColumn
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class Round extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="round_Id")
@@ -24,10 +26,16 @@ public abstract class Round extends BaseEntity {
     @Enumerated(EnumType.STRING)
     protected RoundStatus roundStatus;
 
+    public Round(int season, int roundSt) {
+        this.season = season;
+        this.roundSt = roundSt;
+        this.roundStatus = RoundStatus.INIT;
+    }
 
-
-
-
+    /**
+     *  RoundTemplate 처리를 어떻게 해야할까.
+     * @return
+     */
     public PlayerRecord playerRecordReturn(){
             RoundTemplate roundTemplate = new RoundTemplate();
             RoundFeature<PlayerRecord> roundFeature = new RoundFeature<PlayerRecord>() {

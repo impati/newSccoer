@@ -1,8 +1,6 @@
 package com.example.newscoccer.domain.record;
 
-import com.example.newscoccer.domain.Round.ChampionsRound;
-import com.example.newscoccer.domain.Round.LeagueRound;
-import com.example.newscoccer.domain.Round.Round;
+import com.example.newscoccer.domain.Round.*;
 import com.example.newscoccer.domain.Team;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,7 +25,6 @@ public  class TeamRecord{
     @ManyToOne
     @JoinColumn(name = "round_id")
     private Round round;
-
 
     public static TeamRecord create(Round round, Team team){
         TeamRecord teamLeagueRecord = round.teamRecordReturn();

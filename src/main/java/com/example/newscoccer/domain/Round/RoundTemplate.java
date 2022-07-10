@@ -1,5 +1,8 @@
 package com.example.newscoccer.domain.Round;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class RoundTemplate{
     public <T> T action(Round round , LeagueFeature<T> leagueFeature , ChampionsFeature<T> championsFeature){
         if(round instanceof LeagueRound){
@@ -19,4 +22,5 @@ public class RoundTemplate{
         }
         return null;
     }
+
 }
