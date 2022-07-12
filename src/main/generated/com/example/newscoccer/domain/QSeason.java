@@ -19,15 +19,15 @@ public class QSeason extends EntityPathBase<Season> {
 
     public static final QSeason season = new QSeason("season");
 
-    public final NumberPath<Integer> CurrentChampionsRoundSt = createNumber("CurrentChampionsRoundSt", Integer.class);
+    public final NumberPath<Integer> currentChampionsRoundSt = createNumber("currentChampionsRoundSt", Integer.class);
 
-    public final NumberPath<Integer> CurrentLeagueRoundSt = createNumber("CurrentLeagueRoundSt", Integer.class);
+    public final NumberPath<Integer> currentLeagueRoundSt = createNumber("currentLeagueRoundSt", Integer.class);
 
     public final NumberPath<Integer> currentSeason = createNumber("currentSeason", Integer.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Integer> LastLeagueRoundSt = createNumber("LastLeagueRoundSt", Integer.class);
+    public final NumberPath<Integer> lastLeagueRoundSt = createNumber("lastLeagueRoundSt", Integer.class);
 
     public QSeason(String variable) {
         super(Season.class, forVariable(variable));

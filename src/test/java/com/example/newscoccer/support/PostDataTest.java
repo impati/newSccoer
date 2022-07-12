@@ -6,9 +6,11 @@ import com.example.newscoccer.springDataJpa.PlayerRepository;
 import com.example.newscoccer.springDataJpa.SeasonRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -55,6 +57,14 @@ class PostDataTest {
         });
     }
 
+
+
+    @Test
+    @DisplayName("시즌 두번 생성해보기")
+    void test(){
+        Season season = new Season();
+        Assertions.assertThatThrownBy(()->seasonRepository.save(season)).isInstanceOf(DataIntegrityViolationException.class);
+    }
 
 
 }

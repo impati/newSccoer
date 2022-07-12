@@ -11,7 +11,12 @@ public enum Position {
 
     LB,LWB,CB ,RB, RWB,
 
-    GK
+    GK;
+
+    public static int STRIKER_POSITION_COUNT = 4;
+    public static int MIDFIELDER_POSITION_COUNT = 5;
+    public static int DEFENDER_POSITION_COUNT = 5;
+    public static int GOALKEEPER_POSITION_COUNT = 1;
 }
 /**
  * 0 - 100 반응속도,위치 센스

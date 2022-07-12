@@ -1,6 +1,5 @@
 package com.example.newscoccer.RegisterService.round;
 
-import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
@@ -10,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 @Slf4j
@@ -23,11 +21,12 @@ public class LeagueRoundGeneratorImpl implements LeagueRoundGenerator{
     private final LeagueRepository leagueRepository;
     private final TeamLeagueRecordRepository teamLeagueRecordRepository;
 
+
     /**
      *
      * @param season
      * 라운드
-     * 항상 4대 리그를 시즌 단위로 한번에 생성 -> teamLeagueRecord, playerLeagueRecord
+     * 항상 4대 리그를 시즌 단위로 한번에 생성 -> teamLeagueRecord
      */
     @Override
     public void generator(int season) {
@@ -73,12 +72,11 @@ public class LeagueRoundGeneratorImpl implements LeagueRoundGenerator{
     }
 
     /**
-     *
      * @param round ,team
      * round 에 대한 팀 리그 레코드 생성.
      */
     private void saveEntity(Round round , Team team){
-        TeamRecord teamRecord = TeamRecord.create(round,team);
+        TeamLeagueRecord teamRecord = TeamLeagueRecord.create(round,team);
         teamLeagueRecordRepository.save((TeamLeagueRecord) teamRecord);
     }
 }

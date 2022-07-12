@@ -1,14 +1,15 @@
 package com.example.newscoccer.support;
 
+import com.example.newscoccer.RegisterService.round.ChampionsRoundGenerator;
 import com.example.newscoccer.RegisterService.round.LeagueRoundGenerator;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.*;
-import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Season;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.springDataJpa.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -39,7 +40,7 @@ import java.util.List;
  * ==> PostData 클래스는 초기 설정을 하는 기능을 수행하며 각 메서드들은 다른 곳에서 사용되는 일이 드물것.(ex. 파일 정보를 읽어옴)
  * ==> 일단 메서드로 구현하고 재사용가능성이 빚어진다면 기능으로 구현.
  * ==> 개발 단계에서 필요한 작업들
- * ==> 시즌 라운드, 챔피언스 라운드는 재사용 가능성이 전부하며 개발 단계의 클래스만이 이를 의존하지 않음.
+ * ==> 시즌 라운드, 챔피언스 라운드는 재사용 가능성이 있으며 개발 단계의 클래스만이 이를 의존하지 않음.
  *
  */
 @Component
@@ -52,8 +53,13 @@ public class PostData {
     private final PlayerRepository playerRepository;
     private final DirectorRepository directorRepository;
     private final LeagueRoundGenerator leagueRoundGenerator;
+    private final ChampionsRoundGenerator championsRoundGenerator;
     private final String filePath = "src/main/java/com/example/newscoccer/support/";
 
+    /**
+     * 처음 한번만 .
+     * 시즌이라는 기록도 없을 그 순간만.
+     */
     @EventListener(ApplicationReadyEvent.class)
     public void init() throws IOException {
         int exist = (int) seasonRepository.findAll().stream().count();
@@ -64,10 +70,11 @@ public class PostData {
             directorSetting();
             playerSetting();
             leagueSeasonSetting();
+            championsSeasonSetting();
         }
     }
     private void seasonSetting(){
-        Season season = new Season(0, 45, 1, 16);
+        Season season = new Season(); // 단 한번만 생성할 수 있음.
         seasonRepository.save(season);
     }
     private void leagueSetting(){
@@ -104,7 +111,7 @@ public class PostData {
     private Position[] getPositionByFileName(String name){
         Position []position = null;
         if(name.equals("DefenderList")){
-            position =  new Position[5];
+            position =  new Position[Position.DEFENDER_POSITION_COUNT];
             position[0] = Position.LB;
             position[1] = Position.RB;
             position[2] = Position.LWB;
@@ -112,18 +119,18 @@ public class PostData {
             position[4] = Position.CB;
         }
         else if(name.equals("GoalKeeper")) {
-            position = new Position[1];
+            position = new Position[Position.GOALKEEPER_POSITION_COUNT];
             position[0] = Position.GK;
         }
         else if(name.equals("StrikerPlayerList")) {
-            position = new Position[4];
+            position = new Position[Position.STRIKER_POSITION_COUNT];
             position[0] = Position.ST;
             position[1] = Position.LF;
             position[2] = Position.RF;
             position[3] = Position.CF;
         }
         else {
-            position = new Position[5];
+            position = new Position[Position.MIDFIELDER_POSITION_COUNT];
             position[0] = Position.AM;
             position[1] = Position.LM;
             position[2] = Position.CM;
@@ -175,12 +182,13 @@ public class PostData {
         }
         cin.close();
     }
-
-
     private void leagueSeasonSetting(){
         Season season = seasonRepository.findById(1L).orElse(null);
         leagueRoundGenerator.generator(season.getCurrentSeason());
     }
-
+    private void championsSeasonSetting(){
+        Season season = seasonRepository.findById(1L).orElse(null);
+        championsRoundGenerator.generator(season.getCurrentSeason(),season.getCurrentChampionsRoundSt()); //roundSt = 16이어야함.
+    }
 }
 

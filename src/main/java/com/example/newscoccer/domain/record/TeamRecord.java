@@ -22,16 +22,6 @@ public  class TeamRecord{
     protected Team team;
 
 
-    @ManyToOne
-    @JoinColumn(name = "round_id")
-    private Round round;
-
-    public static TeamRecord create(Round round, Team team){
-        TeamRecord teamLeagueRecord = round.teamRecordReturn();
-        teamLeagueRecord.setRound(round);
-        teamLeagueRecord.setTeam(team);
-        return teamLeagueRecord;
-    }
 
     protected int score ;
     protected int oppositeScore;

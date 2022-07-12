@@ -58,8 +58,7 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
     //inherited
     public final NumberPath<Double> rating;
 
-    // inherited
-    public final com.example.newscoccer.domain.Round.QRound round;
+    public final com.example.newscoccer.domain.Round.QChampionsRound round;
 
     //inherited
     public final NumberPath<Integer> score;
@@ -105,7 +104,7 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
         this.pass = _super.pass;
         this.rank = _super.rank;
         this.rating = _super.rating;
-        this.round = _super.round;
+        this.round = inits.isInitialized("round") ? new com.example.newscoccer.domain.Round.QChampionsRound(forProperty("round")) : null;
         this.score = _super.score;
         this.share = _super.share;
         this.shooting = _super.shooting;

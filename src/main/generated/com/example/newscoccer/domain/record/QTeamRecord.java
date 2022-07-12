@@ -44,8 +44,6 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
 
     public final NumberPath<Double> rating = createNumber("rating", Double.class);
 
-    public final com.example.newscoccer.domain.Round.QRound round;
-
     public final NumberPath<Integer> score = createNumber("score", Integer.class);
 
     public final NumberPath<Integer> share = createNumber("share", Integer.class);
@@ -74,7 +72,6 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
 
     public QTeamRecord(Class<? extends TeamRecord> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.round = inits.isInitialized("round") ? new com.example.newscoccer.domain.Round.QRound(forProperty("round")) : null;
         this.team = inits.isInitialized("team") ? new com.example.newscoccer.domain.QTeam(forProperty("team"), inits.get("team")) : null;
     }
 

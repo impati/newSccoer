@@ -26,6 +26,8 @@ public class QChampionsRound extends EntityPathBase<ChampionsRound> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final NumberPath<Integer> index = createNumber("index", Integer.class);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
