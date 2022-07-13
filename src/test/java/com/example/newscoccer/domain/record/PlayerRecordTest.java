@@ -12,8 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlayerRecordTest {
 
 
-    @Test
-    void playerRecordReturnTest(){
+    @Test    void playerRecordReturnTest(){
         Round leagueRound = new LeagueRound();
         Round championsRound = new ChampionsRound();
         PlayerRecord playerRecord = PlayerRecord.createPlayerRecord(null, Position.AM,null,championsRound);

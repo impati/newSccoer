@@ -70,7 +70,7 @@ public class ChampionsRoundGeneratorImpl implements ChampionsRoundGenerator{
      */
     @Override
     public void generator(int season, int roundSt) {
-
+        if(roundRepository.findChampionsRound(season,roundSt).stream().count() >0)return ;
         TeamPair[] teamPairs = ParticipateTeam(season, roundSt); // 참가할 팀과 인덱스 정보 , 배열의 인덱스가 실제 인엑스임.
         if(roundSt == finals){
             // 하나만 생성.

@@ -30,6 +30,8 @@ public class LeagueRoundGeneratorImpl implements LeagueRoundGenerator{
      */
     @Override
     public void generator(int season) {
+        if(roundRepository.findBySeason(season) > 0) return ;
+
         leagueRepository.findAll().stream().forEach(league->{
             List<Team> teamList = teamRepository.findByLeague(league);
             int idx = 0;

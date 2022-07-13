@@ -1,6 +1,7 @@
 package com.example.newscoccer.RegisterService.round;
 
 import com.example.newscoccer.domain.League;
+import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.LeagueRepository;
@@ -34,16 +35,14 @@ class LeagueRoundGeneratorImplTest {
     private LeagueRoundGenerator leagueRoundGenerator;
     @Test
     void test(){
-
         //THEN
-
         Team team = teamRepository.findById(1L).get();
         Assertions.assertThat(teamLeagueRecordRepository.findByTeam(team).stream().count()).isEqualTo(45);
-
-
     }
     @Test
     void generatorTest(){
+
+
         League league = leagueRepository.findById(1L).get();
         List<Team> teamList = teamRepository.findByLeague(league);
         List<TeamLeagueRecord> ret = new ArrayList<>();
@@ -57,7 +56,7 @@ class LeagueRoundGeneratorImplTest {
         }
 
         int visited[][] = new int[100][100];
-        roundRepository.findAll().stream().forEach(round->{
+        roundRepository.findAll().stream().filter(round -> round instanceof LeagueRound).forEach(round->{
             List<TeamLeagueRecord >  temp = teamLeagueRecordRepository.findByRound(round);
             int l = Math.toIntExact(temp.get(0).getTeam().getId());
             int r = Math.toIntExact(temp.get(1).getTeam().getId());
@@ -70,12 +69,6 @@ class LeagueRoundGeneratorImplTest {
             }
         }
         Assertions.assertThat(flag).isTrue();
-
-
-
-
-
-
 
     }
 

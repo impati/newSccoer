@@ -1,5 +1,6 @@
 package com.example.newscoccer.RegisterService.round;
 
+import com.example.newscoccer.NewScoccerApplication;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Team;
@@ -7,28 +8,30 @@ import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.*;
 import com.example.newscoccer.springDataJpa.dto.TeamScoreDto;
+import com.example.newscoccer.support.PostData;
 import com.example.newscoccer.support.RandomNumber;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 
+
 @SpringBootTest
 @Transactional
-//@DataJpaTest
-//@AutoConfiguration
 class ChampionsRoundGeneratorImplTest {
-
 
     @Autowired
     ChampionsRoundGenerator championsRoundGenerator;
-
     @Autowired
     LeagueRepository leagueRepository;
     @Autowired
@@ -39,7 +42,6 @@ class ChampionsRoundGeneratorImplTest {
     TeamLeagueRecordRepository teamLeagueRecordRepository;
     @Autowired
     TeamChampionsRecordRepository teamChampionsRecordRepository;
-
     @Test
     void firstTeamList(){
 
