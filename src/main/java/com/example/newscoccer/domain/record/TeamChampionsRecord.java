@@ -25,6 +25,7 @@ public class TeamChampionsRecord extends TeamRecord{
         teamChampionsRecord.setRound((ChampionsRound) round);
         teamChampionsRecord.setTeam(team);
         teamChampionsRecord.setFirstOrSecond(firstOrSecond);
+        teamChampionsRecord.setDirector(team.getDirector());
         return teamChampionsRecord;
     }
 

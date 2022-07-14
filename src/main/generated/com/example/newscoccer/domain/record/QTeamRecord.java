@@ -24,6 +24,8 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
 
     public final NumberPath<Integer> cornerKick = createNumber("cornerKick", Integer.class);
 
+    public final com.example.newscoccer.domain.director.QDirector director;
+
     public final NumberPath<Integer> foul = createNumber("foul", Integer.class);
 
     public final NumberPath<Integer> freeKick = createNumber("freeKick", Integer.class);
@@ -72,6 +74,7 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
 
     public QTeamRecord(Class<? extends TeamRecord> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.director = inits.isInitialized("director") ? new com.example.newscoccer.domain.director.QDirector(forProperty("director"), inits.get("director")) : null;
         this.team = inits.isInitialized("team") ? new com.example.newscoccer.domain.QTeam(forProperty("team"), inits.get("team")) : null;
     }
 

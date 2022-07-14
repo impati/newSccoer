@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ *  -  팀은 감독이 항상 있다.
+ */
 @Entity
 @Getter
 @Setter
@@ -23,6 +26,9 @@ public class Team extends BaseEntity{
     @ManyToOne
     @JoinColumn(name ="league_id")
     private League league;
+
+    @OneToOne(mappedBy = "team")
+    private Director director;
 
     public static Team createTeam(League league,String name){
         Team team = new Team();

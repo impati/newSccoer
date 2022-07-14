@@ -2,6 +2,7 @@ package com.example.newscoccer.domain.record;
 
 import com.example.newscoccer.domain.Round.*;
 import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.domain.director.Director;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,9 @@ public  class TeamRecord{
     @JoinColumn(name ="team_id")
     protected Team team;
 
+    @ManyToOne
+    @JoinColumn(name ="director_id")
+    protected Director director;
 
 
     protected int score ;

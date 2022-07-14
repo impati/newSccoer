@@ -27,6 +27,9 @@ public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
     //inherited
     public final NumberPath<Integer> cornerKick;
 
+    // inherited
+    public final com.example.newscoccer.domain.director.QDirector director;
+
     //inherited
     public final NumberPath<Integer> foul;
 
@@ -93,6 +96,7 @@ public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
         super(type, metadata, inits);
         this._super = new QTeamRecord(type, metadata, inits);
         this.cornerKick = _super.cornerKick;
+        this.director = _super.director;
         this.foul = _super.foul;
         this.freeKick = _super.freeKick;
         this.GoodDefense = _super.GoodDefense;

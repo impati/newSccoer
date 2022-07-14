@@ -29,6 +29,7 @@ public class TeamLeagueRecord extends TeamRecord{
         TeamLeagueRecord teamLeagueRecord = (TeamLeagueRecord) round.teamRecordReturn();
         teamLeagueRecord.setRound((LeagueRound) round);
         teamLeagueRecord.setTeam(team);
+        teamLeagueRecord.setDirector(team.getDirector());
         return teamLeagueRecord;
     }
 

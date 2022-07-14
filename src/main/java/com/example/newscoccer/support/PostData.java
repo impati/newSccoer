@@ -176,7 +176,7 @@ public class PostData {
             String temp = cin.readLine();
             if(temp == null) break;
             Director director = Director.createDirector(temp);
-            director.setTeam(teams.get(pos));
+            director.changeTeam(teams.get(pos));
             directorRepository.save(director);
             pos+=1;
         }

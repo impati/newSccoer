@@ -47,9 +47,9 @@ public class DirectorUpdate {
         director.setName(name);
         if(changeTeamId != null) {
             Team team = teamRepository.findById(changeTeamId).orElse(null);
-            director.setTeam(team);
+            director.changeTeam(team);
         }
-        else director.setTeam(null);
+        else director.changeTeam(null);
 
     }
 

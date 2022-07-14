@@ -5,7 +5,6 @@ import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.springDataJpa.DirectorRepository;
-import com.example.newscoccer.springDataJpa.DirectorRepositoryQuerydsl;
 import com.example.newscoccer.springDataJpa.LeagueRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
 import org.assertj.core.api.Assertions;

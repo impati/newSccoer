@@ -27,6 +27,8 @@ public class QTeam extends EntityPathBase<Team> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
 
+    public final com.example.newscoccer.domain.director.QDirector director;
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     //inherited
@@ -56,6 +58,7 @@ public class QTeam extends EntityPathBase<Team> {
 
     public QTeam(Class<? extends Team> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.director = inits.isInitialized("director") ? new com.example.newscoccer.domain.director.QDirector(forProperty("director"), inits.get("director")) : null;
         this.league = inits.isInitialized("league") ? new QLeague(forProperty("league")) : null;
     }
 

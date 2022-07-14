@@ -27,6 +27,9 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
     //inherited
     public final NumberPath<Integer> cornerKick;
 
+    // inherited
+    public final com.example.newscoccer.domain.director.QDirector director;
+
     public final NumberPath<Integer> FirstOrSecond = createNumber("FirstOrSecond", Integer.class);
 
     //inherited
@@ -95,6 +98,7 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
         super(type, metadata, inits);
         this._super = new QTeamRecord(type, metadata, inits);
         this.cornerKick = _super.cornerKick;
+        this.director = _super.director;
         this.foul = _super.foul;
         this.freeKick = _super.freeKick;
         this.GoodDefense = _super.GoodDefense;

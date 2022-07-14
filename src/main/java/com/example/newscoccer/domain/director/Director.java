@@ -9,6 +9,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ *  감독은 맡은 팀이 없을 수도 있다.
+ */
 @Entity
 @Getter@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -28,8 +31,10 @@ public class Director extends BaseEntity {
             this.setTeam(null);
         }
         else {
+            team.setDirector(this);
             this.setTeam(team);
         }
+
     }
     public static Director createDirector(String name) {
         Director director = new Director();
