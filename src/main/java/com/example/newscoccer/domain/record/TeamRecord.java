@@ -1,18 +1,18 @@
 package com.example.newscoccer.domain.record;
 
+import com.example.newscoccer.domain.BaseEntity;
 import com.example.newscoccer.domain.Round.*;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public  class TeamRecord{
+public  class TeamRecord extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "team_record_id")

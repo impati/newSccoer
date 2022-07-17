@@ -1,6 +1,6 @@
 package com.example.newscoccer.SearchService.director.Info;
 
-import com.example.newscoccer.SearchService.common.SimpleInfo;
+import com.example.newscoccer.SearchService.common.EntitySimpleInfo;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,13 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 class DefaultDirectorSimpleInfoTest {
 
     @Autowired
-    SimpleInfo<DirectorSimpleInfoRequest , DirectorSimpleInfoResponse> simpleInfo;
+    EntitySimpleInfo<DirectorSimpleInfoRequest , DirectorSimpleInfoResponse> entitySimpleInfo;
 
     @Test
     @DisplayName("감독 기본 정보 기능")
     void simpleInfo(){
 
-        DirectorSimpleInfoResponse response1 = simpleInfo.simpleInfo(new DirectorSimpleInfoRequest(1L));
+        DirectorSimpleInfoResponse response1 = entitySimpleInfo.simpleInfo(new DirectorSimpleInfoRequest(1L));
 
 
         Assertions.assertThat(response1.getTeamName()).isEqualTo("바이에른 뮌헨");

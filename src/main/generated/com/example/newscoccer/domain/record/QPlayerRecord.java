@@ -44,7 +44,7 @@ public class QPlayerRecord extends EntityPathBase<PlayerRecord> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
-    public final EnumPath<MatchResult> mathResult = createEnum("mathResult", MatchResult.class);
+    public final EnumPath<MatchResult> matchResult = createEnum("matchResult", MatchResult.class);
 
     public final NumberPath<Integer> pass = createNumber("pass", Integer.class);
 

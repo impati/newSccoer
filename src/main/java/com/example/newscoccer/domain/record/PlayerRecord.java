@@ -57,7 +57,7 @@ public class PlayerRecord extends BaseEntity {
     protected Position position;
 
     @Enumerated(EnumType.STRING)
-    protected MatchResult mathResult;
+    protected MatchResult matchResult;
 
     protected boolean isBest;
     protected int grade;

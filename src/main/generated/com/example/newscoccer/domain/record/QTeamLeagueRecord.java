@@ -27,6 +27,9 @@ public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
     //inherited
     public final NumberPath<Integer> cornerKick;
 
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createDate;
+
     // inherited
     public final com.example.newscoccer.domain.director.QDirector director;
 
@@ -43,6 +46,9 @@ public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
     public final NumberPath<Double> grade;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> lastModifiedDate;
 
     //inherited
     public final EnumPath<MatchResult> matchResult;
@@ -96,11 +102,13 @@ public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
         super(type, metadata, inits);
         this._super = new QTeamRecord(type, metadata, inits);
         this.cornerKick = _super.cornerKick;
+        this.createDate = _super.createDate;
         this.director = _super.director;
         this.foul = _super.foul;
         this.freeKick = _super.freeKick;
         this.GoodDefense = _super.GoodDefense;
         this.grade = _super.grade;
+        this.lastModifiedDate = _super.lastModifiedDate;
         this.matchResult = _super.matchResult;
         this.oppositeScore = _super.oppositeScore;
         this.pass = _super.pass;

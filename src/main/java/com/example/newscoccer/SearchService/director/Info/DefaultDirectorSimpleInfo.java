@@ -1,6 +1,6 @@
 package com.example.newscoccer.SearchService.director.Info;
 
-import com.example.newscoccer.SearchService.common.SimpleInfo;
+import com.example.newscoccer.SearchService.common.EntitySimpleInfo;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.springDataJpa.DirectorRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class DefaultDirectorSimpleInfo implements SimpleInfo<DirectorSimpleInfoRequest , DirectorSimpleInfoResponse> {
+public class DefaultDirectorSimpleInfo implements EntitySimpleInfo<DirectorSimpleInfoRequest , DirectorSimpleInfoResponse> {
     private final DirectorRepository  directorRepository;
 
     public DirectorSimpleInfoResponse simpleInfo(Long entityId) {

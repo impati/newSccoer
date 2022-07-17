@@ -53,7 +53,7 @@ public class QPlayerChampionsRecord extends EntityPathBase<PlayerChampionsRecord
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate;
 
     //inherited
-    public final EnumPath<MatchResult> mathResult;
+    public final EnumPath<MatchResult> matchResult;
 
     //inherited
     public final NumberPath<Integer> pass;
@@ -109,7 +109,7 @@ public class QPlayerChampionsRecord extends EntityPathBase<PlayerChampionsRecord
         this.grade = _super.grade;
         this.isBest = _super.isBest;
         this.lastModifiedDate = _super.lastModifiedDate;
-        this.mathResult = _super.mathResult;
+        this.matchResult = _super.matchResult;
         this.pass = _super.pass;
         this.player = _super.player;
         this.position = _super.position;

@@ -22,7 +22,12 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
 
     public static final QTeamRecord teamRecord = new QTeamRecord("teamRecord");
 
+    public final com.example.newscoccer.domain.QBaseEntity _super = new com.example.newscoccer.domain.QBaseEntity(this);
+
     public final NumberPath<Integer> cornerKick = createNumber("cornerKick", Integer.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> createDate = _super.createDate;
 
     public final com.example.newscoccer.domain.director.QDirector director;
 
@@ -35,6 +40,9 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
     public final NumberPath<Double> grade = createNumber("grade", Double.class);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    //inherited
+    public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
     public final EnumPath<MatchResult> matchResult = createEnum("matchResult", MatchResult.class);
 
