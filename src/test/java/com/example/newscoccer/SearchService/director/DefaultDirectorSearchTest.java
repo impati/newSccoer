@@ -1,6 +1,8 @@
 package com.example.newscoccer.SearchService.director;
 
 import com.example.newscoccer.RegisterService.director.DirectorUpdate;
+import com.example.newscoccer.SearchService.director.search.DirectorSearch;
+import com.example.newscoccer.SearchService.director.search.DirectorSearchRequest;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;

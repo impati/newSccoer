@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director;
+package com.example.newscoccer.SearchService.director.search;
 
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Team;
@@ -22,6 +22,10 @@ public class DefaultDirectorSearch implements DirectorSearch{
     private final DirectorRepository directorRepository;
     private final LeagueRepository leagueRepository;
     private final TeamRepository teamRepository;
+
+    /**
+     *  이름 , 리그 , 팀 정보를 통해 감독 서치 기능 .
+     */
     @Override
     public List<Director> directorSearch(DirectorSearchRequest request) {
         League league = null;

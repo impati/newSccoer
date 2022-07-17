@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director;
+package com.example.newscoccer.SearchService.director.search;
 
 import com.example.newscoccer.domain.director.Director;
 
