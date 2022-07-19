@@ -1,6 +1,6 @@
 package com.example.newscoccer.SearchService.director.league;
 
-import com.example.newscoccer.SearchService.common.EntityLeagueInfo;
+import com.example.newscoccer.SearchService.common.EntityRecordInfo;
 import com.example.newscoccer.domain.record.MatchResultUtils;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
@@ -12,11 +12,11 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
-public class DefaultDirectorLeagueInfo implements EntityLeagueInfo<DirectorLeagueInfoRequest,DirectorLeagueInfoResponse> {
+@Transactional
+public class DefaultDirectorLeagueInfo implements EntityRecordInfo<DirectorLeagueInfoRequest,DirectorLeagueInfoResponse> {
     private final TeamLeagueRecordRepository teamLeagueRecordRepository;
     @Override
-    public DirectorLeagueInfoResponse leagueInfo(DirectorLeagueInfoRequest req) {
+    public DirectorLeagueInfoResponse recordInfo(DirectorLeagueInfoRequest req) {
         int rank = 0 ;
         List<TeamLeagueRecord> result = teamLeagueRecordRepository.findByDirectorAndSeason(req.getDirectorId(), req.getSeason());
         MatchResultUtils mat = new MatchResultUtils(result);

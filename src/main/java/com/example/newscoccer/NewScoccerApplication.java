@@ -24,7 +24,6 @@ public class NewScoccerApplication {
         SpringApplication.run(NewScoccerApplication.class, args);
 
     }
-
     @Configuration
     @RequiredArgsConstructor
     static class Config {

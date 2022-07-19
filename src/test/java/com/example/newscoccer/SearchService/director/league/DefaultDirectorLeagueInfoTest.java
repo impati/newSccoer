@@ -1,28 +1,28 @@
 package com.example.newscoccer.SearchService.director.league;
 
-import com.example.newscoccer.SearchService.common.EntityLeagueInfo;
+import com.example.newscoccer.SearchService.common.EntityRecordInfo;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 /**
- * 기록 save 기능 추가시 다시 테스트.
+ * TODO : 기록 save 기능 추가시 다시 테스트.
  */
-@SpringBootTest
+@SpringBoo tTest
 class DefaultDirectorLeagueInfoTest {
 
 
     @Autowired
-    EntityLeagueInfo<DirectorLeagueInfoRequest , DirectorLeagueInfoResponse> leagueInfo ;
+    EntityRecordInfo<DirectorLeagueInfoRequest , DirectorLeagueInfoResponse> leagueInfo ;
 
 
     @Test
     @DisplayName("감독 리그 정보 가져오기")
     void directorLeagueInfoTest(){
-        DirectorLeagueInfoResponse response = leagueInfo.leagueInfo(new DirectorLeagueInfoRequest(1L, 0));
+
+
+        DirectorLeagueInfoResponse response = leagueInfo.recordInfo(new DirectorLeagueInfoRequest(1L, 0));
         int win = response.getWin();
         int draw = response.getDraw();
         int lose = response.getLose();
