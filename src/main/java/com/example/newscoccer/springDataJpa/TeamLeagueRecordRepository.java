@@ -3,6 +3,7 @@ package com.example.newscoccer.springDataJpa;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
 
     List<TeamLeagueRecord> findByTeam(Team team);
     List<TeamLeagueRecord> findByRound(Round round);
-
+    List<TeamLeagueRecord> findByDirector(Director director);
 
     /**
      *
@@ -32,10 +33,29 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
     List<TeamLeagueRecord> findBySeasonTopN(@Param("league") League league , @Param("season")  int season , Pageable pageable);
 
 
+    /**
+     * 감독 + 시즌 정보로 팀 정보를 모두 가져옴 .
+     * @return
+     */
     @Query("select tlr from TeamLeagueRecord tlr " +
             " join  fetch tlr.director d" +
             " join tlr.round r " +
             " where d.id = :director and r.season = :season " +
-            " order by tlr.createDate desc ")
+            " order by tlr.createDate ")
     List<TeamLeagueRecord> findByDirectorAndSeason(@Param("director") Long directorId ,@Param("season") int season);
+
+
+    /**
+     * 감독의 정보로 팀의 시즌 마지막 경기들을 가져옴 .
+     * @param director
+     * @return
+     */
+    @Query("select tlr from TeamLeagueRecord tlr " +
+            " join tlr.round r " +
+            " where tlr.director = :director " +
+            " and r.roundSt = 45 " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE ")
+    List<TeamLeagueRecord> findBySeasonLastGame(@Param("director") Director director);
+
+
 }

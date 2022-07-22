@@ -5,11 +5,11 @@ import com.example.newscoccer.RegisterService.round.LeagueRoundGenerator;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.*;
 import com.example.newscoccer.domain.Season;
+import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.springDataJpa.*;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -72,10 +72,21 @@ public class PostData {
             leagueSeasonSetting();
             championsSeasonSetting();
         }
+        else{
+            Season season = seasonRepository.findById(1L).get();
+            SeasonUtils.currentLeagueRoundSt = season.getCurrentLeagueRoundSt();
+            SeasonUtils.currentSeason = season.getCurrentSeason();
+            SeasonUtils.currentChampionsRoundSt = season.getCurrentChampionsRoundSt();
+            SeasonUtils.lastLeagueRoundSt = season.getLastLeagueRoundSt();
+        }
     }
     private void seasonSetting(){
         Season season = new Season(); // 단 한번만 생성할 수 있음.
         seasonRepository.save(season);
+        SeasonUtils.currentLeagueRoundSt = season.getCurrentLeagueRoundSt();
+        SeasonUtils.currentSeason = season.getCurrentSeason();
+        SeasonUtils.currentChampionsRoundSt = season.getCurrentChampionsRoundSt();
+        SeasonUtils.lastLeagueRoundSt = season.getLastLeagueRoundSt();
     }
     private void leagueSetting(){
         League b = new League("분데스리가");

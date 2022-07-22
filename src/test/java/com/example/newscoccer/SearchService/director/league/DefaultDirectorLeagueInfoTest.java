@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * TODO : 기록 save 기능 추가시 다시 테스트.
  */
-@SpringBoo tTest
+@SpringBootTest
 class DefaultDirectorLeagueInfoTest {
 
 

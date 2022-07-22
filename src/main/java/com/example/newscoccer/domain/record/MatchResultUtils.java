@@ -16,8 +16,6 @@ public class MatchResultUtils  {
     private int win ;
     private int draw ;
     private int lose ;
-    private List<TeamRecord> teamRecords = new ArrayList<>();
-    private List<PlayerRecord> playerRecords = new ArrayList<>();
 
     public MatchResultUtils(List records) {
         for (Object record : records) {
