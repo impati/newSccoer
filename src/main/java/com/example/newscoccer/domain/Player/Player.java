@@ -63,4 +63,34 @@ public class Player extends BaseEntity {
         return player;
     }
 
+    /**
+     *
+     * 선수 정보 업데이트
+     */
+    public void update(String name,Position position ,Team team,
+                       int acceleration,int speed,int physicalFight,
+                       int stamina,int activeness,int jump,
+                       int balance,int ballControl,int crosses,
+                       int pass,int longPass,int dribble,
+                       int goalDetermination,int midRangeShot,int shootPower,
+                       int heading,int defense,int tackle,
+                       int intercepting,int slidingTackle,int diving,
+                       int handling,int goalKick,int speedReaction,
+                       int positioning, int visualRange, int sense
+    ) {
+        this.setName(name);
+        this.setPosition(position);
+        this.setTeam(team);
+        this.getStat().update(
+                acceleration, speed, physicalFight,
+                stamina, activeness, jump, balance, ballControl,
+                crosses, pass, longPass, dribble, goalDetermination, midRangeShot,
+                shootPower, heading, defense,
+                tackle, intercepting, slidingTackle, diving,
+                handling, goalKick, speedReaction, positioning, visualRange, sense);
+    }
+
+
+
+
 }
