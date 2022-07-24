@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director.totalInfo;
+package com.example.newscoccer.SearchService.director.Info.totalInfo;
 
 import com.example.newscoccer.SearchService.common.EntityTotalInfo;
 import com.example.newscoccer.domain.SeasonUtils;

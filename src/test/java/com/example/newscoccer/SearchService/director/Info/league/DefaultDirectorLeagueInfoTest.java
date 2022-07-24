@@ -1,6 +1,8 @@
-package com.example.newscoccer.SearchService.director.league;
+package com.example.newscoccer.SearchService.director.Info.league;
 
 import com.example.newscoccer.SearchService.common.EntityRecordInfo;
+import com.example.newscoccer.SearchService.director.Info.league.DirectorLeagueInfoRequest;
+import com.example.newscoccer.SearchService.director.Info.league.DirectorLeagueInfoResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +16,7 @@ class DefaultDirectorLeagueInfoTest {
 
 
     @Autowired
-    EntityRecordInfo<DirectorLeagueInfoRequest , DirectorLeagueInfoResponse> leagueInfo ;
+    EntityRecordInfo<DirectorLeagueInfoRequest, DirectorLeagueInfoResponse> leagueInfo ;
 
 
     @Test

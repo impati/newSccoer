@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director.champions;
+package com.example.newscoccer.SearchService.director.Info.champions;
 
 import com.example.newscoccer.SearchService.common.EntityRecordInfo;
 import org.junit.jupiter.api.DisplayName;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 class DefaultDirectorChampionsInfoTest {
 
     @Autowired
-    EntityRecordInfo<DirectorChampionsInfoRequest,DirectorChampionsInfoResponse> entityRecordInfo ;
+    EntityRecordInfo<DirectorChampionsInfoRequest, DirectorChampionsInfoResponse> entityRecordInfo ;
 
     @Test
     @DisplayName("감독페이지의  챔피언스리그 기록 기능 테스트")

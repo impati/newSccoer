@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director.champions;
+package com.example.newscoccer.SearchService.director.Info.champions;
 
 import com.example.newscoccer.domain.DataTransferObject;
 import lombok.AllArgsConstructor;

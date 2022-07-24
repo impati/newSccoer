@@ -1,7 +1,6 @@
-package com.example.newscoccer.SearchService.director.champions;
+package com.example.newscoccer.SearchService.director.Info.champions;
 
 import com.example.newscoccer.SearchService.common.EntityRecordInfo;
-import com.example.newscoccer.SearchService.director.league.DirectorLeagueInfoResponse;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.record.MatchResultUtils;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;

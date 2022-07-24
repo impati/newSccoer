@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director.league;
+package com.example.newscoccer.SearchService.director.Info.league;
 
 import com.example.newscoccer.SearchService.common.EntityRecordInfo;
 import com.example.newscoccer.domain.record.MatchResultUtils;

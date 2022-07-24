@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.director.league;
+package com.example.newscoccer.SearchService.player.info.league;
 
 import com.example.newscoccer.domain.DataTransferObject;
 import lombok.AllArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class DirectorLeagueInfoRequest extends DataTransferObject {
-    private Long directorId;
+public class PlayerLeagueInfoRequest extends DataTransferObject {
+    private Long playerId;
     private int season;
 }
