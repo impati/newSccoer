@@ -12,8 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * 리그 정보
- *
+ * 시즌 + 선수 정보로  리그 정보를 가져옴.
  */
 @Slf4j
 @Service
