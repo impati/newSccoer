@@ -3,12 +3,21 @@ package com.example.newscoccer.SearchService.common;
 import com.example.newscoccer.domain.DataTransferObject;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundStatus;
-import com.example.newscoccer.domain.record.*;
 import com.example.newscoccer.domain.SeasonUtils;
+import com.example.newscoccer.domain.record.PlayerChampionsRecord;
+import com.example.newscoccer.domain.record.PlayerLeagueRecord;
+import com.example.newscoccer.domain.record.TeamChampionsRecord;
+import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+/**
+ * 랭크 업적을 조회하고 싶다면 해당 클래스를 상속받는다 .
+ */
 
 @Slf4j
 @Getter
@@ -44,7 +53,7 @@ public class RankInfo extends DataTransferObject {
     }
 
     /**
-     * records : 시즌 마지막 경기들
+     * records : 시즌 마지막 경기들 , 모든 시즌이 들어와도 됨..
      * @param records
      * @param clazz
      */
@@ -53,15 +62,14 @@ public class RankInfo extends DataTransferObject {
             if (clazz.isAssignableFrom(PlayerLeagueRecord.class)) {
                 PlayerLeagueRecord playerLeagueRecord = (PlayerLeagueRecord)record;
                 Round round = playerLeagueRecord.getRound();
-                if(round.getRoundSt() == SeasonUtils.currentLeagueRoundSt && round.getRoundStatus() == RoundStatus.DONE){
+                if(round.getRoundSt() == SeasonUtils.lastLeagueRoundSt && round.getRoundStatus() == RoundStatus.DONE){
                     leagueCalc(playerLeagueRecord.getRank());
                 }
             }
             else {
-
                 TeamLeagueRecord teamLeagueRecord = (TeamLeagueRecord)record;
                 Round round = teamLeagueRecord.getRound();
-                if(round.getRoundSt() == SeasonUtils.currentLeagueRoundSt && round.getRoundStatus() == RoundStatus.DONE){
+                if(round.getRoundSt() == SeasonUtils.lastLeagueRoundSt && round.getRoundStatus() == RoundStatus.DONE){
                     leagueCalc(teamLeagueRecord.getRank());
                 }
             }
@@ -71,23 +79,36 @@ public class RankInfo extends DataTransferObject {
 
     /**
      *
-     * records : 시즌 경기 모두 .
+     * records : 시즌 경기 모두 .(시즌 단위)
      * @param records
      * @param clazz
      */
     private void championsTakeCareOf(List records,Class clazz){
         int minValue = 987654321;
-           for(var record : records){
-               if(clazz.isAssignableFrom(PlayerChampionsRecord.class)){
-                   PlayerChampionsRecord playerChampionsRecord = (PlayerChampionsRecord) record;
-                   minValue = Math.min(playerChampionsRecord.getRank(),minValue);
-               }
-               else{
-                   TeamChampionsRecord teamChampionsRecord = (TeamChampionsRecord) record;
-                   minValue = Math.min(teamChampionsRecord.getRank(),minValue);
-               }
-           }
-        championsCalc(minValue);
+        Map<Integer,Integer> seasonMinValue = new HashMap<>();
+        for(var record : records) {
+            if (clazz.isAssignableFrom(PlayerChampionsRecord.class)) {
+                PlayerChampionsRecord playerChampionsRecord = (PlayerChampionsRecord) record;
+                int season = playerChampionsRecord.getRound().getSeason();
+                if (!seasonMinValue.containsKey(season))
+                    seasonMinValue.put(season, playerChampionsRecord.getRank());
+                else
+                    seasonMinValue.put(season, Math.min(seasonMinValue.get(season), playerChampionsRecord.getRank()));
+            } else {
+                TeamChampionsRecord teamChampionsRecord = (TeamChampionsRecord) record;
+                minValue = Math.min(teamChampionsRecord.getRank(), minValue);
+
+                int season = teamChampionsRecord.getRound().getSeason();
+                if (!seasonMinValue.containsKey(season))
+                    seasonMinValue.put(season, teamChampionsRecord.getRank());
+                else
+                    seasonMinValue.put(season, Math.min(seasonMinValue.get(season), teamChampionsRecord.getRank()));
+            }
+        }
+        for (Integer integer : seasonMinValue.keySet()) {
+            championsCalc(seasonMinValue.get(integer));
+        }
+
     }
 
 

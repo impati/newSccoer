@@ -22,4 +22,17 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
             " where p.id = :player and r.season = :season " +
             " order by r.roundSt desc")
     List<PlayerChampionsRecord> findByPlayerAndSeason(@Param("player") Long playerId , @Param("season")int season);
+
+
+    /**
+     * 선수의 모든 챔피언스 기록을 조회
+     * @param playerId
+     * @return
+     */
+    @Query(" select pcr from PlayerChampionsRecord pcr " +
+            " join fetch pcr.round " +
+            " join pcr.player p " +
+            " where p.id = :player ")
+    List<PlayerChampionsRecord> findPlayerChampionsAll(@Param("player") Long playerId);
+
 }

@@ -21,4 +21,14 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
             " where p.id = :player and r.season = :season " +
             " order by plr.createDate ")
     List<PlayerLeagueRecord> findByPlayerAndSeason(@Param("player") Long playerId ,@Param("season") int season);
+
+    /**
+     *  선수의 리그 전체 기록을 가져옴 .
+     */
+    @Query("select plr from PlayerLeagueRecord plr " +
+            " join fetch plr.round r " +
+            " join  plr.player p " +
+            " where p.id = :player ")
+    List<PlayerLeagueRecord> findPlayerLeagueAll(@Param("player")Long playerId);
+
 }
