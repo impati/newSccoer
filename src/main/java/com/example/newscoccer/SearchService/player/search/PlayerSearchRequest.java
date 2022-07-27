@@ -2,13 +2,16 @@ package com.example.newscoccer.SearchService.player.search;
 
 import com.example.newscoccer.domain.DataTransferObject;
 import com.example.newscoccer.domain.Player.Position;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.collection.internal.PersistentList;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PlayerSearchRequest extends DataTransferObject {
     private String playerName;
     private Long leagueId ;

@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface TeamRepository extends JpaRepository<Team,Long> {
     List<Team> findByLeague(League league);
-    Optional<Team> findByName(String name);
+    Optional<Team> findByName(String name); // exact 매칭
 }
