@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class DefaultPlayerTotalInfo implements EntityTotalInfo<PlayerTotalInfoRequest , PlayerTotalInfoResponse> {
     private final PlayerLeagueRecordRepository playerLeagueRecordRepository;
     private final PlayerChampionsRecordRepository playerChampionsRecordRepository;
+    //TODO : OTHER
     @Override
     public PlayerTotalInfoResponse totalInfo(PlayerTotalInfoRequest req) {
         PlayerTotalInfoResponse resp = new PlayerTotalInfoResponse();

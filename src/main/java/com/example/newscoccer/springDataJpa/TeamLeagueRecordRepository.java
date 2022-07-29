@@ -15,6 +15,8 @@ import java.util.List;
 public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueRecord ,Long> {
 
     List<TeamLeagueRecord> findByTeam(Team team);
+    @Query("select tlr from  TeamLeagueRecord tlr join tlr.team t on t.id = :team ")
+    List<TeamLeagueRecord> findByTeam(@Param("team") Long teamId);
     List<TeamLeagueRecord> findByRound(Round round);
     List<TeamLeagueRecord> findByDirector(Director director);
 

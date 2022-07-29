@@ -17,6 +17,8 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
     List<TeamChampionsRecord> findByRound(Round round);
     List<TeamChampionsRecord> findByDirector(Director director);
 
+
+
     /**
      * 시즌에 챔피언스리그 팀 기록을 감독 기준으로 찾아옴.
      */
@@ -81,6 +83,16 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
             " where r.season = :season and t.id = :team " +
             " order by tcr.createDate ")
     List<TeamChampionsRecord> findByTeamAndSeason(@Param("team") Long teamId , @Param("season") int season);
+
+
+    /**
+     * 팀으로 챔피언스리록을 조회
+     */
+    @Query(" select tcr from TeamChampionsRecord tcr " +
+            " join tcr.team t " +
+            " where t.id = :team " +
+            " order by tcr.createDate ")
+    List<TeamChampionsRecord> findByTeam(@Param("team") Long team);
 
 
 
