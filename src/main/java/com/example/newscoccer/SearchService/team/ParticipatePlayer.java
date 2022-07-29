@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.team.info.league;
+package com.example.newscoccer.SearchService.team;
 
 
 import com.example.newscoccer.domain.Player.Position;
@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * player
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

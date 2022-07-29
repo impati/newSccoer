@@ -3,7 +3,10 @@ package com.example.newscoccer.springDataJpa;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Round.ChampionsRound;
+import com.example.newscoccer.domain.SeasonUtils;
+import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerChampionsRecord;
+import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
 import com.example.newscoccer.testSupport.LeagueTeamPlayer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -51,5 +54,32 @@ class PlayerChampionsRecordRepositoryTest {
         Assertions.assertThat(resp.size()).isEqualTo(roundSt);
 
 
+    }
+
+
+    @Test
+    @DisplayName("어떤 시즌에 챔피언스 리그에 참가한 팀의 선수들 찾기")
+    public void findPlayerParticipate() throws Exception{
+        // given
+        LeagueTeamPlayer maker = new LeagueTeamPlayer(leagueRepository,teamRepository,playerRepository);
+        maker.init();
+        Team team = maker.getTeam();
+        Player player = maker.getPlayer();
+
+
+        for(int i = 1; i<= SeasonUtils.lastLeagueRoundSt; i++){
+            ChampionsRound championsRound = new ChampionsRound(0,i,1);
+            roundRepository.save(championsRound);
+
+            PlayerChampionsRecord plr = (PlayerChampionsRecord) PlayerChampionsRecord.createPlayerRecord(player, player.getPosition(),team,championsRound);
+            playerChampionsRecordRepository.save(plr);
+
+        }
+
+
+        // when
+        List<PlayerParticipate> playerParticipate = playerChampionsRecordRepository.findPlayerParticipate(team.getId(), 0);
+        // then
+        Assertions.assertThat(playerParticipate.size()).isEqualTo(1);
     }
 }

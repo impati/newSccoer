@@ -1,7 +1,7 @@
 package com.example.newscoccer.springDataJpa;
 
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
-import com.example.newscoccer.springDataJpa.dto.PlayerLeagueParticipate;
+import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -40,12 +40,12 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
      * @param season
      * @return
      */
-    @Query(" select new com.example.newscoccer.springDataJpa.dto.PlayerLeagueParticipate(p, count(plr.id)) from PlayerLeagueRecord  plr " +
+    @Query(" select new com.example.newscoccer.springDataJpa.dto.PlayerParticipate(p, count(plr.id)) from PlayerLeagueRecord  plr " +
             " join plr.round r " +
             " join plr.team t " +
             " join plr.player p " +
             " where r.season = :season and t.id = :team " +
             " group by p.id ")
-    List<PlayerLeagueParticipate> findPlayerParticipate(@Param("team") Long team , @Param("season") int season);
+    List<PlayerParticipate> findPlayerParticipate(@Param("team") Long team , @Param("season") int season);
 
 }

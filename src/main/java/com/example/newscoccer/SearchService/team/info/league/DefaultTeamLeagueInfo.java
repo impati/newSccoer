@@ -1,6 +1,7 @@
 package com.example.newscoccer.SearchService.team.info.league;
 
 import com.example.newscoccer.SearchService.common.EntityRecordInfo;
+import com.example.newscoccer.SearchService.team.ParticipatePlayer;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.record.MatchResultUtils;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
@@ -13,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * 시즌 팀의 리그 정보를 가져온다.
+ */
 @Slf4j
 @Service
 @Transactional(readOnly = true)

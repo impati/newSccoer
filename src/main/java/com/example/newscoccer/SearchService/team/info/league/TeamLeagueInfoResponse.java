@@ -1,5 +1,6 @@
 package com.example.newscoccer.SearchService.team.info.league;
 
+import com.example.newscoccer.SearchService.team.ParticipatePlayer;
 import com.example.newscoccer.domain.DataTransferObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;

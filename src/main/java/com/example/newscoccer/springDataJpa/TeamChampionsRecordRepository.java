@@ -4,13 +4,11 @@ import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
-import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.TeamScoreDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import javax.validation.constraints.Size;
 import java.util.List;
 
 public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampionsRecord,Long> {
@@ -72,6 +70,17 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
             "  where tcr.director.id = :director and cr.season = :season" +
             " order by cr.createDate  ")
     List<Round> findRoundByDirector(@Param("director") Long directorId ,@Param("season") int season);
+
+
+    /**
+     * 팀 + 시즌 으로 정보를 가져옴
+     */
+    @Query(" select tcr from TeamChampionsRecord tcr " +
+            " join tcr.round r " +
+            " join tcr.team t " +
+            " where r.season = :season and t.id = :team " +
+            " order by tcr.createDate ")
+    List<TeamChampionsRecord> findByTeamAndSeason(@Param("team") Long teamId , @Param("season") int season);
 
 
 

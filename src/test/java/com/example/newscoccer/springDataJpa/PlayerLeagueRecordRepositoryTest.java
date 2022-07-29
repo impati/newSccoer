@@ -7,7 +7,7 @@ import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
-import com.example.newscoccer.springDataJpa.dto.PlayerLeagueParticipate;
+import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
 import com.example.newscoccer.testSupport.LeagueTeamPlayer;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -68,16 +68,16 @@ class PlayerLeagueRecordRepositoryTest {
         }
 
         // when
-        List<PlayerLeagueParticipate> playerParticipate = playerLeagueRecordRepository.findPlayerParticipate(team.getId(), 0);
+        List<PlayerParticipate> playerParticipate = playerLeagueRecordRepository.findPlayerParticipate(team.getId(), 0);
         // then
         Assertions.assertThat(playerParticipate.size()).isEqualTo(2);
 
 
-        PlayerLeagueParticipate p = playerParticipate.get(0);
+        PlayerParticipate p = playerParticipate.get(0);
         Assertions.assertThat(p.getParticipateCount()).isEqualTo(45);
         Assertions.assertThat(p.getPlayer().getId()).isEqualTo(player.getId());
 
-        PlayerLeagueParticipate p1 = playerParticipate.get(1);
+        PlayerParticipate p1 = playerParticipate.get(1);
         Assertions.assertThat(p1.getParticipateCount()).isEqualTo(45);
         Assertions.assertThat(p1.getPlayer().getId()).isEqualTo(player1.getId());
 
@@ -105,12 +105,12 @@ class PlayerLeagueRecordRepositoryTest {
 
 
         // when
-        List<PlayerLeagueParticipate> playerParticipate = playerLeagueRecordRepository.findPlayerParticipate(team.getId(), 0);
+        List<PlayerParticipate> playerParticipate = playerLeagueRecordRepository.findPlayerParticipate(team.getId(), 0);
         // then
         Assertions.assertThat(playerParticipate.size()).isEqualTo(1);
 
 
-        PlayerLeagueParticipate p = playerParticipate.get(0);
+        PlayerParticipate p = playerParticipate.get(0);
         Assertions.assertThat(p.getParticipateCount()).isEqualTo(45);
         Assertions.assertThat(p.getPlayer().getId()).isEqualTo(player.getId());
 
