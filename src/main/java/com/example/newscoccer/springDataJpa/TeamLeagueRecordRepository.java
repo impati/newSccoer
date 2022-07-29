@@ -5,7 +5,6 @@ import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -57,5 +56,18 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
             " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE ")
     List<TeamLeagueRecord> findBySeasonLastGame(@Param("director") Director director);
 
+
+    /**
+     * 팀  + 시즌 정보로 팀리그정보를 가져옴.
+     * @param teamId
+     * @param season
+     * @return
+     */
+    @Query(" select tlr from TeamLeagueRecord tlr " +
+            " join tlr.round r " +
+            " join fetch tlr.team t " +
+            " where r.season = :season and t.id = :team " +
+            " order by r.roundSt ")
+    List<TeamLeagueRecord> findByTeamAndSeason(@Param("team") Long teamId , @Param("season") int season);
 
 }

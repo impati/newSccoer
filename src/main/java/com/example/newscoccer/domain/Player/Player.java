@@ -3,10 +3,7 @@ package com.example.newscoccer.domain.Player;
 
 import com.example.newscoccer.domain.BaseEntity;
 import com.example.newscoccer.domain.Team;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 

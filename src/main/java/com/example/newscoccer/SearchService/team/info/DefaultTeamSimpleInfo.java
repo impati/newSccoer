@@ -8,6 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 팀의 기본 정보
+ */
 @Slf4j
 @Service
 @Transactional(readOnly = true)

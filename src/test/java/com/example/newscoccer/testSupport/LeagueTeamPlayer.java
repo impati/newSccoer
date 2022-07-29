@@ -32,6 +32,7 @@ public class LeagueTeamPlayer {
         this.playerRepository = playerRepository;
     }
 
+
     public void init(){
         league = new League("teamLeague");
         leagueRepository.save(league);

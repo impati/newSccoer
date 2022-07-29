@@ -1,8 +1,10 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,8 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
@@ -48,5 +48,15 @@ class TeamLeagueRecordRepositoryTest {
 
         });
 
+    }
+
+    @Test
+    @DisplayName("팀 + 시즌 정보로 검색")
+    public void findByTeamAndSeasonTest() throws Exception{
+        // given
+        // when
+        List<TeamLeagueRecord> tlr = teamLeagueRecordRepository.findByTeamAndSeason(1L ,0);
+        // then
+        Assertions.assertThat(tlr.size()).isEqualTo(SeasonUtils.lastLeagueRoundSt);
     }
 }

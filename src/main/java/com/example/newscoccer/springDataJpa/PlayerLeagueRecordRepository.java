@@ -1,6 +1,7 @@
 package com.example.newscoccer.springDataJpa;
 
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
+import com.example.newscoccer.springDataJpa.dto.PlayerLeagueParticipate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -8,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeagueRecord ,Long> {
+
 
     /**
      * 선수의 시즌 리그 정보를 가져옴 .
@@ -30,5 +32,20 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
             " join  plr.player p " +
             " where p.id = :player ")
     List<PlayerLeagueRecord> findPlayerLeagueAll(@Param("player")Long playerId);
+
+
+    /**
+     * 선수정보 , 선수가 해당 시즌에 참가한 경기수
+     * @param team
+     * @param season
+     * @return
+     */
+    @Query(" select new com.example.newscoccer.springDataJpa.dto.PlayerLeagueParticipate(p, count(plr.id)) from PlayerLeagueRecord  plr " +
+            " join plr.round r " +
+            " join plr.team t " +
+            " join plr.player p " +
+            " where r.season = :season and t.id = :team " +
+            " group by p.id ")
+    List<PlayerLeagueParticipate> findPlayerParticipate(@Param("team") Long team , @Param("season") int season);
 
 }
