@@ -1,5 +1,6 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
@@ -14,11 +15,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 
 @SpringBootTest
+@Transactional
 class PlayerLeagueRecordRepositoryTest {
 
     @Autowired
@@ -43,7 +46,7 @@ class PlayerLeagueRecordRepositoryTest {
 
         LeagueTeamPlayer maker = new LeagueTeamPlayer(leagueRepository,teamRepository,playerRepository);
         maker.init();
-
+        League league = maker.getLeague();
         Player player = maker.getPlayer();
 
         Team team  = maker.getTeam();
@@ -53,14 +56,14 @@ class PlayerLeagueRecordRepositoryTest {
 
 
         for(int i = 1;i<= SeasonUtils.lastLeagueRoundSt;i++){
-            LeagueRound leagueRound = new LeagueRound(0,i);
+            LeagueRound leagueRound = new LeagueRound(league,0,i);
             roundRepository.save(leagueRound);
             PlayerLeagueRecord plr = (PlayerLeagueRecord) PlayerLeagueRecord.createPlayerRecord(player, player.getPosition(),team,leagueRound);
             playerLeagueRecordRepository.save(plr);
 
         }
         for(int i = 1;i<= SeasonUtils.lastLeagueRoundSt;i++){
-            LeagueRound leagueRound = new LeagueRound(0,i);
+            LeagueRound leagueRound = new LeagueRound(league,0,i);
             roundRepository.save(leagueRound);
             PlayerLeagueRecord plr = (PlayerLeagueRecord) PlayerLeagueRecord.createPlayerRecord(player1, player1.getPosition(),team,leagueRound);
             playerLeagueRecordRepository.save(plr);
@@ -92,11 +95,13 @@ class PlayerLeagueRecordRepositoryTest {
         LeagueTeamPlayer maker = new LeagueTeamPlayer(leagueRepository,teamRepository,playerRepository);
         maker.init();
 
+        League league = maker.getLeague();
+
         Player player = maker.getPlayer();
         Team team = maker.getTeam();
 
         for(int i = 1;i<= SeasonUtils.lastLeagueRoundSt;i++){
-            LeagueRound leagueRound = new LeagueRound(0,i);
+            LeagueRound leagueRound = new LeagueRound(league,0,i);
             roundRepository.save(leagueRound);
             PlayerLeagueRecord plr = (PlayerLeagueRecord) PlayerLeagueRecord.createPlayerRecord(player, player.getPosition(),team,leagueRound);
             playerLeagueRecordRepository.save(plr);

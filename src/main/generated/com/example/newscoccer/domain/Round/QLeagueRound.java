@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -16,6 +17,8 @@ import com.querydsl.core.types.Path;
 public class QLeagueRound extends EntityPathBase<LeagueRound> {
 
     private static final long serialVersionUID = 1695664518L;
+
+    private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QLeagueRound leagueRound = new QLeagueRound("leagueRound");
 
@@ -29,6 +32,8 @@ public class QLeagueRound extends EntityPathBase<LeagueRound> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
+    public final com.example.newscoccer.domain.QLeague league;
+
     //inherited
     public final NumberPath<Integer> roundSt = _super.roundSt;
 
@@ -39,15 +44,24 @@ public class QLeagueRound extends EntityPathBase<LeagueRound> {
     public final NumberPath<Integer> season = _super.season;
 
     public QLeagueRound(String variable) {
-        super(LeagueRound.class, forVariable(variable));
+        this(LeagueRound.class, forVariable(variable), INITS);
     }
 
     public QLeagueRound(Path<? extends LeagueRound> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QLeagueRound(PathMetadata metadata) {
-        super(LeagueRound.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QLeagueRound(PathMetadata metadata, PathInits inits) {
+        this(LeagueRound.class, metadata, inits);
+    }
+
+    public QLeagueRound(Class<? extends LeagueRound> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.league = inits.isInitialized("league") ? new com.example.newscoccer.domain.QLeague(forProperty("league")) : null;
     }
 
 }

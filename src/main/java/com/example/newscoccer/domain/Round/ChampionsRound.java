@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class ChampionsRound extends Round{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "champions_round_id")
+    @Column(name= "round_id")
     private Long id;
 
     private int index;

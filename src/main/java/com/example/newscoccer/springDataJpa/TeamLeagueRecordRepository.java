@@ -17,6 +17,7 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
     List<TeamLeagueRecord> findByTeam(Team team);
     @Query("select tlr from  TeamLeagueRecord tlr join tlr.team t on t.id = :team ")
     List<TeamLeagueRecord> findByTeam(@Param("team") Long teamId);
+
     List<TeamLeagueRecord> findByRound(Round round);
     List<TeamLeagueRecord> findByDirector(Director director);
 
@@ -71,5 +72,19 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
             " where r.season = :season and t.id = :team " +
             " order by r.roundSt ")
     List<TeamLeagueRecord> findByTeamAndSeason(@Param("team") Long teamId , @Param("season") int season);
+
+
+
+    /**
+     * 시즌 , 라운드 , 리그로 정보를 가져옴 .
+     */
+    @Query("select tlr from TeamLeagueRecord tlr " +
+            " join fetch tlr.team t " +
+            " join fetch tlr.round r " +
+            " where r in(:rounds) " +
+            " order by t.id ")
+    List<TeamLeagueRecord> findLeagueRoundInfo(@Param("rounds") List<Round> rounds);
+
+
 
 }

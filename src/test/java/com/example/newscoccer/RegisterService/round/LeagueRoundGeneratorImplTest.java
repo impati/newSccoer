@@ -9,17 +9,12 @@ import com.example.newscoccer.springDataJpa.RoundRepository;
 import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.task.TaskExecutionAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class LeagueRoundGeneratorImplTest {
@@ -57,7 +52,12 @@ class LeagueRoundGeneratorImplTest {
 
         int visited[][] = new int[100][100];
         roundRepository.findAll().stream().filter(round -> round instanceof LeagueRound).forEach(round->{
-            List<TeamLeagueRecord >  temp = teamLeagueRecordRepository.findByRound(round);
+
+            Assertions.assertThat(round).isInstanceOf(LeagueRound.class);
+            List<TeamLeagueRecord>  temp = teamLeagueRecordRepository.findByRound(round);
+
+            Assertions.assertThat(temp.size()).isEqualTo(2);
+
             int l = Math.toIntExact(temp.get(0).getTeam().getId());
             int r = Math.toIntExact(temp.get(1).getTeam().getId());
             visited[l][r] +=1;

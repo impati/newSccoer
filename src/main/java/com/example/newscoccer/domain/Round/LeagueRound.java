@@ -1,6 +1,6 @@
 package com.example.newscoccer.domain.Round;
 
-import lombok.AccessLevel;
+import com.example.newscoccer.domain.League;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,10 +13,15 @@ import javax.persistence.*;
 public class LeagueRound extends Round{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name= "league_round_id")
+    @Column(name= "round_id")
     private Long id;
 
-    public LeagueRound(int season, int roundSt) {
+    @ManyToOne
+    @JoinColumn(name ="league_id")
+    private League league;
+
+    public LeagueRound(League league , int season, int roundSt) {
         super(season, roundSt);
+        this.league = league;
     }
 }

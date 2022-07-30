@@ -60,7 +60,7 @@ public class LeagueRoundGeneratorImpl implements LeagueRoundGenerator{
                         if (posible[i][opposite] || posible[opposite][i]) continue;
                         posible[i][opposite] = true;
                         posible[opposite][i] = true;
-                        Round round = new LeagueRound(season, k + 1 + idx);
+                        Round round = new LeagueRound(league,season, k + 1 + idx);
                         roundRepository.save(round);
                         saveEntity(round, teamList.get(i));
                         saveEntity(round, teamList.get(opposite));

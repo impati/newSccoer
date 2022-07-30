@@ -114,7 +114,7 @@ public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
         this.pass = _super.pass;
         this.rank = _super.rank;
         this.rating = _super.rating;
-        this.round = inits.isInitialized("round") ? new com.example.newscoccer.domain.Round.QLeagueRound(forProperty("round")) : null;
+        this.round = inits.isInitialized("round") ? new com.example.newscoccer.domain.Round.QLeagueRound(forProperty("round"), inits.get("round")) : null;
         this.score = _super.score;
         this.share = _super.share;
         this.shooting = _super.shooting;

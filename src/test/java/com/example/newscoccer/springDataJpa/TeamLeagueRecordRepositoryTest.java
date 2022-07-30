@@ -1,5 +1,6 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
@@ -11,7 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @SpringBootTest
 @Transactional
@@ -22,6 +25,8 @@ class TeamLeagueRecordRepositoryTest {
     @Autowired
     LeagueRepository leagueRepository;
 
+    @Autowired
+    RoundRepository roundRepository;
     @Autowired
     TeamRepository teamRepository;
     @Test
@@ -58,5 +63,28 @@ class TeamLeagueRecordRepositoryTest {
         List<TeamLeagueRecord> tlr = teamLeagueRecordRepository.findByTeamAndSeason(1L ,0);
         // then
         Assertions.assertThat(tlr.size()).isEqualTo(SeasonUtils.lastLeagueRoundSt);
+    }
+
+
+    @Test
+    @DisplayName("리그 + 시즌 + 라운드 정보로 라운드 정보가져오기")
+    public void findLeagueRoundInfo() throws Exception{
+        // given
+        // when
+        List<Round> roundList = roundRepository.findByLeagueRoundInfo(1L, 0, 1);
+        List<TeamLeagueRecord> tlrList = teamLeagueRecordRepository.findLeagueRoundInfo(roundList);
+
+        // then
+        Assertions.assertThat(roundList.size()).isEqualTo(8);
+        Assertions.assertThat(tlrList.size()).isEqualTo(16);
+        Set<Long> r = new HashSet<>();
+
+        for(var record : tlrList){
+            r.add(record.getRound().getId());
+        }
+        Assertions.assertThat(r.size()).isEqualTo(8);
+
+
+
     }
 }

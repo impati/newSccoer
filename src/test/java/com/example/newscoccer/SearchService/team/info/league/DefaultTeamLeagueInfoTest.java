@@ -66,7 +66,7 @@ class DefaultTeamLeagueInfoTest {
 
         int rank = -1, gain = 0, lost = 0,point = 0;
         for(int i = 1;i<=15;i++){
-            LeagueRound leagueRound = new LeagueRound(0,i);
+            LeagueRound leagueRound = new LeagueRound(league,0,i);
             roundRepository.save(leagueRound);
 
             TeamLeagueRecord tlr = TeamLeagueRecord.create(leagueRound,team);

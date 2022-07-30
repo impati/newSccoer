@@ -1,6 +1,7 @@
 package com.example.newscoccer.SearchService.player.info.totalInfo;
 
 import com.example.newscoccer.SearchService.common.EntityTotalInfo;
+import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.LeagueRound;
@@ -52,6 +53,7 @@ class DefaultPlayerTotalInfoTest {
         // given
         LeagueTeamPlayer maker = new LeagueTeamPlayer(leagueRepository,teamRepository,playerRepository);
         maker.init();
+        League league = maker.getLeague();
         Player player = maker.getPlayer();
         Team team = maker.getTeam();
 
@@ -151,7 +153,7 @@ class DefaultPlayerTotalInfoTest {
 
 
 
-            LeagueRound leagueRound = new LeagueRound(0,i);
+            LeagueRound leagueRound = new LeagueRound(league,0,i);
             leagueRound.setRoundStatus(RoundStatus.DONE);
             roundRepository.save(leagueRound);
             plr.setRound(leagueRound);
@@ -237,7 +239,7 @@ class DefaultPlayerTotalInfoTest {
 
 
 
-            LeagueRound leagueRound = new LeagueRound(1,i);
+            LeagueRound leagueRound = new LeagueRound(league,1,i);
             leagueRound.setRoundStatus(RoundStatus.DONE);
             roundRepository.save(leagueRound);
             plr.setRound(leagueRound);

@@ -2,7 +2,6 @@ package com.example.newscoccer.springDataJpa;
 
 import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.Round;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,5 +21,13 @@ public interface RoundRepository extends JpaRepository<Round,Long> {
     @Query("select count(r) from LeagueRound r where r.season =:season")
     Long findBySeason(@Param("season") int season);
 
+    /**
+     * * 시즌 , 라운드 , 리그로 정보를 가져옴 .
+     */
+
+    @Query("select lr from LeagueRound lr " +
+            " join lr.league l " +
+            "where lr.season = :season and lr.roundSt = :roundSt and l.id = :league ")
+    List<Round> findByLeagueRoundInfo(@Param("league") Long leagueId , @Param("season") int season, @Param("roundSt") int roundSt);
 
 }
