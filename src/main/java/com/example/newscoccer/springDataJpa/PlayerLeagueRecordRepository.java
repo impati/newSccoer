@@ -1,5 +1,7 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.domain.Round.Round;
+import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -47,5 +49,17 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
             " where r.season = :season and t.id = :team " +
             " group by p.id ")
     List<PlayerParticipate> findPlayerParticipate(@Param("team") Long team , @Param("season") int season);
+
+
+    /**
+     * 팀 + 라운드로 해당 라운드에 참가한 선수들을 가져옴 .
+     */
+    @Query("select plr from PlayerLeagueRecord plr " +
+            " join plr.team t " +
+            " join plr.round r " +
+            " where t = :team and r = :round")
+    List<PlayerLeagueRecord> findByTeamAndRound(@Param("team") Team team , @Param("round")Round round);
+
+
 
 }

@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.round.common;
+package com.example.newscoccer.SearchService.round.common.lineUp;
 
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
