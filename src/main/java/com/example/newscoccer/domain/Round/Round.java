@@ -2,8 +2,10 @@ package com.example.newscoccer.domain.Round;
 
 import com.example.newscoccer.domain.BaseEntity;
 import com.example.newscoccer.domain.record.*;
-import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -51,6 +53,7 @@ public abstract class Round extends BaseEntity {
             };
             return roundTemplate.action(this,roundFeature);
     }
+
     public TeamRecord  teamRecordReturn(){
         RoundTemplate roundTemplate = new RoundTemplate();
         RoundFeature<TeamRecord> roundFeature = new RoundFeature<TeamRecord>() {
@@ -65,5 +68,10 @@ public abstract class Round extends BaseEntity {
         };
         return roundTemplate.action(this,roundFeature);
     }
+
+
+
+
+
 
 }
