@@ -14,7 +14,12 @@ import java.util.List;
 public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampionsRecord,Long> {
 
 
-    List<TeamChampionsRecord> findByRound(Round round);
+    @Query("select tcr from TeamChampionsRecord tcr " +
+            " join tcr.team t " +
+            " join tcr.round r " +
+            " where r = :round " +
+            " order by t.id")
+    List<TeamChampionsRecord> findByRound(@Param("round") Round round);
     List<TeamChampionsRecord> findByDirector(Director director);
 
 

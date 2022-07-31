@@ -4,6 +4,7 @@ import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
 import com.example.newscoccer.domain.Round.RoundTemplate;
 import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.PlayerRepository;
 import com.example.newscoccer.springDataJpa.RoundRepository;
@@ -54,11 +55,27 @@ public class DefaultRoundLineUp implements RoundLineUp{
 
             @Override
             public RoundLineUpResponse championsSolved() {
-                return null;
+                RoundLineUpResponse resp = new RoundLineUpResponse();
+                List<TeamChampionsRecord> tcr = teamChampionsRecordRepository.findByRound(round);
+
+                Team teamA = tcr.get(0).getTeam();
+                resp.setTeamAName(teamA.getName());
+                playerRepository.findByTeam(teamA).stream().forEach(p->{
+                    resp.getPlayerListA().add(new RoundLineUpDto(p.getId(),p.getName(),p.getPosition()));
+                });
+
+                Team teamB = tcr.get(1).getTeam();
+                resp.setTeamBName(teamB.getName());
+                playerRepository.findByTeam(teamB).stream().forEach(p->{
+                    resp.getPlayerListB().add(new RoundLineUpDto(p.getId(),p.getName(),p.getPosition()));
+                });
+
+                return resp;
             }
         };
 
 
         return roundTemplate.action(round,roundFeature);
     }
+
 }

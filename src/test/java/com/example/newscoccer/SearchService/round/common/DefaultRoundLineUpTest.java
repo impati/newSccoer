@@ -4,8 +4,10 @@ import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
+import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.*;
 import com.example.newscoccer.testSupport.LeagueTeamPlayer;
@@ -38,6 +40,8 @@ class DefaultRoundLineUpTest {
     @Autowired
     TeamLeagueRecordRepository teamLeagueRecordRepository;
 
+    @Autowired
+    TeamChampionsRecordRepository teamChampionsRecordRepository;
     @Test
     @DisplayName("리그 라운드 라인업")
     public void leagueLineUp() throws Exception{
@@ -78,13 +82,8 @@ class DefaultRoundLineUpTest {
             playerRepository.save(oppositePlayer);
             playerRepository.save(player);
 
-
         }
-
-
-
             LeagueRound round = new LeagueRound(league,0,1000);
-
             roundRepository.save(round);
 
             TeamLeagueRecord teamLeagueRecordA = TeamLeagueRecord.create(round,team);
@@ -92,16 +91,80 @@ class DefaultRoundLineUpTest {
 
             teamLeagueRecordRepository.save(teamLeagueRecordA);
             teamLeagueRecordRepository.save(teamLeagueRecordB);
-
-
-
-
             return round.getId();
 
 
 
 
     }
+
+
+
+
+
+
+
+
+
+
+    @Test
+    @DisplayName("챔피언스 리그 라인업 ")
+    public void championsRound() throws Exception{
+        // given
+        Long roundId = makeTeamChampionsRound();
+        // when
+        RoundLineUpResponse resp = roundLineUp.lineUp(new RoundLineUpRequest(roundId));
+        // then
+        Assertions.assertThat(resp.getTeamAName()).isEqualTo("testTeam1");
+        Assertions.assertThat(resp.getTeamBName()).isEqualTo("testTeam2");
+
+        Assertions.assertThat(resp.getPlayerListA().size()).isEqualTo(11);
+        Assertions.assertThat(resp.getPlayerListB().size()).isEqualTo(11);
+
+    }
+    private Long makeTeamChampionsRound(){
+
+        League league1 = new League("testLeague1");
+        League league2 = new League("testLeague2");
+
+
+        leagueRepository.save(league1);
+        leagueRepository.save(league2);
+
+        Team team1 = Team.createTeam(league1,"testTeam1");
+        Team team2 = Team.createTeam(league2,"testTeam2");
+
+
+        teamRepository.save(team1);
+        teamRepository.save(team2);
+
+        for(int i = 1;i<=11;i+=1) {
+            Player player = Player.createPlayer("testPlayer1" + i, Position.ST, team1, new Stat());
+            Player oppositePlayer = Player.createPlayer("testPlayer2" + i, Position.GK, team2, new Stat());
+
+            playerRepository.save(oppositePlayer);
+            playerRepository.save(player);
+
+        }
+
+
+
+        ChampionsRound round = new ChampionsRound(0,1000,2000);
+        roundRepository.save(round);
+
+        TeamChampionsRecord teamLeagueRecordA = TeamChampionsRecord.create(round,team1,1);
+        TeamChampionsRecord teamLeagueRecordB = TeamChampionsRecord.create(round,team2,1);
+
+        teamChampionsRecordRepository.save(teamLeagueRecordA);
+        teamChampionsRecordRepository.save(teamLeagueRecordB);
+        return round.getId();
+
+
+
+
+    }
+
+
 
 
 
