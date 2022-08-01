@@ -1,12 +1,9 @@
 package com.example.newscoccer.domain.record;
 
-import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -31,6 +28,13 @@ public class TeamLeagueRecord extends TeamRecord{
         teamLeagueRecord.setTeam(team);
         teamLeagueRecord.setDirector(team.getDirector());
         return teamLeagueRecord;
+    }
+    public void update(int score,int share , int cornerKick,int freeKick){
+        this.score += score;
+        this.share += share;
+        this.cornerKick += cornerKick;
+        this.freeKick += freeKick;
+
     }
 
 }

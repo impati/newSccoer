@@ -15,15 +15,22 @@ import java.util.List;
 public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueRecord ,Long> {
 
     List<TeamLeagueRecord> findByTeam(Team team);
+
     @Query("select tlr from  TeamLeagueRecord tlr join tlr.team t on t.id = :team ")
     List<TeamLeagueRecord> findByTeam(@Param("team") Long teamId);
 
+    /**
+     *  라운드로 두개의 팀리그기록을 가져옴 .
+     * @param round
+     * @return
+     */
     @Query("select tlr from TeamLeagueRecord tlr " +
-            " join tlr.team t " +
-            " join tlr.round r " +
+            " join fetch tlr.team t " +
+            " join fetch tlr.round r " +
             " where r =:round " +
             " order by t.id ")
     List<TeamLeagueRecord> findByRound(@Param("round") Round round);
+
     List<TeamLeagueRecord> findByDirector(Director director);
 
     /**
@@ -81,7 +88,7 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
 
 
     /**
-     * 시즌 , 라운드 , 리그로 정보를 가져옴 .
+     * 라운드 정보들로 팀 리그 정보를 가져옴 .
      */
     @Query("select tlr from TeamLeagueRecord tlr " +
             " join fetch tlr.team t " +

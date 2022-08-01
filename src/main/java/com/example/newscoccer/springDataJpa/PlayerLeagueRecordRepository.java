@@ -55,8 +55,8 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
      * 팀 + 라운드로 해당 라운드에 참가한 선수들을 가져옴 .
      */
     @Query("select plr from PlayerLeagueRecord plr " +
-            " join plr.team t " +
-            " join plr.round r " +
+            " join fetch plr.team t " +
+            " join fetch plr.round r " +
             " where t = :team and r = :round")
     List<PlayerLeagueRecord> findByTeamAndRound(@Param("team") Team team , @Param("round")Round round);
 
