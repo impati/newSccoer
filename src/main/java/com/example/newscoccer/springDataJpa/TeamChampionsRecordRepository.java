@@ -1,5 +1,6 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
@@ -98,6 +99,19 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
             " where t.id = :team " +
             " order by tcr.createDate ")
     List<TeamChampionsRecord> findByTeam(@Param("team") Long team);
+
+
+    /**
+     *  라운드 리스트에 해당되는 팀챔피언스 레코드를 모두 가져옴.
+     * @param roundList
+     */
+
+    @Query(" select tcr from TeamChampionsRecord  tcr " +
+            " join fetch tcr.team t " +
+            " join fetch  tcr.round r " +
+            " where r in (:roundList) " +
+            " order by t.id ")
+    List<TeamChampionsRecord> findByRoundList(@Param("roundList")List<ChampionsRound> roundList);
 
 
 

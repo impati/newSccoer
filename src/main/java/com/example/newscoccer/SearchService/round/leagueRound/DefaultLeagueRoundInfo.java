@@ -35,7 +35,6 @@ public class DefaultLeagueRoundInfo implements LeagueRoundInfo{
         List<TeamLeagueRecord> teamLeagueRecordList = teamLeagueRecordRepository
                 .findLeagueRoundInfo(roundRepository.findByLeagueRoundInfo(req.getLeagueId(),req.getSeason(),req.getRoundSt()));
 
-
         teamLeagueRecordList.stream().forEach(tlr->{
             if(mapped.containsKey(tlr.getRound().getId())){
                 Round round = tlr.getRound();

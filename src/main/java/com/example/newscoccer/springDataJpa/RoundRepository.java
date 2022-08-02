@@ -30,4 +30,6 @@ public interface RoundRepository extends JpaRepository<Round,Long> {
             "where lr.season = :season and lr.roundSt = :roundSt and l.id = :league ")
     List<Round> findByLeagueRoundInfo(@Param("league") Long leagueId , @Param("season") int season, @Param("roundSt") int roundSt);
 
+
 }
+
