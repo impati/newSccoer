@@ -29,12 +29,5 @@ public class TeamLeagueRecord extends TeamRecord{
         teamLeagueRecord.setDirector(team.getDirector());
         return teamLeagueRecord;
     }
-    public void update(int score,int share , int cornerKick,int freeKick){
-        this.score += score;
-        this.share += share;
-        this.cornerKick += cornerKick;
-        this.freeKick += freeKick;
-
-    }
 
 }

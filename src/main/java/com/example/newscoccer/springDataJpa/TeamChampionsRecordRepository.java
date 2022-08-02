@@ -15,8 +15,8 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
 
 
     @Query("select tcr from TeamChampionsRecord tcr " +
-            " join tcr.team t " +
-            " join tcr.round r " +
+            " join fetch tcr.team t " +
+            " join fetch tcr.round r " +
             " where r = :round " +
             " order by t.id")
     List<TeamChampionsRecord> findByRound(@Param("round") Round round);
@@ -98,6 +98,7 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
             " where t.id = :team " +
             " order by tcr.createDate ")
     List<TeamChampionsRecord> findByTeam(@Param("team") Long team);
+
 
 
 

@@ -3,8 +3,6 @@ package com.example.newscoccer.domain.record;
 import com.example.newscoccer.domain.BaseEntity;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
-import com.example.newscoccer.domain.Round.ChampionsRound;
-import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import lombok.AccessLevel;
@@ -73,8 +71,22 @@ public class PlayerRecord extends BaseEntity {
         return PlayerRecord;
     }
 
+    /**
+     * 넘겨 받은 경기 결과를 저장.
+     */
+    public void update(int goal, int assist,int pass,
+                       int shooting ,int validShooting,int foul,
+                       int defense , int grade){
+        this.goal = goal;
+        this.assist = assist;
+        this.pass = pass;
+        this.shooting = shooting;
+        this.validShooting = validShooting;
+        this.foul= foul;
+        this.goodDefense = defense;
+        this.grade = grade;
 
-
+    }
 
 
 }

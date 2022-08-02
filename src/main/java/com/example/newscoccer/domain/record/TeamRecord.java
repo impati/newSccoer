@@ -1,11 +1,11 @@
 package com.example.newscoccer.domain.record;
 
 import com.example.newscoccer.domain.BaseEntity;
-import com.example.newscoccer.domain.Round.*;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.*;
 
 @Getter
@@ -54,4 +54,14 @@ public  class TeamRecord extends BaseEntity {
     protected double grade;
     protected double rating;
     protected int rank;
+
+    public void update(int score,int share , int cornerKick,int freeKick){
+        this.score += score;
+        this.share += share;
+        this.cornerKick += cornerKick;
+        this.freeKick += freeKick;
+
+    }
+
+
 }
