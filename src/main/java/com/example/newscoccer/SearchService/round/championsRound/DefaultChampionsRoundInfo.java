@@ -54,16 +54,11 @@ public class DefaultChampionsRoundInfo implements ChampionsRoundInfo{
         for(var element :mapped.keySet()){
             list.add(mapped.get(element));
         }
-
         list.sort((t1,t2)-> {
             if(t1.getTeamA().getId() > t2.getTeamA().getId()) return 1;
             else return -1;
         });
-
     }
-
-
-
     private void mapped(Map<Long,RoundInfoDto> mapped , Round round , TeamChampionsRecord tcr,int order){
         if(tcr.getFirstOrSecond() == order) {
             if (mapped.containsKey(round.getId())) {

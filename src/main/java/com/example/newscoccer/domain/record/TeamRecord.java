@@ -32,36 +32,57 @@ public  class TeamRecord extends BaseEntity {
 
     //점유율
     protected int share;
-    //슈팅
-    protected int shooting;
-    // 유효 슈팅
-    protected int validShooting;
     //코너 킥
     protected int cornerKick;
     //프리킥
     protected int freeKick;
+
+
+    // 선수들의 기록 합.
+
+    //슈팅
+    protected int shooting;
+    // 유효 슈팅
+    protected int validShooting;
+
     //파울
     protected int foul;
-    //선방
+    //선방 , 세이브
     protected int GoodDefense;
     protected int pass;
+    // 팀의 평점 . 선수들의 평균 평점.
+    protected double grade;
 
     @Enumerated(EnumType.STRING)
     protected MatchResult matchResult;
 
 
-    // 팀의 평점 . 선수들의 평균 평점.
-    protected double grade;
+
+    //later
     protected double rating;
+    //현재 시즌 , 라운드일때 또는 n 시즌의 마지막 라운드 일때 유효한 값
     protected int rank;
 
-    public void update(int score,int share , int cornerKick,int freeKick){
-        this.score += score;
-        this.share += share;
-        this.cornerKick += cornerKick;
-        this.freeKick += freeKick;
+
+
+    public void teamUpdate(int score,int oppositeScore , int share , int cornerKick,int freeKick){
+        this.score = score;
+        this.oppositeScore = oppositeScore;
+        this.share = share;
+        this.cornerKick = cornerKick;
+        this.freeKick = freeKick;
 
     }
+    // 선수들의 총합기록  -> 매겨변수가 이미 계산되어 넘어옴.
+    public void playerRecordSummation(int shooting,int validShooting, int foul,int goodDefense,int pass ,int grade){
+        this.setShooting(shooting);
+        this.setValidShooting(validShooting);
+        this.setFoul(foul);
+        this.setGoodDefense(goodDefense);
+        this.setPass(pass);
+        this.setGrade(grade);
+    }
+
 
 
 }

@@ -47,9 +47,10 @@ public class PlayerRecord extends BaseEntity {
     protected int foul;
     //선방
     protected int goodDefense;
+    protected int grade;
 
-    protected double rating;
-
+    // 팀 당 bestPlayer
+    protected boolean isBest;
 
     @Enumerated(EnumType.STRING)
     protected Position position;
@@ -57,8 +58,12 @@ public class PlayerRecord extends BaseEntity {
     @Enumerated(EnumType.STRING)
     protected MatchResult matchResult;
 
-    protected boolean isBest;
-    protected int grade;
+
+
+
+
+    // later
+    protected double rating;
     protected int rank;
 
 
@@ -76,7 +81,7 @@ public class PlayerRecord extends BaseEntity {
      */
     public void update(int goal, int assist,int pass,
                        int shooting ,int validShooting,int foul,
-                       int defense , int grade){
+                       int defense , int grade,MatchResult matchResult){
         this.goal = goal;
         this.assist = assist;
         this.pass = pass;
@@ -85,8 +90,10 @@ public class PlayerRecord extends BaseEntity {
         this.foul= foul;
         this.goodDefense = defense;
         this.grade = grade;
-
+        this.matchResult = matchResult;
+        this.isBest = false;
     }
+
 
 
 }

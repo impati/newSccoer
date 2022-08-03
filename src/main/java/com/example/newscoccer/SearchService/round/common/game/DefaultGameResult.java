@@ -35,7 +35,7 @@ public class DefaultGameResult implements GameResult{
     public GameResultResponse gameResult(GameResultRequest req) {
         Round round = roundRepository.findById(req.getRoundId()).orElse(null);
         GameResultResponse resp = gameRecord(round);
-        if(round.getRoundStatus() == RoundStatus.DONE || round.getRoundStatus() == RoundStatus.RECORD) resp.setIsDone(true);
+        if(round.getRoundStatus() == RoundStatus.DONE || round.getRoundStatus() == RoundStatus.PAIR) resp.setIsDone(true);
         else resp.setIsDone(false);
         return resp;
     }

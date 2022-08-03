@@ -2,16 +2,13 @@ package com.example.newscoccer.RegisterService.round;
 
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Round.ChampionsRound;
-import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import com.example.newscoccer.domain.record.TeamRecord;
 import com.example.newscoccer.springDataJpa.*;
 import com.example.newscoccer.springDataJpa.dto.TeamScoreDto;
 import com.example.newscoccer.support.RandomNumber;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -25,6 +22,7 @@ import java.util.List;
 
 
 /**
+ * generator(season,roundSt)
  *
  */
 @Slf4j

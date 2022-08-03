@@ -14,7 +14,7 @@ import java.util.List;
 public class GameRecordDto {
 
     private Long roundId;
-    private List<GameResultTeamDto> teams = new ArrayList<>(); // 팀A vs 팀
+    private List<GameResultTeamDto> teams = new ArrayList<>(); // 팀A vs 팀B
     private List<GameResultPlayerDto> players = new ArrayList<>();
 
 }
