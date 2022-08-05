@@ -4,10 +4,10 @@ import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
 import com.example.newscoccer.domain.Round.RoundTemplate;
+import com.example.newscoccer.domain.Season;
 import com.example.newscoccer.domain.record.MatchResult;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import com.example.newscoccer.springDataJpa.TeamChampionsRecordRepository;
-import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
+import com.example.newscoccer.springDataJpa.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
@@ -43,24 +43,57 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class AfterGameDone implements GameDoneTroubleShooter{
     private final TeamLeagueRecordRepository teamLeagueRecordRepository;
+    private final PlayerLeagueRecordRepository playerLeagueRecordRepository;
+
     private final TeamChampionsRecordRepository teamChampionsRecordRepository;
+    private final PlayerChampionsRecordRepository playerChampionsRecordRepository;
+
+
+    private final RoundRepository roundRepository;
+    private final SeasonRepository seasonRepository;
+
+    private final LeagueRoundGenerator leagueRoundGenerator;
+    private final ChampionsRoundGenerator championsRoundGenerator;
+
     @Override
     public void AfterGameDone(Round round) {
         RoundFeature<Void> feature = new RoundFeature<Void>() {
             @Override
             public Void leagueSolved() {
-                leagueGame(round);
+                // 랭크 업데이트
+                leagueRankCalc(round);
+                // 남아 있는 경기가 없으면 시즌 업데이트
+                isLeagueRemain(round);
+
                 return null;
             }
 
             @Override
             public Void championsSolved() {
+                championsCalc(round);
                 return null;
             }
         };
         new RoundTemplate().action(round,feature);
+
+        if(roundRepository.findRemainCount(round.getSeason()).equals(0L)){
+            Season season = seasonRepository.findById(0L).orElse(null);
+            // 시즌에 아무 경기도 남아 있지 않는다면 시즌 + 1
+            season.seasonUpdate();
+            leagueRoundGenerator.generator(season.getCurrentSeason());
+            championsRoundGenerator.generator(season.getCurrentSeason(),season.getCurrentChampionsRoundSt());
+        }
+
+
     }
-    private void leagueGame(Round round){
+    private void championsCalc(Round round){
+        if(roundRepository.findChampionsRemainCount(round.getSeason(), round.getRoundSt()).equals(0L)){
+            Season season = seasonRepository.findById(0L).orElse(null);
+            season.championsUpdate();
+            championsRoundGenerator.generator(season.getCurrentSeason(),season.getCurrentChampionsRoundSt());
+        }
+    }
+    private void leagueRankCalc(Round round){
         LeagueRound leagueRound = (LeagueRound)round;
         // 시즌 리그의 팀기록을 모두 가져온 후 승점과 , 득실차를 계산
         Map<Long , TeamRankInfo> result = new HashMap<>();
@@ -100,6 +133,9 @@ public class AfterGameDone implements GameDoneTroubleShooter{
                 .forEach(ele->{
                     Long teamId = ele.getTeam().getId();
                     int r = result.get(teamId).getRank();
+                    playerLeagueRecordRepository.findByTeamAndRound(ele.getTeam(),round)
+                            .stream()
+                            .forEach(p->p.setRank(r));
                     ele.setRank(r);
                 });
 
@@ -118,7 +154,13 @@ public class AfterGameDone implements GameDoneTroubleShooter{
     }
 
 
-
-
+    private void isLeagueRemain(Round round){
+        // 시즌 , 라운드 남아 있는 경기가 없다면
+        if(roundRepository.findLeagueRemainCount(round.getSeason(),round.getRoundSt()).equals(0L)){
+            Season season = seasonRepository.findById(0L).orElse(null);
+            // 시즌 전체 라운드 증가 ,  마지막 라운드였다면 아무 행동도 취하지 않음.
+            season.leagueUpdate();
+        }
+    }
 
 }

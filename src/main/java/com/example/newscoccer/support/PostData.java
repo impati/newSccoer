@@ -83,10 +83,7 @@ public class PostData {
     private void seasonSetting(){
         Season season = new Season(); // 단 한번만 생성할 수 있음.
         seasonRepository.save(season);
-        SeasonUtils.currentLeagueRoundSt = season.getCurrentLeagueRoundSt();
-        SeasonUtils.currentSeason = season.getCurrentSeason();
-        SeasonUtils.currentChampionsRoundSt = season.getCurrentChampionsRoundSt();
-        SeasonUtils.lastLeagueRoundSt = season.getLastLeagueRoundSt();
+        season.SeasonUtilsUpdate();
     }
     private void leagueSetting(){
         League b = new League("분데스리가");
