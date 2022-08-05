@@ -98,5 +98,26 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
     List<TeamLeagueRecord> findLeagueRoundInfo(@Param("rounds") List<Round> rounds);
 
 
+    /**
+     * 리그, 시즌에 팀들의 기록을 모두 가져와 순위를 매김.
+     * @param league
+     * @param season
+     * @return
+     */
+    @Query("select tlr from TeamLeagueRecord tlr " +
+            " join tlr.round r " +
+            " join tlr.team t" +
+            " join t.league l " +
+            " where l = :league and r.season = :season " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE " +
+            " order by r.roundSt desc ")
+    List<TeamLeagueRecord> findByLeagueAndSeasonForRank(@Param("league") League league ,
+                                                @Param("season")int season );
+
+
+
+
+
+
 
 }

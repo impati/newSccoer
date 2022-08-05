@@ -87,4 +87,16 @@ class TeamLeagueRecordRepositoryTest {
 
 
     }
+
+
+    @Test
+    @DisplayName("가장 최근의 팀 경기들 조회 ")
+    public void findLastGame() throws Exception{
+        // given
+
+        // when
+
+        // then
+
+    }
 }
