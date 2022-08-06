@@ -85,6 +85,19 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
             " order by r.roundSt ")
     List<TeamLeagueRecord> findByTeamAndSeason(@Param("team") Long teamId , @Param("season") int season);
 
+   /**
+     * 팀  + 시즌 정보로 팀리그정보를 가져옴.
+     * @param teamId
+     * @param season
+     * @return
+     */
+    @Query(" select tlr from TeamLeagueRecord tlr " +
+            " join tlr.round r " +
+            " join fetch tlr.team t " +
+            " where r.season = :season and t.id = :team and r.roundSt < :roundSt" +
+            " order by r.roundSt ")
+    List<TeamLeagueRecord> findByTeamAndSeasonLessThanRoundSt(@Param("team") Long teamId , @Param("season") int season,@Param("roundSt")int roundSt);
+
 
 
     /**

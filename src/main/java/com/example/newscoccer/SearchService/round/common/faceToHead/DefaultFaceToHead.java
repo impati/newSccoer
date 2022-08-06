@@ -1,10 +1,13 @@
 package com.example.newscoccer.SearchService.round.common.faceToHead;
 
+import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
 import com.example.newscoccer.domain.Round.RoundTemplate;
+import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.springDataJpa.RoundRepository;
 import com.example.newscoccer.springDataJpa.TeamChampionsRecordRepository;
+import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,9 +39,10 @@ public class DefaultFaceToHead implements FaceToHead{
 
     private final RoundRepository roundRepository;
 
+    private final TeamLeagueRecordRepository teamLeagueRecordRepository;
     private final TeamChampionsRecordRepository teamChampionsRecordRepository;
     /**
-     * 리그인 경우  시즌의 정보를 종합해서 리턴
+     * 리그인 경우  시즌의 정보를 종합해서 리턴 (단 , 라운드 이전의 정보들)
      *
      * 챔피언스 경우  시즌 정보와 전체 시즌 정보를 종합해서 리턴
      */
@@ -49,17 +53,56 @@ public class DefaultFaceToHead implements FaceToHead{
             @Override
             public ComparisonRecordResponse leagueSolved() {
                 ComparisonRecordResponse resp = new ComparisonRecordResponse();
-
-
-
-
-
-                return null;
+                teamLeagueRecordRepository.findByRound(round)
+                        .stream()
+                        .forEach(tlr->{
+                            Team team = tlr.getTeam();
+                            ComparisonRecordDto dto = new ComparisonRecordDto(team.getName());
+                            teamLeagueRecordRepository.findByTeamAndSeasonLessThanRoundSt(team.getId(),round.getSeason(),round.getRoundSt())
+                                    .stream()
+                                    .forEach(element->{
+                                        dto.leagueUpdate(element.getMatchResult(),element.getScore(), element.getOppositeScore());
+                                    });
+                            resp.getRecordList().add(dto);
+                        });
+                return resp;
             }
 
             @Override
             public ComparisonRecordResponse championsSolved() {
-                return null;
+                ChampionsRound championsRound = (ChampionsRound) round;
+                ComparisonRecordResponse resp = new ComparisonRecordResponse();
+                teamChampionsRecordRepository.findByRound(round)
+                        .stream()
+                        .forEach(tcr->{
+                            Team team = tcr.getTeam();
+                            ComparisonRecordDto dto = new ComparisonRecordDto(team.getName());
+                            // 팀의 전체 챔피언스 기록을 가져온 후 라운드의 시즌과 같으면 시즌처리를 한번 더 호출해 줌
+                            teamChampionsRecordRepository.findByTeam(team.getId())
+                                    .stream()
+                                    .forEach(element->{
+                                            ChampionsRound atThatTime = element.getRound();
+                                            if(championsRound.getSeason() > atThatTime.getSeason()){
+                                                dto.championsTotalUpdate(element.getMatchResult(),element.getScore(), element.getOppositeScore());
+                                            }
+                                            else  if( championsRound.getSeason() == atThatTime.getSeason()) {
+                                                if(championsRound.getRoundSt() < atThatTime.getRoundSt()){
+                                                    dto.championsTotalUpdate(element.getMatchResult(), element.getScore(), element.getOppositeScore());
+                                                    dto.championsSeasonUpdate(element.getMatchResult());
+                                                }
+                                                else if(championsRound.getRoundSt() == atThatTime.getRoundSt() && tcr.getFirstOrSecond() > element.getFirstOrSecond()){
+                                                    dto.championsTotalUpdate(element.getMatchResult(), element.getScore(), element.getOppositeScore());
+                                                    dto.championsSeasonUpdate(element.getMatchResult());
+                                                }
+
+                                            }
+
+
+
+                                    });
+                            resp.getRecordList().add(dto);
+                        });
+                return resp;
             }
         };
 

@@ -8,5 +8,5 @@ import java.util.List;
 
 @Data
 public class ComparisonRecordResponse extends DataTransferObject {
-    List<ComparisonRecord> recordList = new ArrayList<>();
+    List<ComparisonRecordDto> recordList = new ArrayList<>();
 }

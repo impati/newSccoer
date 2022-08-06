@@ -104,9 +104,10 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
      * 팀으로 챔피언스리록을 조회
      */
     @Query(" select tcr from TeamChampionsRecord tcr " +
-            " join tcr.team t " +
+            " join fetch tcr.team t " +
+            " join fetch tcr.round r " +
             " where t.id = :team " +
-            " order by tcr.createDate ")
+            " order by r.season ,r.roundSt ")
     List<TeamChampionsRecord> findByTeam(@Param("team") Long team);
 
 
