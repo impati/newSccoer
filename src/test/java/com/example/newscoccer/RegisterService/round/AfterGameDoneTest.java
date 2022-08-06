@@ -4,13 +4,12 @@ import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundStatus;
+import com.example.newscoccer.domain.Season;
+import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResult;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import com.example.newscoccer.springDataJpa.LeagueRepository;
-import com.example.newscoccer.springDataJpa.RoundRepository;
-import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
-import com.example.newscoccer.springDataJpa.TeamRepository;
+import com.example.newscoccer.springDataJpa.*;
 import com.example.newscoccer.support.RandomNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,6 +39,9 @@ class AfterGameDoneTest {
     @Autowired
     TeamLeagueRecordRepository teamLeagueRecordRepository;
 
+
+    @Autowired
+    SeasonRepository seasonRepository;
     @Test
     @DisplayName("경기 후 순위 테스트")
     public void rankFeature() throws Exception{
@@ -99,16 +101,14 @@ class AfterGameDoneTest {
 
         // then
 
-        roundList.stream().forEach(ele->afterGameDone.AfterGameDone(ele)); // 안에서 출력 TEST !
-
-
-
-
-
-
+        for (var element : roundList){
+            afterGameDone.AfterGameDone(element);
+            Season season = seasonRepository.findById(1L).orElse(null);
+            System.out.println("season : " + SeasonUtils.currentSeason  + " roundSt : " + SeasonUtils.currentLeagueRoundSt);
+            System.out.println("season : " + season.getCurrentSeason() + " roundSt : " + season.getCurrentLeagueRoundSt());
+        }
 
     }
-
     private void MakeTeam(String del , League league, List<Team> teamBList) {
         for(int i = 1;i<=11;i++){
             Team team = Team.createTeam(league,"testTeam" + del  + i);
@@ -116,4 +116,15 @@ class AfterGameDoneTest {
             teamBList.add(team);
         }
     }
+
+
+
+
+
+
+
+
+
+
+
 }

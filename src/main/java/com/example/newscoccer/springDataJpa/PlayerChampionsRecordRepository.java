@@ -3,6 +3,7 @@ package com.example.newscoccer.springDataJpa;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerChampionsRecord;
+import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -64,4 +65,14 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
     List<PlayerChampionsRecord> findByTeamAndRound(@Param("team") Team team , @Param("round") Round round);
 
 
+
+
+    /**
+     * 시즌 , 챔피언스 라운드에 진출한 선수 기록을 가져옴.
+     */
+    @Query("select pcr from PlayerChampionsRecord  pcr " +
+            " join pcr.team t " +
+            " join pcr.round r " +
+            "where r.season = :season and r.roundSt = :roundSt")
+    List<TeamLeagueRecord> findBySeasonAndRoundSt(@Param("season") int season , @Param("roundSt") int roundSt);
 }

@@ -36,6 +36,11 @@ import java.util.Map;
  *  ...
  *
  *  모두 시즌 업데이트 준비가 완료됬을 시 시즌이 넘어갑니다.->새로운 시즌
+ *
+ *
+ *
+ *
+ *  TODO : 전체적인 테스트 ,
  */
 @Slf4j
 @Transactional
@@ -77,7 +82,7 @@ public class AfterGameDone implements GameDoneTroubleShooter{
         new RoundTemplate().action(round,feature);
 
         if(roundRepository.findRemainCount(round.getSeason()).equals(0L)){
-            Season season = seasonRepository.findById(0L).orElse(null);
+            Season season = seasonRepository.findById(1L).orElse(null);
             // 시즌에 아무 경기도 남아 있지 않는다면 시즌 + 1
             season.seasonUpdate();
             leagueRoundGenerator.generator(season.getCurrentSeason());
@@ -87,10 +92,29 @@ public class AfterGameDone implements GameDoneTroubleShooter{
 
     }
     private void championsCalc(Round round){
+
+        // 챔피언스 랭크 업데이트
+        // 정책 ->경기가 끝날 떄 마다 현재 라운드가 순위가 됨.
+        teamChampionsRecordRepository.findBySeasonAndRoundSt(round.getSeason(),round.getRoundSt())
+                .stream()
+                .forEach(tcr->tcr.setRank(round.getRoundSt()));
+        playerChampionsRecordRepository.findBySeasonAndRoundSt(round.getSeason(),round.getRoundSt())
+                .stream()
+                .forEach(pcr->pcr.setRank(round.getRoundSt()));
+
         if(roundRepository.findChampionsRemainCount(round.getSeason(), round.getRoundSt()).equals(0L)){
-            Season season = seasonRepository.findById(0L).orElse(null);
+            Season season = seasonRepository.findById(1L).orElse(null);
             season.championsUpdate();
-            championsRoundGenerator.generator(season.getCurrentSeason(),season.getCurrentChampionsRoundSt());
+
+            //결승전 끝.
+            if(season.getCurrentChampionsRoundSt() == 1){
+                teamChampionsRecordRepository.findBySeasonAndRoundSt(round.getSeason(),round.getRoundSt())
+                        .stream().filter(tcr->tcr.getMatchResult() == MatchResult.WIN).forEach(tcr->tcr.setRank(1));
+                playerChampionsRecordRepository.findBySeasonAndRoundSt(round.getSeason(),round.getRoundSt())
+                        .stream().filter(pcr->pcr.getMatchResult() == MatchResult.WIN).forEach(pcr->pcr.setRank(1));
+            }
+            else // 그외
+                championsRoundGenerator.generator(season.getCurrentSeason(),season.getCurrentChampionsRoundSt());
         }
     }
     private void leagueRankCalc(Round round){
@@ -157,7 +181,7 @@ public class AfterGameDone implements GameDoneTroubleShooter{
     private void isLeagueRemain(Round round){
         // 시즌 , 라운드 남아 있는 경기가 없다면
         if(roundRepository.findLeagueRemainCount(round.getSeason(),round.getRoundSt()).equals(0L)){
-            Season season = seasonRepository.findById(0L).orElse(null);
+            Season season = seasonRepository.findById(1L).orElse(null);
             // 시즌 전체 라운드 증가 ,  마지막 라운드였다면 아무 행동도 취하지 않음.
             season.leagueUpdate();
         }

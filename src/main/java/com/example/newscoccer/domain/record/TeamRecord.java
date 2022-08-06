@@ -60,6 +60,7 @@ public  class TeamRecord extends BaseEntity {
 
     //later
     protected double rating;
+
     //현재 시즌 , 라운드일때 또는 n 시즌의 마지막 라운드 일때 유효한 값
     protected int rank;
 

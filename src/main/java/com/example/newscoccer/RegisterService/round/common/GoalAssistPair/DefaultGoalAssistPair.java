@@ -1,5 +1,6 @@
 package com.example.newscoccer.RegisterService.round.common.GoalAssistPair;
 
+import com.example.newscoccer.RegisterService.round.GameDoneTroubleShooter;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.record.Duo;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DefaultGoalAssistPair implements GoalAssistPair{
     private final DuoRepository duoRepository;
+    private final GameDoneTroubleShooter gameDoneTroubleShooter;
     @Override
     public void goalPairRegister(List<GoalAssistPairDto> pairList, Round round) {
         pairList.stream().forEach(d->{
@@ -29,6 +31,6 @@ public class DefaultGoalAssistPair implements GoalAssistPair{
             duoRepository.save(duo);
         });
         round.setRoundStatus(RoundStatus.DONE);
-
+        gameDoneTroubleShooter.AfterGameDone(round);
     }
 }
