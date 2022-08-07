@@ -40,7 +40,7 @@ public class MatchResultUtils  {
         }
     }
 
-
+    // 입력으로 들어오는 matchResult의 대응하는 결과를 리턴함
     public static MatchResult oppositeMatchResult(MatchResult matchResult){
         if(matchResult== MatchResult.WIN) return matchResult = MatchResult.LOSE;
         else if(matchResult == MatchResult.DRAW) return matchResult = MatchResult.DRAW;

@@ -8,9 +8,7 @@ import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResultUtils;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import com.example.newscoccer.springDataJpa.RoundRepository;
-import com.example.newscoccer.springDataJpa.TeamChampionsRecordRepository;
-import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
+import com.example.newscoccer.springDataJpa.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -47,6 +45,56 @@ public class DefaultFaceToHead implements FaceToHead{
 
     private final TeamLeagueRecordRepository teamLeagueRecordRepository;
     private final TeamChampionsRecordRepository teamChampionsRecordRepository;
+
+    private final PlayerLeagueRecordRepository playerLeagueRecordRepository;
+    private final PlayerChampionsRecordRepository playerChampionsRecordRepository;
+
+
+    @Override
+    public TopPlayerResponse top5Player(Long roundId) {
+        Round round = roundRepository.findById(roundId).orElse(null);
+
+        RoundFeature<TopPlayerResponse> feature = new RoundFeature<>() {
+            @Override
+            public TopPlayerResponse leagueSolved() {
+                List<TeamLeagueRecord> tlrList  = teamLeagueRecordRepository.findByRound(round);
+
+                Team teamA = tlrList.get(0).getTeam();
+                Team teamB = tlrList.get(1).getTeam();
+
+                TopPlayerResponse resp = new TopPlayerResponse();
+
+                resp.setTeamAPlayerList(playerLeagueRecordRepository.findByTeam(teamA,round.getSeason(), round.getRoundSt(),PageRequest.of(0,5)));
+                resp.setTeamBPlayerList(playerLeagueRecordRepository.findByTeam(teamB,round.getSeason(), round.getRoundSt(),PageRequest.of(0,5)));
+
+
+
+                return resp;
+            }
+
+            @Override
+            public TopPlayerResponse championsSolved() {
+                return null;
+            }
+        };
+
+        return new RoundTemplate().action(round,feature);
+
+    }
+
+    private List<TopPlayerDto> sortingAndCut(List<TopPlayerDto> list){
+        list.sort((e1,e2)->{
+            if(e1.getGoal() + e1.getAssist() > e2.getGoal() + e2.getAssist()) return -1;
+            else if(e1.getGoal() + e1.getAssist() < e2.getGoal() + e2.getAssist()) return 1;
+            else {
+                if(e1.getRating() > e2.getRating()) return -1;
+                else if(e1.getRating() == e2.getRating()) return 0;
+                else return 1;
+            }
+        });
+        return list.subList(0,5);
+    }
+
 
 
     /**
@@ -105,10 +153,7 @@ public class DefaultFaceToHead implements FaceToHead{
 
 
 
-    @Override
-    public TopPlayerResponse top5Player(Long roundId) {
-        return null;
-    }
+
 
     @Override
     public TotalComparisonRecordResponse totalComparison(Long roundId) {

@@ -1,9 +1,11 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.SearchService.round.common.faceToHead.TopPlayerDto;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -59,6 +61,17 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
             " join fetch plr.round r " +
             " where t = :team and r = :round")
     List<PlayerLeagueRecord> findByTeamAndRound(@Param("team") Team team , @Param("round")Round round);
+
+
+    @Query("select new com.example.newscoccer.SearchService.round.common.faceToHead.TopPlayerDto(p.name,sum(plr.goal),sum(plr.assist),p.rating) " +
+            " from PlayerLeagueRecord  plr " +
+            " join plr.player p " +
+            " join plr.round r" +
+            " join plr.team t " +
+            " where t = :team and r.season = :season and r.roundSt < :roundSt " +
+            " group by p.id " +
+            " order by sum(plr.goal) + sum(plr.assist) desc ,  p.rating desc ")
+    List<TopPlayerDto> findByTeam(@Param("team") Team team , @Param("season") int season , @Param("roundSt") int roundSt, Pageable pageable );
 
 
 

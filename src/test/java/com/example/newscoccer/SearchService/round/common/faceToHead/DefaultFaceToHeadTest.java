@@ -1,20 +1,26 @@
 package com.example.newscoccer.SearchService.round.common.faceToHead;
 
 import com.example.newscoccer.domain.League;
+import com.example.newscoccer.domain.Player.Player;
+import com.example.newscoccer.domain.Player.Position;
+import com.example.newscoccer.domain.Player.Stat;
 import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResult;
+import com.example.newscoccer.domain.record.PlayerLeagueRecord;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.*;
+import com.example.newscoccer.support.RandomNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,7 +43,99 @@ class DefaultFaceToHeadTest {
     @Autowired
     TeamChampionsRecordRepository teamChampionsRecordRepository;
 
+    @Autowired
+    PlayerLeagueRecordRepository playerLeagueRecordRepository;
+    @Autowired
+    PlayerChampionsRecordRepository playerChampionsRecordRepository;
 
+    @Autowired
+    PlayerRepository playerRepository;
+    @Test
+    @DisplayName("리그 탑 플레이어")
+    public void leagueTopPlayer() throws Exception{
+        // given
+        League league = new League("testLeague");
+        leagueRepository.save(league);
+
+        Team teamA = Team.createTeam(league,"teamA");
+        Team teamB = Team.createTeam(league,"teamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        List<Player> playerAList = new ArrayList<>();
+        List<Player> playerBList = new ArrayList<>();
+
+        for(int i =0;i<11;i++){
+            Player playerA = Player.createPlayer("playerA " + i , Position.ST , teamA,new Stat());
+            Player playerB = Player.createPlayer("playerB " + i , Position.GK , teamA,new Stat());
+
+            playerAList.add(playerA);
+            playerBList.add(playerB);
+
+
+            playerA.setRating(RandomNumber.returnRandomNumber(0,2000));
+            playerB.setRating(RandomNumber.returnRandomNumber(0,2000));
+            playerRepository.save(playerA);
+            playerRepository.save(playerB);
+        }
+        Long roundId = null;
+        for(int i = 1 ;i <= 5 ; i++){
+            LeagueRound leagueRound = new LeagueRound(league,1000,i);
+            roundRepository.save(leagueRound);
+            roundId = leagueRound.getId();
+            TeamLeagueRecord teamLeagueRecordA = TeamLeagueRecord.create(leagueRound,teamA);
+            TeamLeagueRecord teamLeagueRecordB = TeamLeagueRecord.create(leagueRound,teamB);
+            teamLeagueRecordRepository.save(teamLeagueRecordA);
+            teamLeagueRecordRepository.save(teamLeagueRecordB);
+            for(int k = 0;k<11;k++){
+                PlayerLeagueRecord playerLeagueRecordA = (PlayerLeagueRecord) PlayerLeagueRecord.createPlayerRecord(playerAList.get(k),Position.ST,teamA,leagueRound);
+                PlayerLeagueRecord playerLeagueRecordB = (PlayerLeagueRecord) PlayerLeagueRecord.createPlayerRecord(playerBList.get(k),Position.ST,teamB,leagueRound);
+
+                playerLeagueRecordA.setGoal(RandomNumber.returnRandomNumber(0,5));
+                playerLeagueRecordA.setAssist(RandomNumber.returnRandomNumber(0,5));
+
+                playerLeagueRecordB.setGoal(RandomNumber.returnRandomNumber(0,5));
+                playerLeagueRecordB.setAssist(RandomNumber.returnRandomNumber(0,5));
+                playerLeagueRecordRepository.save(playerLeagueRecordA);
+                playerLeagueRecordRepository.save(playerLeagueRecordB);
+            }
+        }
+
+
+
+        // when
+
+        TopPlayerResponse resp = faceToHead.top5Player(roundId);
+
+        // then
+
+        for(int i = 0;i<resp.getTeamAPlayerList().size();i++){
+            for(int k = i + 1; k<resp.getTeamAPlayerList().size();k++){
+                TopPlayerDto cur = resp.getTeamAPlayerList().get(i);
+                TopPlayerDto nxt = resp.getTeamAPlayerList().get(k);
+                if(cur.getGoal() + cur.getAssist() == nxt.getGoal() + nxt.getAssist()){
+                    assertThat(cur.getRating() >= nxt.getRating()).isTrue();
+                }
+                else
+                    assertThat(cur.getGoal() + cur.getAssist() > nxt.getGoal() + nxt.getAssist()).isTrue();
+
+            }
+        } for(int i = 0;i<resp.getTeamBPlayerList().size();i++){
+            for(int k = i + 1; k<resp.getTeamBPlayerList().size();k++){
+                TopPlayerDto cur = resp.getTeamBPlayerList().get(i);
+                TopPlayerDto nxt = resp.getTeamBPlayerList().get(k);
+                if(cur.getGoal() + cur.getAssist() == nxt.getGoal() + nxt.getAssist()){
+                    assertThat(cur.getRating() >= nxt.getRating()).isTrue();
+                }
+                else
+                    assertThat(cur.getGoal() + cur.getAssist() > nxt.getGoal() + nxt.getAssist()).isTrue();
+
+            }
+        }
+
+
+
+    }
 
     @Test
     @DisplayName("챔피언스 최근 5경기 맞대결")
