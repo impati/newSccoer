@@ -43,7 +43,7 @@ public interface RoundRepository extends JpaRepository<Round,Long> {
     Long findLeagueRemainCount(@Param("season")int season,@Param("roundSt")int roundSt);
 
     /**
-     * 리그의 season + roundSt 에 남아있는 경기가 있나?
+     * 챔피언스 season + roundSt 에 남아있는 경기가 있나?
      * @param season
      * @param roundSt
      * @return
@@ -64,6 +64,7 @@ public interface RoundRepository extends JpaRepository<Round,Long> {
             " where r.season = :season  " +
             " and r.roundStatus <> com.example.newscoccer.domain.Round.RoundStatus.DONE ")
     Long findRemainCount(@Param("season")int season);
+
 
 
 

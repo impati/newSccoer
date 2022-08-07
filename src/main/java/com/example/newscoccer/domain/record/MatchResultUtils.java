@@ -3,8 +3,6 @@ package com.example.newscoccer.domain.record;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,6 +38,13 @@ public class MatchResultUtils  {
                 }
             }
         }
+    }
+
+
+    public static MatchResult oppositeMatchResult(MatchResult matchResult){
+        if(matchResult== MatchResult.WIN) return matchResult = MatchResult.LOSE;
+        else if(matchResult == MatchResult.DRAW) return matchResult = MatchResult.DRAW;
+        else return matchResult = MatchResult.WIN;
     }
 
 

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueRecord ,Long> {
@@ -128,7 +129,31 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
                                                 @Param("season")int season );
 
 
+    /**
+     *
+     * 라운드가 시간순으로 생성이 된다는 기준 ,
+     * 팀이 참가 했던 모든 라운드를 조회 (단 , 현재 라운드 보다 이전에 치른)
+     */
+    @Query("select r from TeamLeagueRecord tr " +
+            " join tr.round r " +
+            " join tr.team t " +
+            " where t = :team " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE " +
+            " and r.createDate < :create " +
+            " order by tr.createDate ")
+    List<Round> findRoundListByTeam(@Param("team") Team team , @Param("create")LocalDateTime create);
 
+
+    /**
+     *
+     * roundList 에 참가한 팀중 team 에 해당하는 기록들 .
+     */
+    @Query(" select tlr from TeamLeagueRecord tlr " +
+            " join tlr.round r " +
+            " join tlr.team t " +
+            " where r in(:roundList) and t =:team " +
+            " order by tlr.createDate desc ")
+    List<TeamLeagueRecord> findByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team ,Pageable pageable);
 
 
 

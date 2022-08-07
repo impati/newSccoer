@@ -4,8 +4,6 @@ import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundStatus;
-import com.example.newscoccer.domain.Season;
-import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResult;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
@@ -101,12 +99,12 @@ class AfterGameDoneTest {
 
         // then
 
-        for (var element : roundList){
-            afterGameDone.AfterGameDone(element);
-            Season season = seasonRepository.findById(1L).orElse(null);
-            System.out.println("season : " + SeasonUtils.currentSeason  + " roundSt : " + SeasonUtils.currentLeagueRoundSt);
-            System.out.println("season : " + season.getCurrentSeason() + " roundSt : " + season.getCurrentLeagueRoundSt());
-        }
+//        for (var element : roundList){
+//            afterGameDone.AfterGameDone(element);
+//            Season season = seasonRepository.findById(1L).orElse(null);
+//            System.out.println("season : " + SeasonUtils.currentSeason  + " roundSt : " + SeasonUtils.currentLeagueRoundSt);
+//            System.out.println("season : " + season.getCurrentSeason() + " roundSt : " + season.getCurrentLeagueRoundSt());
+//        }
 
     }
     private void MakeTeam(String del , League league, List<Team> teamBList) {

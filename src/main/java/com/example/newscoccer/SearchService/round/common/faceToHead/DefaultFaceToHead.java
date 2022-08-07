@@ -5,13 +5,19 @@ import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
 import com.example.newscoccer.domain.Round.RoundTemplate;
 import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.domain.record.MatchResultUtils;
+import com.example.newscoccer.domain.record.TeamChampionsRecord;
+import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.RoundRepository;
 import com.example.newscoccer.springDataJpa.TeamChampionsRecordRepository;
 import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * 두 팀간 맞대결 정보
@@ -41,6 +47,75 @@ public class DefaultFaceToHead implements FaceToHead{
 
     private final TeamLeagueRecordRepository teamLeagueRecordRepository;
     private final TeamChampionsRecordRepository teamChampionsRecordRepository;
+
+
+    /**
+     * 최근  5경기 맞대결을 가져옴
+     */
+    @Override
+    public RecentRecordResponse recentRecord(Long roundId) {
+        Round round = roundRepository.findById(roundId).orElse(null);
+        RoundFeature<RecentRecordResponse> feature = new RoundFeature<>() {
+            @Override
+            public RecentRecordResponse leagueSolved() {
+                List<TeamLeagueRecord> tlrList  = teamLeagueRecordRepository.findByRound(round);
+
+                TeamLeagueRecord tlrA = tlrList.get(0);
+                TeamLeagueRecord tlrB = tlrList.get(1);
+
+                RecentRecordResponse resp = new RecentRecordResponse();
+                List<Round> roundList = teamLeagueRecordRepository.findRoundListByTeam(tlrA.getTeam(),round.getCreateDate());
+                teamLeagueRecordRepository.findByRoundListAndTeam(roundList,tlrB.getTeam(), PageRequest.of(0,5))
+                        .stream()
+                        .forEach(tlr->{
+                            SimpleRecordResultDto dto = new SimpleRecordResultDto();
+                            dto.updateTeamA(tlrA.getTeam().getName(),tlr.getOppositeScore(), MatchResultUtils.oppositeMatchResult(tlr.getMatchResult()));
+                            dto.updateTeamB(tlr.getTeam().getName(),tlr.getScore(),tlr.getMatchResult());
+                            resp.getSimpleRecordResultDtoList().add(dto);
+                        });
+                return resp;
+            }
+
+
+            @Override
+            public RecentRecordResponse championsSolved() {
+                List<TeamChampionsRecord> tcrList  = teamChampionsRecordRepository.findByRound(round);
+
+                TeamChampionsRecord tcrA = tcrList.get(0);
+                TeamChampionsRecord tcrB = tcrList.get(1);
+
+                RecentRecordResponse resp = new RecentRecordResponse();
+                List<Round> roundList = teamChampionsRecordRepository.findRoundListByTeam(tcrA.getTeam(),round.getCreateDate());
+                teamChampionsRecordRepository.findByRoundListAndTeam(roundList,tcrB.getTeam(), PageRequest.of(0,5))
+                        .stream()
+                        .forEach(tlr->{
+                            SimpleRecordResultDto dto = new SimpleRecordResultDto();
+                            dto.updateTeamA(tcrA.getTeam().getName(),tlr.getOppositeScore(), MatchResultUtils.oppositeMatchResult(tlr.getMatchResult()));
+                            dto.updateTeamB(tlr.getTeam().getName(),tlr.getScore(),tlr.getMatchResult());
+                            resp.getSimpleRecordResultDtoList().add(dto);
+                        });
+                return resp;
+
+            }
+        };
+
+        return new RoundTemplate().action(round,feature);
+    }
+
+
+
+
+    @Override
+    public TopPlayerResponse top5Player(Long roundId) {
+        return null;
+    }
+
+    @Override
+    public TotalComparisonRecordResponse totalComparison(Long roundId) {
+        return null;
+    }
+
+
     /**
      * 리그인 경우  시즌의 정보를 종합해서 리턴 (단 , 라운드 이전의 정보들)
      *
@@ -81,21 +156,21 @@ public class DefaultFaceToHead implements FaceToHead{
                             teamChampionsRecordRepository.findByTeam(team.getId())
                                     .stream()
                                     .forEach(element->{
-                                            ChampionsRound atThatTime = element.getRound();
-                                            if(championsRound.getSeason() > atThatTime.getSeason()){
-                                                dto.championsTotalUpdate(element.getMatchResult(),element.getScore(), element.getOppositeScore());
+                                        ChampionsRound atThatTime = element.getRound();
+                                        if(championsRound.getSeason() > atThatTime.getSeason()){
+                                            dto.championsTotalUpdate(element.getMatchResult(),element.getScore(), element.getOppositeScore());
+                                        }
+                                        else  if( championsRound.getSeason() == atThatTime.getSeason()) {
+                                            if(championsRound.getRoundSt() < atThatTime.getRoundSt()){
+                                                dto.championsTotalUpdate(element.getMatchResult(), element.getScore(), element.getOppositeScore());
+                                                dto.championsSeasonUpdate(element.getMatchResult());
                                             }
-                                            else  if( championsRound.getSeason() == atThatTime.getSeason()) {
-                                                if(championsRound.getRoundSt() < atThatTime.getRoundSt()){
-                                                    dto.championsTotalUpdate(element.getMatchResult(), element.getScore(), element.getOppositeScore());
-                                                    dto.championsSeasonUpdate(element.getMatchResult());
-                                                }
-                                                else if(championsRound.getRoundSt() == atThatTime.getRoundSt() && tcr.getFirstOrSecond() > element.getFirstOrSecond()){
-                                                    dto.championsTotalUpdate(element.getMatchResult(), element.getScore(), element.getOppositeScore());
-                                                    dto.championsSeasonUpdate(element.getMatchResult());
-                                                }
+                                            else if(championsRound.getRoundSt() == atThatTime.getRoundSt() && tcr.getFirstOrSecond() > element.getFirstOrSecond()){
+                                                dto.championsTotalUpdate(element.getMatchResult(), element.getScore(), element.getOppositeScore());
+                                                dto.championsSeasonUpdate(element.getMatchResult());
+                                            }
 
-                                            }
+                                        }
 
 
 
@@ -107,21 +182,6 @@ public class DefaultFaceToHead implements FaceToHead{
         };
 
         return new RoundTemplate().action(round,feature);
-    }
-
-    @Override
-    public RecentRecordResponse recentRecord(Long roundId) {
-        return null;
-    }
-
-    @Override
-    public TopPlayerResponse top5Player(Long roundId) {
-        return null;
-    }
-
-    @Override
-    public TotalComparisonRecordResponse totalComparison(Long roundId) {
-        return null;
     }
 
 
