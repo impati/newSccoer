@@ -8,10 +8,7 @@ import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.Team;
-import com.example.newscoccer.domain.record.MatchResult;
-import com.example.newscoccer.domain.record.PlayerLeagueRecord;
-import com.example.newscoccer.domain.record.TeamChampionsRecord;
-import com.example.newscoccer.domain.record.TeamLeagueRecord;
+import com.example.newscoccer.domain.record.*;
 import com.example.newscoccer.springDataJpa.*;
 import com.example.newscoccer.support.RandomNumber;
 import org.junit.jupiter.api.DisplayName;
@@ -50,6 +47,116 @@ class DefaultFaceToHeadTest {
 
     @Autowired
     PlayerRepository playerRepository;
+
+
+    @Test
+    @DisplayName("챔피언스 탑 플레이어 ")
+    public void championsTopPlayer() throws Exception{
+        League league = new League("testLeague");
+        leagueRepository.save(league);
+
+        Team teamA = Team.createTeam(league,"testTeamA");
+        Team teamB = Team.createTeam(league,"testTeamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+        List<Player> playerAList = new ArrayList<>();
+        List<Player> playerBList = new ArrayList<>();
+
+        for(int i =0;i<11;i++){
+            Player playerA = Player.createPlayer("playerA " + i , Position.ST , teamA,new Stat());
+            Player playerB = Player.createPlayer("playerB " + i , Position.GK , teamB,new Stat());
+
+            playerAList.add(playerA);
+            playerBList.add(playerB);
+
+
+            playerA.setRating(RandomNumber.returnRandomNumber(0,2000));
+            playerB.setRating(RandomNumber.returnRandomNumber(0,2000));
+            playerRepository.save(playerA);
+            playerRepository.save(playerB);
+        }
+
+        ChampionsRound round = new ChampionsRound(1000,1000,1);
+        roundRepository.save(round);
+        TeamChampionsRecord teamLeagueRecordA = TeamChampionsRecord.create(round,teamA,1);
+        TeamChampionsRecord teamLeagueRecordB = TeamChampionsRecord.create(round,teamB,1);
+        teamChampionsRecordRepository.save(teamLeagueRecordA);
+        teamChampionsRecordRepository.save(teamLeagueRecordB);
+        for(int k = 0;k<11;k++){
+            PlayerChampionsRecord playerLeagueRecordA = (PlayerChampionsRecord) PlayerChampionsRecord.createPlayerRecord(playerAList.get(k),Position.ST,teamA,round);
+            PlayerChampionsRecord playerLeagueRecordB = (PlayerChampionsRecord) PlayerChampionsRecord.createPlayerRecord(playerBList.get(k),Position.ST,teamB,round);
+
+            playerLeagueRecordA.setGoal(RandomNumber.returnRandomNumber(1000,5000));
+            playerLeagueRecordA.setAssist(RandomNumber.returnRandomNumber(1000,5000));
+
+            playerLeagueRecordB.setGoal(RandomNumber.returnRandomNumber(1000,5000));
+            playerLeagueRecordB.setAssist(RandomNumber.returnRandomNumber(1000,5000));
+
+
+            playerChampionsRecordRepository.save(playerLeagueRecordA);
+            playerChampionsRecordRepository.save(playerLeagueRecordB);
+        }
+
+        Long roundId = null;
+        for(int i = 16 ;i >= 2 ; i/=2){
+            for(int j = 1 ; j<=2;j++) {
+                ChampionsRound championsRound = new ChampionsRound(1001, i, 1);
+                roundRepository.save(championsRound);
+                roundId = championsRound.getId();
+                TeamChampionsRecord teamChampionsRecordA1 = TeamChampionsRecord.create(championsRound, teamA, j);
+                TeamChampionsRecord teamChampionsRecordB1 = TeamChampionsRecord.create(championsRound, teamB, j);
+                teamChampionsRecordRepository.save(teamChampionsRecordA1);
+                teamChampionsRecordRepository.save(teamChampionsRecordB1);
+                for (int k = 0; k < 11; k++) {
+                    PlayerChampionsRecord playerLeagueRecordA = (PlayerChampionsRecord) PlayerChampionsRecord.createPlayerRecord(playerAList.get(k), Position.ST, teamA, championsRound);
+                    PlayerChampionsRecord playerLeagueRecordB = (PlayerChampionsRecord) PlayerChampionsRecord.createPlayerRecord(playerBList.get(k), Position.ST, teamB, championsRound);
+
+                    playerLeagueRecordA.setGoal(RandomNumber.returnRandomNumber(0, 5));
+                    playerLeagueRecordA.setAssist(RandomNumber.returnRandomNumber(0, 5));
+
+                    playerLeagueRecordB.setGoal(RandomNumber.returnRandomNumber(0, 5));
+                    playerLeagueRecordB.setAssist(RandomNumber.returnRandomNumber(0, 5));
+                    playerChampionsRecordRepository.save(playerLeagueRecordA);
+                    playerChampionsRecordRepository.save(playerLeagueRecordB);
+                }
+            }
+        }
+        // when
+        TopPlayerResponse resp = faceToHead.top5Player(roundId);
+        // then
+
+        for(var ele: resp.getTeamAPlayerList()){
+            System.out.println(ele);
+        }
+
+        // then
+
+        for(int i = 0;i<resp.getTeamAPlayerList().size();i++){
+            for(int k = i + 1; k<resp.getTeamAPlayerList().size();k++){
+                TopPlayerDto cur = resp.getTeamAPlayerList().get(i);
+                TopPlayerDto nxt = resp.getTeamAPlayerList().get(k);
+                if(cur.getGoal() + cur.getAssist() == nxt.getGoal() + nxt.getAssist()){
+                    assertThat(cur.getRating() >= nxt.getRating()).isTrue();
+                }
+                else
+                    assertThat(cur.getGoal() + cur.getAssist() > nxt.getGoal() + nxt.getAssist()).isTrue();
+
+            }
+        } for(int i = 0;i<resp.getTeamBPlayerList().size();i++){
+            for(int k = i + 1; k<resp.getTeamBPlayerList().size();k++){
+                TopPlayerDto cur = resp.getTeamBPlayerList().get(i);
+                TopPlayerDto nxt = resp.getTeamBPlayerList().get(k);
+                if(cur.getGoal() + cur.getAssist() == nxt.getGoal() + nxt.getAssist()){
+                    assertThat(cur.getRating() >= nxt.getRating()).isTrue();
+                }
+                else
+                    assertThat(cur.getGoal() + cur.getAssist() > nxt.getGoal() + nxt.getAssist()).isTrue();
+
+            }
+        }
+
+    }
     @Test
     @DisplayName("리그 탑 플레이어")
     public void leagueTopPlayer() throws Exception{
@@ -67,7 +174,7 @@ class DefaultFaceToHeadTest {
 
         for(int i =0;i<11;i++){
             Player playerA = Player.createPlayer("playerA " + i , Position.ST , teamA,new Stat());
-            Player playerB = Player.createPlayer("playerB " + i , Position.GK , teamA,new Stat());
+            Player playerB = Player.createPlayer("playerB " + i , Position.GK , teamB,new Stat());
 
             playerAList.add(playerA);
             playerBList.add(playerB);

@@ -71,7 +71,7 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
             " where t = :team and r.season = :season and r.roundSt < :roundSt " +
             " group by p.id " +
             " order by sum(plr.goal) + sum(plr.assist) desc ,  p.rating desc ")
-    List<TopPlayerDto> findByTeam(@Param("team") Team team , @Param("season") int season , @Param("roundSt") int roundSt, Pageable pageable );
+    List<TopPlayerDto> findTop5Player(@Param("team") Team team , @Param("season") int season , @Param("roundSt") int roundSt, Pageable pageable );
 
 
 

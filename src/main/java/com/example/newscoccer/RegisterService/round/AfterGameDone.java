@@ -98,6 +98,7 @@ public class AfterGameDone implements GameDoneTroubleShooter{
         teamChampionsRecordRepository.findBySeasonAndRoundSt(round.getSeason(),round.getRoundSt())
                 .stream()
                 .forEach(tcr->tcr.setRank(round.getRoundSt()));
+
         playerChampionsRecordRepository.findBySeasonAndRoundSt(round.getSeason(),round.getRoundSt())
                 .stream()
                 .forEach(pcr->pcr.setRank(round.getRoundSt()));

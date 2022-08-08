@@ -10,4 +10,8 @@ public class TopPlayerDto {
     private Long goal;
     private Long assist;
     private double rating;
+    public void update(int goal,int assist){
+        this.goal += goal;
+        this.assist += assist;
+    }
 }

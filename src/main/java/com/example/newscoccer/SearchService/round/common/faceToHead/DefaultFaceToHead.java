@@ -15,7 +15,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 두 팀간 맞대결 정보
@@ -50,6 +52,11 @@ public class DefaultFaceToHead implements FaceToHead{
     private final PlayerChampionsRecordRepository playerChampionsRecordRepository;
 
 
+    /**
+     *  시즌 +  라운드 이전에 선수들의 골 +  어시 , 레이팅 순으로 5명만 조회
+     * @param roundId
+     * @return
+     */
     @Override
     public TopPlayerResponse top5Player(Long roundId) {
         Round round = roundRepository.findById(roundId).orElse(null);
@@ -64,8 +71,8 @@ public class DefaultFaceToHead implements FaceToHead{
 
                 TopPlayerResponse resp = new TopPlayerResponse();
 
-                resp.setTeamAPlayerList(playerLeagueRecordRepository.findByTeam(teamA,round.getSeason(), round.getRoundSt(),PageRequest.of(0,5)));
-                resp.setTeamBPlayerList(playerLeagueRecordRepository.findByTeam(teamB,round.getSeason(), round.getRoundSt(),PageRequest.of(0,5)));
+                resp.setTeamAPlayerList(playerLeagueRecordRepository.findTop5Player(teamA,round.getSeason(), round.getRoundSt(),PageRequest.of(0,5)));
+                resp.setTeamBPlayerList(playerLeagueRecordRepository.findTop5Player(teamB,round.getSeason(), round.getRoundSt(),PageRequest.of(0,5)));
 
 
 
@@ -74,14 +81,50 @@ public class DefaultFaceToHead implements FaceToHead{
 
             @Override
             public TopPlayerResponse championsSolved() {
-                return null;
+                ChampionsRound championsRound = (ChampionsRound) round;
+                List<TeamChampionsRecord> tcrList = teamChampionsRecordRepository.findByRound(championsRound);
+                Team teamA = tcrList.get(0).getTeam();
+                Team teamB = tcrList.get(1).getTeam();
+
+                int firstAndSecond = tcrList.get(0).getFirstOrSecond();
+
+                TopPlayerResponse resp = new TopPlayerResponse();
+                championsTopPlayer(teamA,round,firstAndSecond,resp.getTeamAPlayerList());
+                championsTopPlayer(teamB,round,firstAndSecond,resp.getTeamBPlayerList());
+
+
+                resp.setTeamAPlayerList(sortingAndCut(resp.getTeamAPlayerList()));
+                resp.setTeamBPlayerList(sortingAndCut(resp.getTeamBPlayerList()));
+
+                return resp;
             }
         };
 
         return new RoundTemplate().action(round,feature);
 
     }
+    // 시즌 챔피언스 기록 중 시즌 , 현재 라운드보다 이전의 기록 중 탑 플레이어들을 가져옴
+    private void championsTopPlayer(Team team,Round round , int firstAndSecond,List<TopPlayerDto> result){
+        Map<Long,TopPlayerDto> map = new HashMap<> ();
 
+        playerChampionsRecordRepository.findByTeamAndSeason(team,round.getSeason())
+                .stream()
+                .filter(pcr->!((pcr.getRound().getRoundSt() == round.getRoundSt())&& (pcr.getFirstOrSecond() >= firstAndSecond)))
+                .forEach(pcr->{
+                    Long playerId = pcr.getPlayer().getId();
+                    if(map.containsKey(playerId)){
+                        map.get(playerId).update(pcr.getGoal(),pcr.getAssist());
+                    }
+                    else{
+                        TopPlayerDto dto = new TopPlayerDto(pcr.getPlayer().getName(), (long) pcr.getGoal(), (long) pcr.getAssist(),pcr.getPlayer().getRating());
+                        map.put(playerId,dto);
+                    }
+                });
+        for (var ele : map.keySet()) {
+            result.add(map.get(ele));
+        }
+    }
+    // 탑플레이어 중 조건에 맞게 정렳하고 5개만 가져옴 .
     private List<TopPlayerDto> sortingAndCut(List<TopPlayerDto> list){
         list.sort((e1,e2)->{
             if(e1.getGoal() + e1.getAssist() > e2.getGoal() + e2.getAssist()) return -1;

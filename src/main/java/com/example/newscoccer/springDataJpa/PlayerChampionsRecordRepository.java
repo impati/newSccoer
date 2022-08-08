@@ -3,7 +3,6 @@ package com.example.newscoccer.springDataJpa;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerChampionsRecord;
-import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.PlayerParticipate;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerChampionsRecord,Long> {
+
+public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerChampionsRecord,Long> , PlayerChampionsRepositoryQuerydsl {
 
 
     /**
@@ -56,6 +56,20 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
 
 
     /**
+     * 선수정보 , 선수가 해당 시즌에 챔피언스 리그 정보
+     * @param team
+     * @param season
+     * @return
+     */
+    @Query(" select pcr from PlayerChampionsRecord  pcr " +
+            " join fetch pcr.round r " +
+            " join pcr.team t " +
+            " join fetch pcr.player p " +
+            " where r.season = :season and t = :team ")
+    List<PlayerChampionsRecord> findByTeamAndSeason(@Param("team") Team team , @Param("season") int season);
+
+
+    /**
      * 팀 + 라운드로 해당 라운드에 참가한 선수들을 가져옴 .
      */
     @Query("select pcr from PlayerChampionsRecord pcr " +
@@ -74,5 +88,12 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
             " join pcr.team t " +
             " join pcr.round r " +
             "where r.season = :season and r.roundSt = :roundSt")
-    List<TeamLeagueRecord> findBySeasonAndRoundSt(@Param("season") int season , @Param("roundSt") int roundSt);
+    List<PlayerChampionsRecord> findBySeasonAndRoundSt(@Param("season") int season , @Param("roundSt") int roundSt);
+
+
+
+
+
+
+
 }
