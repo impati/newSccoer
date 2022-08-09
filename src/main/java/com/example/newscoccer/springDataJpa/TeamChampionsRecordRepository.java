@@ -151,7 +151,16 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
             " join fetch tcr.team t " +
             " where r in(:roundList) and t =:team " +
             " order by tcr.createDate desc ")
-    List<TeamChampionsRecord> findByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team , Pageable pageable);
+    List<TeamChampionsRecord> findByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team , Pageable pageable); /**
+     *
+     * roundList 에 참가한 팀중 team 에 해당하는 기록들 .전부
+     */
+    @Query(" select tcr from TeamChampionsRecord tcr " +
+            " join tcr.round r " +
+            " join fetch tcr.team t " +
+            " where r in(:roundList) and t =:team " +
+            " order by tcr.createDate desc ")
+    List<TeamChampionsRecord> findAllByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team );
 
 
 

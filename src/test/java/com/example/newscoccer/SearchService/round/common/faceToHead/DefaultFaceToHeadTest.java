@@ -49,6 +49,60 @@ class DefaultFaceToHeadTest {
     PlayerRepository playerRepository;
 
 
+
+    @Test
+    @DisplayName("전체 상대 전적")
+    public void totalComparison() throws Exception{
+        // given
+        League league = new League("testLeague");
+        leagueRepository.save(league);
+
+        Team teamA = Team.createTeam(league,"testTeamA");
+        Team teamB = Team.createTeam(league,"testTeamB");
+        teamRepository.save(teamA);
+        teamRepository.save(teamB);
+
+
+        createRecord(league, teamA, teamB,1,5,2);
+        createRecord(league, teamA, teamB,2,5,2);
+        createRecord(league, teamA, teamB,3,5,2);
+        createRecord(league,teamA,teamB,4,1,1);
+        createRecord(league,teamA,teamB,5,2,5);
+        createRecord(league,teamA,teamB,6,2,5);
+        createRecord(league,teamA,teamB,7,2,5);
+        createRecord(league,teamA,teamB,8,2,5);
+
+
+
+        createChampionsRecord(teamA,teamB,1000,16,1,100,200);
+        createChampionsRecord(teamA,teamB,1000,16,2,300,200);
+
+        LeagueRound leagueRound = new LeagueRound(league,1001,1);
+        roundRepository.save(leagueRound);
+
+        TeamLeagueRecord tlrA = TeamLeagueRecord.create(leagueRound,teamA);
+        TeamLeagueRecord tlrB = TeamLeagueRecord.create(leagueRound,teamB);
+        teamLeagueRecordRepository.save(tlrA);
+        teamLeagueRecordRepository.save(tlrB);
+
+        // when
+
+        TotalComparisonRecordResponse resp = faceToHead.totalComparison(leagueRound.getId());
+
+        // then
+
+        assertThat(resp.getWinA()).isEqualTo(4);
+        assertThat(resp.getDrawA()).isEqualTo(1);
+        assertThat(resp.getLoseA()).isEqualTo(5);
+        assertThat(resp.getAvgGoalA()).isEqualTo(42.4);
+
+        assertThat(resp.getAvgGoalB()).isEqualTo(42.7);
+        assertThat(resp.getWinB()).isEqualTo(5);
+        assertThat(resp.getDrawB()).isEqualTo(1);
+        assertThat(resp.getLoseB()).isEqualTo(4);
+
+
+    }
     @Test
     @DisplayName("챔피언스 탑 플레이어 ")
     public void championsTopPlayer() throws Exception{

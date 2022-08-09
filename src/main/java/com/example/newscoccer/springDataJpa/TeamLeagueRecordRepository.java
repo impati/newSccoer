@@ -153,7 +153,21 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
             " join tlr.team t " +
             " where r in(:roundList) and t =:team " +
             " order by tlr.createDate desc ")
-    List<TeamLeagueRecord> findByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team ,Pageable pageable);
+    List<TeamLeagueRecord> findByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team ,Pageable pageable); /**
+
+     *
+     * roundList 에 참가한 팀중 team 에 해당하는 기록들 .전부
+     */
+    @Query(" select tlr from TeamLeagueRecord tlr " +
+            " join tlr.round r " +
+            " join tlr.team t " +
+            " where r in(:roundList) and t =:team " +
+            " order by tlr.createDate desc ")
+    List<TeamLeagueRecord> findAllByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team);
+
+
+
+
 
 
 

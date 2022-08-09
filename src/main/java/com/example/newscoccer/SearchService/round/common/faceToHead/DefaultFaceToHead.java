@@ -8,6 +8,7 @@ import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResultUtils;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
+import com.example.newscoccer.domain.record.TeamRecord;
 import com.example.newscoccer.springDataJpa.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * 두 팀간 맞대결 정보
@@ -50,6 +53,54 @@ public class DefaultFaceToHead implements FaceToHead{
 
     private final PlayerLeagueRecordRepository playerLeagueRecordRepository;
     private final PlayerChampionsRecordRepository playerChampionsRecordRepository;
+
+
+    /**
+     * 팀A  , 팀B 의 리그 , 침피언스 리그 ,, 전체 전적(승,무,패) + 평균 득점 계산
+     * @param roundId
+     * @return
+     */
+    @Override
+    public TotalComparisonRecordResponse totalComparison(Long roundId) {
+        Round round = roundRepository.findById(roundId).orElse(null);
+
+        RoundFeature <List<TeamRecord>> feature = new RoundFeature<>() {
+            @Override
+            public List<TeamRecord> leagueSolved() {
+                return teamLeagueRecordRepository.findByRound(round).stream().collect(toList());
+            }
+
+            @Override
+            public List<TeamRecord> championsSolved() {
+                return teamChampionsRecordRepository.findByRound(round).stream().collect(toList());
+            }
+        };
+
+        List<TeamRecord> ret = new RoundTemplate().action(round,feature);
+
+        Team teamA = ret.get(0).getTeam();
+        Team teamB = ret.get(1).getTeam();
+
+        TotalComparisonRecordResponse resp = new TotalComparisonRecordResponse(teamA.getName(),teamB.getName());
+
+        leagueAllComparison(round, teamA, teamB, resp);
+        championsAllComparison(round, teamA, teamB, resp);
+        return resp;
+    }
+
+    private void championsAllComparison(Round round, Team teamA, Team teamB, TotalComparisonRecordResponse resp) {
+        List<Round > roundList = teamChampionsRecordRepository.findRoundListByTeam(teamB, round.getCreateDate());
+        teamChampionsRecordRepository.findAllByRoundListAndTeam(roundList, teamA)
+                .stream()
+                .forEach(ele-> resp.update(ele.getMatchResult(),ele.getScore(),ele.getOppositeScore()));
+    }
+
+    private void leagueAllComparison(Round round, Team teamA, Team teamB, TotalComparisonRecordResponse resp) {
+        List<Round> roundList = teamLeagueRecordRepository.findRoundListByTeam(teamB, round.getCreateDate());
+        teamLeagueRecordRepository.findAllByRoundListAndTeam(roundList, teamA)
+                .stream()
+                .forEach(ele-> resp.update(ele.getMatchResult(),ele.getScore(),ele.getOppositeScore()));
+    }
 
 
     /**
@@ -91,8 +142,6 @@ public class DefaultFaceToHead implements FaceToHead{
                 TopPlayerResponse resp = new TopPlayerResponse();
                 championsTopPlayer(teamA,round,firstAndSecond,resp.getTeamAPlayerList());
                 championsTopPlayer(teamB,round,firstAndSecond,resp.getTeamBPlayerList());
-
-
                 resp.setTeamAPlayerList(sortingAndCut(resp.getTeamAPlayerList()));
                 resp.setTeamBPlayerList(sortingAndCut(resp.getTeamBPlayerList()));
 
@@ -193,15 +242,6 @@ public class DefaultFaceToHead implements FaceToHead{
         return new RoundTemplate().action(round,feature);
     }
 
-
-
-
-
-
-    @Override
-    public TotalComparisonRecordResponse totalComparison(Long roundId) {
-        return null;
-    }
 
 
     /**
