@@ -16,6 +16,7 @@ public class TeamChampionsRecord extends TeamRecord{
     @Column(name= "team_champions_id")
     private Long id;
     private int FirstOrSecond;
+
     @ManyToOne
     @JoinColumn(name = "round_id")
     private ChampionsRound round;

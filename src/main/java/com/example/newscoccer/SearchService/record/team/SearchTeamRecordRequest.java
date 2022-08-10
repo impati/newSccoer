@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.record;
+package com.example.newscoccer.SearchService.record.team;
 
 import com.example.newscoccer.domain.DataTransferObject;
 import lombok.AllArgsConstructor;

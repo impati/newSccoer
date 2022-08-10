@@ -1,4 +1,4 @@
-package com.example.newscoccer.SearchService.record;
+package com.example.newscoccer.SearchService.record.team;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
