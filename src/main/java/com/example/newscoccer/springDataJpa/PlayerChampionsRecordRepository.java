@@ -1,5 +1,6 @@
 package com.example.newscoccer.springDataJpa;
 
+import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerChampionsRecord;
@@ -54,6 +55,17 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
             " group by p.id ")
     List<PlayerParticipate> findPlayerParticipate(@Param("team") Long team , @Param("season") int season);
 
+
+
+
+
+
+    @Query(" select p from PlayerChampionsRecord pcr " +
+            " join pcr.player p " +
+            " join fetch p.team t " +
+            " join pcr.round r " +
+            " where t in(:teamList) and r.season = :season ")
+    List<Player> findPlayerByTeamListAndSeason(@Param("teamList") List<Team> teamList , @Param("season") int season);
 
     /**
      * 선수정보 , 선수가 해당 시즌에 챔피언스 리그 정보
