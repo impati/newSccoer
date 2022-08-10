@@ -6,6 +6,7 @@ import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
 import com.example.newscoccer.domain.Round.LeagueRound;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResult;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
@@ -67,6 +68,7 @@ class DefaultTeamLeagueInfoTest {
         int rank = -1, gain = 0, lost = 0,point = 0;
         for(int i = 1;i<=15;i++){
             LeagueRound leagueRound = new LeagueRound(league,0,i);
+            leagueRound.setRoundStatus(RoundStatus.DONE);
             roundRepository.save(leagueRound);
 
             TeamLeagueRecord tlr = TeamLeagueRecord.create(leagueRound,team);

@@ -1,7 +1,6 @@
 package com.example.newscoccer.springDataJpa;
 
 import com.example.newscoccer.domain.Round.Round;
-import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import org.assertj.core.api.Assertions;
@@ -55,15 +54,7 @@ class TeamLeagueRecordRepositoryTest {
 
     }
 
-    @Test
-    @DisplayName("팀 + 시즌 정보로 검색")
-    public void findByTeamAndSeasonTest() throws Exception{
-        // given
-        // when
-        List<TeamLeagueRecord> tlr = teamLeagueRecordRepository.findByTeamAndSeason(1L ,0);
-        // then
-        Assertions.assertThat(tlr.size()).isEqualTo(SeasonUtils.lastLeagueRoundSt);
-    }
+
 
 
     @Test

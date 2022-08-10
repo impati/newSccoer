@@ -11,7 +11,6 @@ import java.util.List;
 public class TeamChampionsInfoResponse extends DataTransferObject {
     private int rank;
 
-
     private int win;
     private int draw;
     private int lose;

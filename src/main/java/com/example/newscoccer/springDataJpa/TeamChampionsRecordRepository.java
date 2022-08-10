@@ -8,6 +8,7 @@ import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.TeamScoreDto;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,13 +40,15 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
     List<TeamChampionsRecord> findByDirector(@Param("director") Long director,@Param("season") int season );
 
     /**
-     * 시즌 , 챔피언스 라운드에 진출한 팀을 가져옴.
+     * 시즌에 챔피언스 진출 팀을 가져옴.
      */
-    @Query("select t from TeamChampionsRecord  tcr " +
-            " join tcr.team t " +
-            " join tcr.round r " +
-            "where r.season = :season and r.roundSt = :roundSt")
-    List<Team> findTeam(@Param("season") int season , @Param("roundSt") int roundSt);
+    @EntityGraph(attributePaths = {"team"})
+    @Query("select distinct t from TeamChampionsRecord  tcr " +
+            " join  tcr.team t " +
+            " join  tcr.round r " +
+            " where r.season = :season ")
+    List<Team> findTeamBySeason(@Param("season") int season);
+
     /**
      * 시즌 , 챔피언스 라운드에 진출한 팀 기록을 가져옴.
      */

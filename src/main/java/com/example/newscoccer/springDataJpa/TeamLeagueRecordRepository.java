@@ -83,6 +83,7 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
             " join tlr.round r " +
             " join fetch tlr.team t " +
             " where r.season = :season and t.id = :team " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE" +
             " order by r.roundSt ")
     List<TeamLeagueRecord> findByTeamAndSeason(@Param("team") Long teamId , @Param("season") int season);
 
@@ -164,6 +165,7 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
             " where r in(:roundList) and t =:team " +
             " order by tlr.createDate desc ")
     List<TeamLeagueRecord> findAllByRoundListAndTeam(@Param("roundList") List<Round> roundList , @Param("team") Team team);
+
 
 
 
