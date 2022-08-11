@@ -11,10 +11,8 @@ import java.util.List;
  */
 @Data
 public class RoundLineUpResponse extends DataTransferObject {
-
     private String teamAName;
     private String teamBName;
     private List<RoundLineUpDto> playerListA = new ArrayList<>();
     private List<RoundLineUpDto> playerListB = new ArrayList<>();
-
 }

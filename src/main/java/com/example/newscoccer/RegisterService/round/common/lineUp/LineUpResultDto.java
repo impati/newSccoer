@@ -13,6 +13,4 @@ import java.util.List;
 public class LineUpResultDto {
     private Long roundId;
     private List<LineUpResult> participatePlayer = new ArrayList<>();
-
-
 }

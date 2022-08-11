@@ -3,6 +3,7 @@ package com.example.newscoccer.springDataJpa;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Round.ChampionsRound;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerChampionsRecord;
@@ -44,6 +45,7 @@ class PlayerChampionsRecordRepositoryTest {
         int roundSt = 10 ;
         for(int i = 0 ;i<roundSt;i++){
             ChampionsRound round = new ChampionsRound(season,i,1);
+            round.setRoundStatus(RoundStatus.DONE);
             roundRepository.save(round);
             PlayerChampionsRecord playerChampionsRecord = (PlayerChampionsRecord) PlayerChampionsRecord.createPlayerRecord(player, Position.ST,player.getTeam(),round);
             playerChampionsRecordRepository.save(playerChampionsRecord);

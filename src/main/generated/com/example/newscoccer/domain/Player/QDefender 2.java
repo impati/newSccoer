@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QStriker is a Querydsl query type for Striker
+ * QDefender is a Querydsl query type for Defender
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QStriker extends EntityPathBase<Striker> {
+public class QDefender extends EntityPathBase<Defender> {
 
-    private static final long serialVersionUID = 767299788L;
+    private static final long serialVersionUID = 1164296599L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QStriker striker = new QStriker("striker");
+    public static final QDefender defender = new QDefender("defender");
 
     public final QPlayer _super;
 
@@ -32,9 +32,6 @@ public class QStriker extends EntityPathBase<Striker> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate;
-
-    //inherited
-    public final BooleanPath main;
 
     //inherited
     public final StringPath name;
@@ -51,29 +48,28 @@ public class QStriker extends EntityPathBase<Striker> {
     // inherited
     public final com.example.newscoccer.domain.QTeam team;
 
-    public QStriker(String variable) {
-        this(Striker.class, forVariable(variable), INITS);
+    public QDefender(String variable) {
+        this(Defender.class, forVariable(variable), INITS);
     }
 
-    public QStriker(Path<? extends Striker> path) {
+    public QDefender(Path<? extends Defender> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QStriker(PathMetadata metadata) {
+    public QDefender(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QStriker(PathMetadata metadata, PathInits inits) {
-        this(Striker.class, metadata, inits);
+    public QDefender(PathMetadata metadata, PathInits inits) {
+        this(Defender.class, metadata, inits);
     }
 
-    public QStriker(Class<? extends Striker> type, PathMetadata metadata, PathInits inits) {
+    public QDefender(Class<? extends Defender> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QPlayer(type, metadata, inits);
         this.createDate = _super.createDate;
         this.id = _super.id;
         this.lastModifiedDate = _super.lastModifiedDate;
-        this.main = _super.main;
         this.name = _super.name;
         this.position = _super.position;
         this.rating = _super.rating;

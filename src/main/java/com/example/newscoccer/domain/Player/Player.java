@@ -28,6 +28,9 @@ public class Player extends BaseEntity {
     @JoinColumn(name ="team_id")
     private Team team;
 
+
+    // 현재 팀에서 메인이냐 ? ->true , false
+    private boolean main;
     /**
      *  Stat 은 선수에게 종속적 , 생명주기의존 , 선수 Entity 에서만 stat Entity 사용함으로  -> Cascade .All
      *  단 하나이며 선수가 둘이상을 가지는 상황이 존재할 수가 없음.
@@ -61,7 +64,6 @@ public class Player extends BaseEntity {
     }
 
     /**
-     *
      * 선수 정보 업데이트
      */
     public void update(String name,Position position ,Team team,
@@ -86,6 +88,8 @@ public class Player extends BaseEntity {
                 tackle, intercepting, slidingTackle, diving,
                 handling, goalKick, speedReaction, positioning, visualRange, sense);
     }
+
+
 
 
 

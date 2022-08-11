@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QStriker is a Querydsl query type for Striker
+ * QGoalkeeper is a Querydsl query type for Goalkeeper
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QStriker extends EntityPathBase<Striker> {
+public class QGoalkeeper extends EntityPathBase<Goalkeeper> {
 
-    private static final long serialVersionUID = 767299788L;
+    private static final long serialVersionUID = -1873169799L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QStriker striker = new QStriker("striker");
+    public static final QGoalkeeper goalkeeper = new QGoalkeeper("goalkeeper");
 
     public final QPlayer _super;
 
@@ -32,9 +32,6 @@ public class QStriker extends EntityPathBase<Striker> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate;
-
-    //inherited
-    public final BooleanPath main;
 
     //inherited
     public final StringPath name;
@@ -51,29 +48,28 @@ public class QStriker extends EntityPathBase<Striker> {
     // inherited
     public final com.example.newscoccer.domain.QTeam team;
 
-    public QStriker(String variable) {
-        this(Striker.class, forVariable(variable), INITS);
+    public QGoalkeeper(String variable) {
+        this(Goalkeeper.class, forVariable(variable), INITS);
     }
 
-    public QStriker(Path<? extends Striker> path) {
+    public QGoalkeeper(Path<? extends Goalkeeper> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QStriker(PathMetadata metadata) {
+    public QGoalkeeper(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QStriker(PathMetadata metadata, PathInits inits) {
-        this(Striker.class, metadata, inits);
+    public QGoalkeeper(PathMetadata metadata, PathInits inits) {
+        this(Goalkeeper.class, metadata, inits);
     }
 
-    public QStriker(Class<? extends Striker> type, PathMetadata metadata, PathInits inits) {
+    public QGoalkeeper(Class<? extends Goalkeeper> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QPlayer(type, metadata, inits);
         this.createDate = _super.createDate;
         this.id = _super.id;
         this.lastModifiedDate = _super.lastModifiedDate;
-        this.main = _super.main;
         this.name = _super.name;
         this.position = _super.position;
         this.rating = _super.rating;

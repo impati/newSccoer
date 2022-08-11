@@ -32,6 +32,8 @@ public class QPlayer extends EntityPathBase<Player> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate = _super.lastModifiedDate;
 
+    public final BooleanPath main = createBoolean("main");
+
     public final StringPath name = createString("name");
 
     public final EnumPath<Position> position = createEnum("position", Position.class);

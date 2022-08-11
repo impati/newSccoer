@@ -4,6 +4,7 @@ import com.example.newscoccer.SearchService.common.EntityRecordInfo;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.LeagueRound;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResult;
@@ -150,6 +151,7 @@ class DefaultPlayerLeagueInfoTest {
 
 
             LeagueRound leagueRound = new LeagueRound(league,0,i);
+            leagueRound.setRoundStatus(RoundStatus.DONE);
             roundRepository.save(leagueRound);
             plr.setRound(leagueRound);
             leagueRecordRepository.save(plr);

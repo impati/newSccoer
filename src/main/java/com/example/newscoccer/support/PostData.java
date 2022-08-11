@@ -69,6 +69,8 @@ public class PostData {
             teamSetting();
             directorSetting();
             playerSetting();
+
+
             leagueSeasonSetting();
             championsSeasonSetting();
         }
@@ -174,6 +176,42 @@ public class PostData {
             }
         }
 
+        teams.stream().forEach(t-> {
+            List<Player> playerList = playerRepository.findByTeam(t);
+            // 공격수 3명
+            decisionMain(playerList,new Position[]{Position.ST, Position.CF , Position.RF ,Position.LF} , 3)
+                    .stream()
+                    .forEach(p->p.setMain(true));
+            // 미드필더 3명
+            decisionMain(playerList,new Position[]{ Position.AM ,Position.LM, Position.CM , Position.RM , Position.DM } , 3)
+                    .stream()
+                    .forEach(p->p.setMain(true));
+            // 수비수 4명
+            decisionMain(playerList,new Position[]{Position.LB ,Position.LWB ,Position.CB, Position.RB , Position.RWB} , 4)
+                    .stream()
+                    .forEach(p->p.setMain(true));
+            // 골기퍼 1명
+            decisionMain(playerList,new Position[]{Position.GK} , 1)
+                    .stream()
+                    .forEach(p->p.setMain(true));
+        });
+    }
+    private List<Player> decisionMain(List<Player> playerList , Position [] positions , int n){
+        List<Player> ret = new ArrayList<>();
+        for(var player : playerList){
+            Position position = player.getPosition();
+            for(var p : positions){
+                if(position == p) ret.add(player);
+            }
+        }
+
+        while(true){
+            int sz  = ret.size();
+            if(sz == n) break;
+            int rn = RandomNumber.returnRandomNumber(0,ret.size()-1);
+            ret.remove(rn);
+        }
+        return ret;
     }
     private void directorSetting() throws IOException {
         String pathDirector = filePath +"director.txt";

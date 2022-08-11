@@ -34,9 +34,6 @@ public class QStriker extends EntityPathBase<Striker> {
     public final DateTimePath<java.time.LocalDateTime> lastModifiedDate;
 
     //inherited
-    public final BooleanPath main;
-
-    //inherited
     public final StringPath name;
 
     //inherited
@@ -73,7 +70,6 @@ public class QStriker extends EntityPathBase<Striker> {
         this.createDate = _super.createDate;
         this.id = _super.id;
         this.lastModifiedDate = _super.lastModifiedDate;
-        this.main = _super.main;
         this.name = _super.name;
         this.position = _super.position;
         this.rating = _super.rating;

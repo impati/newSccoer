@@ -3,6 +3,7 @@ package com.example.newscoccer.SearchService.player.info.champoions;
 import com.example.newscoccer.SearchService.common.EntityRecordInfo;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.ChampionsRound;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.MatchResult;
@@ -140,6 +141,7 @@ class DefaultPlayerChampionsInfoTest {
 
 
             ChampionsRound leagueRound = new ChampionsRound(0,i,RandomNumber.returnRandomNumber(0,1));
+            leagueRound.setRoundStatus(RoundStatus.DONE);
             roundRepository.save(leagueRound);
             plr.setRound(leagueRound);
             playerChampionsRecordRepository.save(plr);

@@ -17,6 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * 팀의 선수들을 모두 가져옴 .
+ * 팀 A , 팀 B
+ *
+ */
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -32,7 +37,7 @@ public class DefaultRoundLineUp implements RoundLineUp{
 
         RoundTemplate roundTemplate = new RoundTemplate();
 
-        RoundFeature<RoundLineUpResponse> roundFeature = new RoundFeature<RoundLineUpResponse>() {
+        RoundFeature<RoundLineUpResponse> roundFeature = new RoundFeature<>() {
             @Override
             public RoundLineUpResponse leagueSolved() {
                 RoundLineUpResponse resp = new RoundLineUpResponse();
