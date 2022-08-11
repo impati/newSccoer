@@ -25,6 +25,7 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
             " join pcr.player p " +
             " join pcr.round r " +
             " where p.id = :player and r.season = :season " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE" +
             " order by r.roundSt desc")
     List<PlayerChampionsRecord> findByPlayerAndSeason(@Param("player") Long playerId , @Param("season")int season);
 
@@ -56,15 +57,19 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
     List<PlayerParticipate> findPlayerParticipate(@Param("team") Long team , @Param("season") int season);
 
 
-
-
-
-
-    @Query(" select p from PlayerChampionsRecord pcr " +
+    /**
+     *
+     * 시즌에 팀에 있던 참가한 선수들 모두 .
+     * @param teamList
+     * @param season
+     * @return
+     */
+    @Query(" select distinct p from PlayerChampionsRecord pcr " +
             " join pcr.player p " +
             " join fetch p.team t " +
             " join pcr.round r " +
-            " where t in(:teamList) and r.season = :season ")
+            " where t in(:teamList) and r.season = :season " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE ")
     List<Player> findPlayerByTeamListAndSeason(@Param("teamList") List<Team> teamList , @Param("season") int season);
 
     /**

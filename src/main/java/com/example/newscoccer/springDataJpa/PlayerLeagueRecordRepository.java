@@ -26,6 +26,7 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
             " join plr.player p " +
             " join plr.round r " +
             " where p.id = :player and r.season = :season " +
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE" +
             " order by plr.createDate ")
     List<PlayerLeagueRecord> findByPlayerAndSeason(@Param("player") Long playerId ,@Param("season") int season);
 
@@ -57,12 +58,16 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
 
 
 
-    @Query(" select p from PlayerLeagueRecord plr " +
+    @Query(" select distinct p from PlayerLeagueRecord plr " +
             " join plr.player p " +
             " join fetch p.team t " +
             " join plr.round r " +
             " where t in(:teamList) and r.season = :season ")
     List<Player> findPlayerByTeamListAndSeason(@Param("teamList") List<Team> teamList , @Param("season") int season);
+
+
+
+
     /**
      * 팀 + 라운드로 해당 라운드에 참가한 선수들을 가져옴 .
      */

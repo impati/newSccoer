@@ -19,6 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ *  성능 이슈 - 테스트가 너무 오래걸림.
+ */
 @Slf4j
 @Service
 @Transactional(readOnly = true)
@@ -54,6 +57,13 @@ public class DefaultSearchPlayerRecord implements SearchPlayerRecord {
     }
 
 
+    /**
+     * 해당 시즌 챔피언스리그에 진출한 선수들 기록을 조회
+     * @param season
+     * @param sortType
+     * @param direction
+     * @return
+     */
     @Override
     public SearchPlayerRecordResponse searchChampionsPlayerRecord(int season, SortType sortType , Direction direction) {
         SearchPlayerRecordResponse resp = new SearchPlayerRecordResponse();
@@ -73,6 +83,12 @@ public class DefaultSearchPlayerRecord implements SearchPlayerRecord {
     }
 
 
+    /**
+     *  조건에 맞는 정렬.
+     * @param resultList
+     * @param sortType
+     * @param direction
+     */
     private void sorting(List<PlayerRecordDto> resultList , SortType sortType, Direction direction){
         if(sortType == SortType.RANK){
             resultList.sort((e1,e2)->{
