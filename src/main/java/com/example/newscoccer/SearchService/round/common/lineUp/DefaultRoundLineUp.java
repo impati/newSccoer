@@ -2,14 +2,12 @@ package com.example.newscoccer.SearchService.round.common.lineUp;
 
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.Round.RoundTemplate;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import com.example.newscoccer.springDataJpa.PlayerRepository;
-import com.example.newscoccer.springDataJpa.RoundRepository;
-import com.example.newscoccer.springDataJpa.TeamChampionsRecordRepository;
-import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
+import com.example.newscoccer.springDataJpa.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,9 +15,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 /**
- * 팀의 선수들을 모두 가져옴 .
- * 팀 A , 팀 B
+ * RoundStatus.INIT
+ *  ->팀의 선수들을 모두 가져옴 .
+ *  ->팀 A , 팀 B
+ *
+ * RoundStatus.YET
+ *  ->저장된 라인업을 가져와서 리턴.
+ *
  *
  */
 @Slf4j
@@ -31,6 +36,8 @@ public class DefaultRoundLineUp implements RoundLineUp{
     private final PlayerRepository playerRepository;
     private final TeamLeagueRecordRepository teamLeagueRecordRepository;
     private final TeamChampionsRecordRepository teamChampionsRecordRepository;
+    private final PlayerLeagueRecordRepository playerLeagueRecordRepository;
+    private final PlayerChampionsRecordRepository playerChampionsRecordRepository;
     @Override
     public RoundLineUpResponse lineUp(RoundLineUpRequest req) {
         Round round = roundRepository.findById(req.getRoundId()).orElse(null);
@@ -41,19 +48,34 @@ public class DefaultRoundLineUp implements RoundLineUp{
             @Override
             public RoundLineUpResponse leagueSolved() {
                 RoundLineUpResponse resp = new RoundLineUpResponse();
+
                 List<TeamLeagueRecord> tlr = teamLeagueRecordRepository.findByRound(round);
-
                 Team teamA = tlr.get(0).getTeam();
-                resp.setTeamAName(teamA.getName());
-                playerRepository.findByTeam(teamA).stream().forEach(p->{
-                    resp.getPlayerListA().add(new RoundLineUpDto(p.getId(),p.getName(),p.getPosition()));
-                });
-
                 Team teamB = tlr.get(1).getTeam();
+
+                resp.setTeamAName(teamA.getName());
                 resp.setTeamBName(teamB.getName());
-                playerRepository.findByTeam(teamB).stream().forEach(p->{
-                    resp.getPlayerListB().add(new RoundLineUpDto(p.getId(),p.getName(),p.getPosition()));
-                });
+
+
+                //라인업이 결정되지 않았을 때
+                if(round.getRoundStatus() == RoundStatus.INIT) {
+                    playerRepository.findByTeam(teamA).stream().forEach(p -> {
+                        resp.getPlayerListA().add(new RoundLineUpDto(p.getId(), p.getName(), p.getPosition()));
+                    });
+                    playerRepository.findByTeam(teamB).stream().forEach(p -> {
+                        resp.getPlayerListB().add(new RoundLineUpDto(p.getId(), p.getName(), p.getPosition()));
+                    });
+                }
+                else{// 라인업이 결정되었을 때
+
+                    resp.setPlayerListA(playerLeagueRecordRepository.findByTeamAndRound(teamA,round).stream()
+                            .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
+                            .collect(toList()));
+
+                    resp.setPlayerListB(playerLeagueRecordRepository.findByTeamAndRound(teamB,round).stream()
+                            .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
+                            .collect(toList()));
+                }
 
                 return resp;
             }
@@ -65,15 +87,29 @@ public class DefaultRoundLineUp implements RoundLineUp{
 
                 Team teamA = tcr.get(0).getTeam();
                 resp.setTeamAName(teamA.getName());
-                playerRepository.findByTeam(teamA).stream().forEach(p->{
-                    resp.getPlayerListA().add(new RoundLineUpDto(p.getId(),p.getName(),p.getPosition()));
-                });
 
                 Team teamB = tcr.get(1).getTeam();
                 resp.setTeamBName(teamB.getName());
-                playerRepository.findByTeam(teamB).stream().forEach(p->{
-                    resp.getPlayerListB().add(new RoundLineUpDto(p.getId(),p.getName(),p.getPosition()));
-                });
+
+                //라인업이 결정되지 않았을 때
+                if(round.getRoundStatus() == RoundStatus.INIT) {
+                    playerRepository.findByTeam(teamA).stream().forEach(p -> {
+                        resp.getPlayerListA().add(new RoundLineUpDto(p.getId(), p.getName(), p.getPosition()));
+                    });
+                    playerRepository.findByTeam(teamB).stream().forEach(p -> {
+                        resp.getPlayerListB().add(new RoundLineUpDto(p.getId(), p.getName(), p.getPosition()));
+                    });
+                }
+                else{ // 라인업이 결정되었을 때
+
+                    resp.setPlayerListA(playerChampionsRecordRepository.findByTeamAndRound(teamA,round).stream()
+                            .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
+                            .collect(toList()));
+                    resp.setPlayerListB(playerChampionsRecordRepository.findByTeamAndRound(teamB,round).stream()
+                            .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
+                            .collect(toList()));
+
+                }
 
                 return resp;
             }

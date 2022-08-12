@@ -150,4 +150,37 @@ public class Stat extends BaseEntity {
         this.setSense(sense);
 
     }
+
+    @Override
+    public String toString() {
+        return "Stat{" +
+                "acceleration=" + acceleration +
+                ", speed=" + speed +
+                ", physicalFight=" + physicalFight +
+                ", stamina=" + stamina +
+                ", activeness=" + activeness +
+                ", jump=" + jump +
+                ", balance=" + balance +
+                ", ballControl=" + ballControl +
+                ", crosses=" + crosses +
+                ", pass=" + pass +
+                ", longPass=" + longPass +
+                ", dribble=" + dribble +
+                ", goalDetermination=" + goalDetermination +
+                ", midRangeShot=" + midRangeShot +
+                ", shootPower=" + shootPower +
+                ", heading=" + heading +
+                ", defense=" + defense +
+                ", tackle=" + tackle +
+                ", intercepting=" + intercepting +
+                ", slidingTackle=" + slidingTackle +
+                ", diving=" + diving +
+                ", handling=" + handling +
+                ", goalKick=" + goalKick +
+                ", speedReaction=" + speedReaction +
+                ", positioning=" + positioning +
+                ", visualRange=" + visualRange +
+                ", sense=" + sense +
+                '}';
+    }
 }

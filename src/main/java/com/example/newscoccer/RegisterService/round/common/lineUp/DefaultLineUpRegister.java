@@ -3,6 +3,7 @@ package com.example.newscoccer.RegisterService.round.common.lineUp;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.Round.RoundTemplate;
 import com.example.newscoccer.domain.record.PlayerChampionsRecord;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
@@ -46,6 +47,7 @@ public class DefaultLineUpRegister implements LineUpRegister{
                                     PlayerLeagueRecord.createPlayerRecord(player,p.getPosition(),player.getTeam(),round);
                             playerLeagueRecordRepository.save(plr);
                         });
+                round.setRoundStatus(RoundStatus.YET);
 
                 return null;
             }
@@ -61,7 +63,7 @@ public class DefaultLineUpRegister implements LineUpRegister{
                                     PlayerChampionsRecord.createPlayerRecord(player,p.getPosition(),player.getTeam(),round);
                             playerChampionsRecordRepository.save(pcr);
                         });
-
+                round.setRoundStatus(RoundStatus.YET);
 
                 return null;
             }

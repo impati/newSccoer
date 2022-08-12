@@ -74,6 +74,7 @@ public interface PlayerLeagueRecordRepository extends JpaRepository<PlayerLeague
     @Query("select plr from PlayerLeagueRecord plr " +
             " join fetch plr.team t " +
             " join fetch plr.round r " +
+            " join fetch plr.player p " +
             " where t = :team and r = :round")
     List<PlayerLeagueRecord> findByTeamAndRound(@Param("team") Team team , @Param("round")Round round);
 

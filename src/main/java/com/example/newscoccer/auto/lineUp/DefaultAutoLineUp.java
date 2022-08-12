@@ -30,7 +30,7 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-@Transactional(readOnly = true)
+@Transactional
 public class DefaultAutoLineUp implements AutoLineUp{
     private final RoundLineUp roundLineUp;
     private final LineUpRegister lineUpRegister;
@@ -40,14 +40,12 @@ public class DefaultAutoLineUp implements AutoLineUp{
     public void autoLineUp(Long roundId) {
         RoundLineUpResponse resp = roundLineUp.lineUp(new RoundLineUpRequest(roundId));
         LineUpResultDto result = new LineUpResultDto();
-
         result.setRoundId(roundId);
 
         // LineUpResult 생성해서 넣어줌 .
 
         //팀A
         List<Long> playerIdAList = resp.getPlayerListA().stream().map(ele->ele.getPlayerId()).collect(toList());
-
         playerRepository.findByPlayerList(playerIdAList).stream().filter(p->p.isMain()).forEach(ele->{
             result.getParticipatePlayer().add(new LineUpResult(ele.getId(),ele.getPosition()));
         });
@@ -58,7 +56,6 @@ public class DefaultAutoLineUp implements AutoLineUp{
         playerRepository.findByPlayerList(playerIdBList).stream().filter(p->p.isMain()).forEach(ele->{
             result.getParticipatePlayer().add(new LineUpResult(ele.getId(),ele.getPosition()));
         });
-
         lineUpRegister.lineUpRegister(result);
     }
 }

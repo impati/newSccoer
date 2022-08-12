@@ -92,6 +92,7 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
     @Query("select pcr from PlayerChampionsRecord pcr " +
             " join pcr.team t " +
             " join pcr.round r " +
+            " join pcr.player p " +
             " where t = :team and r = :round")
     List<PlayerChampionsRecord> findByTeamAndRound(@Param("team") Team team , @Param("round") Round round);
 

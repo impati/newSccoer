@@ -3,12 +3,14 @@ package com.example.newscoccer.SearchService.round.common;
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUp;
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUpRequest;
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUpResponse;
+import com.example.newscoccer.auto.lineUp.AutoLineUp;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
 import com.example.newscoccer.domain.Round.ChampionsRound;
 import com.example.newscoccer.domain.Round.LeagueRound;
+import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
@@ -66,6 +68,35 @@ class DefaultRoundLineUpTest {
     }
 
 
+    @Autowired
+    AutoLineUp lineUp;
+
+    @Test
+    @DisplayName("리그 라운드 저장된 라인업을 가져오기 ")
+    public void savedLeagueLineUp() throws Exception{
+        // given
+        Long roundId = makeTeamLeagueRound();
+        // when
+        lineUp.autoLineUp(roundId);
+
+        RoundLineUpResponse resp = roundLineUp.lineUp(new RoundLineUpRequest(roundId));
+        // then
+        Assertions.assertThat(resp.getPlayerListA().size()).isEqualTo(11);
+        Assertions.assertThat(resp.getPlayerListB().size()).isEqualTo(11);
+
+        for(var ele : resp.getPlayerListA()){
+            Player player = playerRepository.findById(ele.getPlayerId()).get();
+            Assertions.assertThat(player.isMain()).isTrue();
+        }
+        for(var ele : resp.getPlayerListB()){
+            Player player = playerRepository.findById(ele.getPlayerId()).get();
+            Assertions.assertThat(player.isMain()).isTrue();
+        }
+
+    }
+
+
+
 
     private Long makeTeamLeagueRound(){
 
@@ -81,12 +112,14 @@ class DefaultRoundLineUpTest {
         for(int i = 1;i<=11;i+=1) {
             Player player = Player.createPlayer("test" + i, Position.ST, team, new Stat());
             Player oppositePlayer = Player.createPlayer("oppositeTest" + i, Position.GK, opposite, new Stat());
-
+            player.setMain(true);
+            oppositePlayer.setMain(true);
             playerRepository.save(oppositePlayer);
             playerRepository.save(player);
 
         }
             LeagueRound round = new LeagueRound(league,0,1000);
+            round.setRoundStatus(RoundStatus.INIT);
             roundRepository.save(round);
 
             TeamLeagueRecord teamLeagueRecordA = TeamLeagueRecord.create(round,team);
