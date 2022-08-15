@@ -5,5 +5,5 @@ package com.example.newscoccer.auto.Game;
  *
  */
 public interface AutoGameRegister {
-    void autoGameRegister();
+    void autoGameRegister(Long roundId);
 }

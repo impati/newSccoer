@@ -19,11 +19,15 @@ public class GameResultPlayerDto extends DataTransferObject {
 
     private int goal;
     private int assist;
+
     private int pass;
+
     private int shooting;
     private int validShooting;
+
     private int foul;
     private int defense;
+
     private int grade;
 
     public GameResultPlayerDto(Long playerId, String playerName, Position position) {
@@ -31,6 +35,8 @@ public class GameResultPlayerDto extends DataTransferObject {
         this.playerName = playerName;
         this.position = position;
     }
+
+
 
 
 }

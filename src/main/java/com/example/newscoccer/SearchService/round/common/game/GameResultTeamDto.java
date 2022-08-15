@@ -12,12 +12,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class GameResultTeamDto extends DataTransferObject {
-    private Long teamId;
-    private String teamName;
-    private int score;
-    private int share;
-    private int cornerKick;
-    private int freeKick;
+    private Long teamId;//
+    private String teamName;//
+    private int score;//
+    private double share;//
+    private int cornerKick;//
+    private int freeKick;//
 
     public GameResultTeamDto(Long teamId, String teamName) {
         this.teamId = teamId;

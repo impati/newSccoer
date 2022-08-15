@@ -53,9 +53,8 @@ public class DefaultRoundLineUp implements RoundLineUp{
                 Team teamA = tlr.get(0).getTeam();
                 Team teamB = tlr.get(1).getTeam();
 
-                resp.setTeamAName(teamA.getName());
-                resp.setTeamBName(teamB.getName());
-
+                resp.teamAUpdate(teamA);
+                resp.teamBUpdate(teamB);
 
                 //라인업이 결정되지 않았을 때
                 if(round.getRoundStatus() == RoundStatus.INIT) {
@@ -86,10 +85,10 @@ public class DefaultRoundLineUp implements RoundLineUp{
                 List<TeamChampionsRecord> tcr = teamChampionsRecordRepository.findByRound(round);
 
                 Team teamA = tcr.get(0).getTeam();
-                resp.setTeamAName(teamA.getName());
-
                 Team teamB = tcr.get(1).getTeam();
-                resp.setTeamBName(teamB.getName());
+
+                resp.teamAUpdate(teamA);
+                resp.teamBUpdate(teamB);
 
                 //라인업이 결정되지 않았을 때
                 if(round.getRoundStatus() == RoundStatus.INIT) {

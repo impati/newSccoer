@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Stat extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,7 +34,7 @@ public class Stat extends BaseEntity {
     private int longPass; //롱 패스
 
     //공격력
-    private int dribble; //
+    private int dribble; // 드리블
     private int goalDetermination; // 결정력
     private int midRangeShot; // 중거리슛
     private int shootPower; // 슛파워
