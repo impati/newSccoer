@@ -36,7 +36,7 @@ public class PassDecision {
         ret += stat.getSense()* 40;
 
         // ret Max = 90000
-        int ans  =(int)(ret * (condition));
+        int ans  =  (int)(ret * (condition));
 
         int modValue = 2000;
         int s = RandomNumber.returnRandomNumber(0,ans / modValue) + 3;
@@ -45,11 +45,9 @@ public class PassDecision {
         return value;
     }
 
-    public static double avgPass(){
-        return 0;
-    }
 
-    public int passDecision(Position st, double v, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
+
+    public static int passDecision(Position st, double v, int i, int i1, int i2, int i3, int i4, int i5, int i6, int i7, int i8) {
         Stat stat = new Stat();
         stat.setBallControl(i);
         stat.setCrosses(i1);
@@ -60,6 +58,6 @@ public class PassDecision {
         stat.setVisualRange(i6);
         stat.setSense(i7);
         stat.setBalance(i8);
-        return DefenseDecision.defenseDecision(st,v,stat);
+        return PassDecision.passDecision(st,v,stat);
     }
 }

@@ -20,9 +20,9 @@ class FoulDecisionTest {
             maxValue = Math.max(maxValue,ret);
         }
         // then
-        System.out.println("minValue " + minValue);
-        System.out.println("maxValue " + maxValue);
-        System.out.println("avg "  + sum / n);
+        System.out.println("minValue " + minValue); // 0
+        System.out.println("maxValue " + maxValue); // 4
+        System.out.println("avg "  + sum / n); // 1
 
     }
     @Test
@@ -38,9 +38,9 @@ class FoulDecisionTest {
             maxValue = Math.max(maxValue,ret);
         }
         // then
-        System.out.println("minValue " + minValue);
-        System.out.println("maxValue " + maxValue);
-        System.out.println("avg "  + sum / n);
+        System.out.println("minValue " + minValue); // 0
+        System.out.println("maxValue " + maxValue); // 7
+        System.out.println("avg "  + sum / n); // 2
 
     }
 
@@ -57,9 +57,9 @@ class FoulDecisionTest {
             maxValue = Math.max(maxValue,ret);
         }
         // then
-        System.out.println("minValue " + minValue);
-        System.out.println("maxValue " + maxValue);
-        System.out.println("avg "  + sum / n);
+        System.out.println("minValue " + minValue); // 0
+        System.out.println("maxValue " + maxValue); // 15
+        System.out.println("avg "  + sum / n); // 4
 
     }
 }

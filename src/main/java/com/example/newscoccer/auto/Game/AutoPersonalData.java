@@ -41,7 +41,7 @@ public class AutoPersonalData {
         value += stat.getSense();
         value += stat.getPositioning();
 
-        receivedPass /= 3;
+        receivedPass /= 6;
         int ret = 0;
         while(receivedPass != 0){
             int rn = RandomNumber.returnRandomNumber(0, 1000);
@@ -68,7 +68,7 @@ public class AutoPersonalData {
         value += stat.getGoalDetermination();
         value += stat.getJump()*2;
 
-        receivedPass /= 3;
+        receivedPass /= 4;
         int ret = 0;
         while(receivedPass != 0){
             int rn = RandomNumber.returnRandomNumber(0, 1000);

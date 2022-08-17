@@ -32,10 +32,11 @@ public class FoulDecision {
         ret += stat.getSense() * 50;
         // ret = max 50000
         int ans  = (int) ((ret / 500) * condition);
-        int curValue = maxNum - ans;
+        int curValue = maxNum - (2 * ans);
         if(curValue < 0 ) return 0;
         else{
-            int modValue = RandomNumber.returnRandomNumber(ret/1000 + 1,2 * (ret/1000) + 1);
+
+            int modValue = RandomNumber.returnRandomNumber(ret/1000  + 1,2 * (ret/1000)  + 1);
             return RandomNumber.returnRandomNumber(0,curValue / modValue);
         }
     }

@@ -77,22 +77,38 @@ public class DefaultAutoGameRegister implements AutoGameRegister{
         autoGameDtoA.updateShare();
         autoGameDtoB.updateShare();
 
+
+
         // 파울
         autoGameDtoA.updateFoul();
         autoGameDtoB.updateFoul();
 
+
+
+
+
         // 프리킼
         autoGameDtoA.updateFreeKick();
         autoGameDtoB.updateFreeKick();
+
+
+
 
         //슈팅 골 어시
         autoGameDtoA.updateGoalAndAssist();
         autoGameDtoB.updateGoalAndAssist();
 
 
+
+
+
         //코너킥
         autoGameDtoA.updateCornerKick();
         autoGameDtoB.updateCornerKick();
+
+
+        // test complete
+
 
         // 스코어 세팅
         autoGameDtoA.updateScore();

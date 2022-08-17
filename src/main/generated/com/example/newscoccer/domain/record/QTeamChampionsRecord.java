@@ -73,7 +73,7 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
     public final NumberPath<Integer> score;
 
     //inherited
-    public final NumberPath<Integer> share;
+    public final NumberPath<Double> share;
 
     //inherited
     public final NumberPath<Integer> shooting;

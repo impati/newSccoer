@@ -41,8 +41,8 @@ public class AutoGameDto {
     public void updateShare(){
         if(playerList.size() == 0)return;
         this.passSum +=  playerList.stream().mapToInt(ele -> ele.getPass()).sum();
-        int result1 =  passSum - opposite.getPlayerList().stream().mapToInt(ele -> ele.getDefense()).sum() + 1;
-        int result2 = (opposite.getPlayerList().stream().mapToInt(ele->ele.getPass()).sum() - playerList.stream().mapToInt(ele->ele.getDefense()).sum()) + 1;
+        int result1 =  passSum + playerList.stream().mapToInt(ele -> ele.getDefense()).sum() ;
+        int result2 = (opposite.getPlayerList().stream().mapToInt(ele->ele.getPass()).sum() + opposite.getPlayerList().stream().mapToInt(ele->ele.getDefense()).sum());
         this.share = ((double) result1 /  (result1 + result2)) * 100;
     }
 
@@ -51,9 +51,12 @@ public class AutoGameDto {
         this.totalFoul = playerList.stream().mapToInt(ele->ele.getFoul()).sum();
     }
     // 상대 foul -> 나의 프로킥 기회
+
+
+    // 경기당 프리킥 골 확률 -> 0.7 //
     public void updateFreeKick(){
         int oppositeFoul = opposite.getTotalFoul();
-        oppositeFoul /= 10;
+        oppositeFoul /= 5;
         this.setFreeKick(oppositeFoul);
         AutoPersonalData freeKicker = decisionFreeKicker();
         // 점수가 높을 수록 유리한 입지를 얻을 수 있어야 합니다 .
@@ -84,9 +87,17 @@ public class AutoGameDto {
     }
 
 
+    /**
+     *  한명 당
+     *  normal 0.065
+     *  heading 0.023
+     *  mid 0.015
+     *
+     *  // 포지션에 따라 다름을 부여
+     */
     public void updateGoalAndAssist(){
         int pass = passSum / 10;
-        playerList.stream().forEach(ele->{
+        for(var ele : playerList){
             int normal = ele.normalShooting(pass / 5);
             while (normal != 0) {
                 AutoPersonalData assistant = decisionAssistant();
@@ -94,24 +105,31 @@ public class AutoGameDto {
                 goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(),assistant.getPlayerId(), GoalType.NOMAL));
                 normal -=1;
             }
-            int heading = ele.heading(passSum / 10);
+            int heading = ele.heading(pass / 10);
             while(heading !=0 ){
                 AutoPersonalData assistant = decisionAssistant();
                 assistant.setAssist(assistant.getAssist() + 1);
                 goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.HEADING));
                 heading -=1;
             }
-            int mid = ele.midShooting(passSum / 10);
+            int mid = ele.midShooting(pass / 10);
             while(mid !=0 ){
                 AutoPersonalData assistant = decisionAssistant();
                 assistant.setAssist(assistant.getAssist() + 1);
                 goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.LONGKICK));
                 mid -=1;
             }
-        });
+        }
     }
 
     // 공격 기회  -> 확률 -> 코너킥 값을 세팅
+
+    /**
+     * 코너킼 한번당
+     * shooting = 0.497
+     * validationShooting = 0.255
+     * goal = 0.164
+     */
     public void updateCornerKick(){
         int cornerKick = playerList.stream().mapToInt(ele->ele.getShooting()).sum() ;
 
@@ -157,10 +175,11 @@ public class AutoGameDto {
     }
 
     // 어시 기준 솔팅.
-    private void sorting(String type){
-
+    private List<AutoPersonalData> sorting(String type ,List<AutoPersonalData> list){
+        List<AutoPersonalData> ret = new ArrayList<>();
+        list.stream().forEach(ele->ret.add(ele));
         if(type.equals("Assistant")) {
-            playerList.sort((e1, e2) -> {
+            ret.sort((e1, e2) -> {
                 if (e1.getStat().getActiveness() + e1.getStat().getSpeed() + e1.getStat().getAcceleration() + e1.getStat().getPass()
                         + e1.getStat().getCrosses() + e1.getStat().getLongPass() + e1.getStat().getDribble() > e2.getStat().getActiveness() + e2.getStat().getSpeed()
                         + e2.getStat().getAcceleration() + e2.getStat().getPass() + e2.getStat().getCrosses() + e2.getStat().getLongPass() + e2.getStat().getDribble()) {
@@ -173,7 +192,7 @@ public class AutoGameDto {
             });
         }
         else{
-            playerList.sort((e1, e2) -> {
+            ret.sort((e1, e2) -> {
                 if (e1.getStat().getJump() + e1.getStat().getActiveness() + e1.getStat().getBalance() + e1.getStat().getGoalDetermination()
                         + e1.getStat().getPositioning() + e1.getStat().getHeading() + e1.getStat().getVisualRange() > e2.getStat().getJump() + e2.getStat().getActiveness()
                         + e2.getStat().getBalance() + e2.getStat().getGoalDetermination()
@@ -187,7 +206,7 @@ public class AutoGameDto {
                 } else return -1;
             });
         }
-
+        return ret;
     }
     private AutoPersonalData decisionCornerKicker(){
         int maxValue = 0;
@@ -203,35 +222,36 @@ public class AutoGameDto {
         return ret;
     }
     private AutoPersonalData decisionCornerKickScorer(){
-        sorting("Scorer");
+        List<AutoPersonalData> ret = sorting("CornerKicker",playerList);
+        // 100 70 60 50 40 30 20 10 8 7
         int rn = RandomNumber.returnRandomNumber(0,410);
-        if(rn <= 100) return playerList.get(0);
-        else if(rn <=170) return playerList.get(1);
-        else if(rn <=230) return playerList.get(2);
-        else if(rn <=280) return playerList.get(3);
-        else if(rn <=320) return playerList.get(4);
-        else if(rn <=350) return playerList.get(5);
-        else if(rn <=370) return playerList.get(6);
-        else if(rn <=390) return playerList.get(7);
-        else if(rn <=400) return playerList.get(8);
-        else if(rn <=410) return playerList.get(9);
+        if(rn <= 100) return ret.get(0);
+        else if(rn <=170) return ret.get(1);
+        else if(rn <=230) return ret.get(2);
+        else if(rn <=280) return ret.get(3);
+        else if(rn <=320) return ret.get(4);
+        else if(rn <=350) return ret.get(5);
+        else if(rn <=370) return ret.get(6);
+        else if(rn <=390) return ret.get(7);
+        else if(rn <=400) return ret.get(8);
+        else if(rn <=410) return ret.get(9);
         return null;
     }
 
     private AutoPersonalData decisionAssistant(){
-        sorting("Assistant");
+        List<AutoPersonalData> ret = sorting("Assistant",playerList);
         // 100 70 60 50 40 30 20 10 8 7
         int rn = RandomNumber.returnRandomNumber(0,410);
-        if(rn <= 100) return playerList.get(0);
-        else if(rn <=170) return playerList.get(1);
-        else if(rn <=230) return playerList.get(2);
-        else if(rn <=280) return playerList.get(3);
-        else if(rn <=320) return playerList.get(4);
-        else if(rn <=350) return playerList.get(5);
-        else if(rn <=370) return playerList.get(6);
-        else if(rn <=390) return playerList.get(7);
-        else if(rn <=400) return playerList.get(8);
-        else if(rn <=410) return playerList.get(9);
+        if(rn <= 100) return ret.get(0);
+        else if(rn <=170) return ret.get(1);
+        else if(rn <=230) return ret.get(2);
+        else if(rn <=280) return ret.get(3);
+        else if(rn <=320) return ret.get(4);
+        else if(rn <=350) return ret.get(5);
+        else if(rn <=370) return ret.get(6);
+        else if(rn <=390) return ret.get(7);
+        else if(rn <=400) return ret.get(8);
+        else if(rn <=410) return ret.get(9);
         return null;
     }
 

@@ -24,9 +24,9 @@ class DefenseDecisionTest {
             maxValue = Math.max(maxValue,ret);
         }
         // then
-        System.out.println("minValue " + minValue);
-        System.out.println("maxValue " + maxValue);
-        System.out.println("avg "  + sum / n);
+        System.out.println("minValue " + minValue); // 3
+        System.out.println("maxValue " + maxValue); // 51
+        System.out.println("avg "  + sum / n); // 22
 
 
         // when
@@ -51,9 +51,9 @@ class DefenseDecisionTest {
             maxValue = Math.max(maxValue,ret);
         }
         // then
-        System.out.println("minValue " + minValue);
-        System.out.println("maxValue " + maxValue);
-        System.out.println("avg "  + sum / n);
+        System.out.println("minValue " + minValue); // 3
+        System.out.println("maxValue " + maxValue); // 35
+        System.out.println("avg "  + sum / n); // 15
 
 
         // when

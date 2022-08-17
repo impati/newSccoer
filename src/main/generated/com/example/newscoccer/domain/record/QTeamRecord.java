@@ -56,7 +56,7 @@ public class QTeamRecord extends EntityPathBase<TeamRecord> {
 
     public final NumberPath<Integer> score = createNumber("score", Integer.class);
 
-    public final NumberPath<Integer> share = createNumber("share", Integer.class);
+    public final NumberPath<Double> share = createNumber("share", Double.class);
 
     public final NumberPath<Integer> shooting = createNumber("shooting", Integer.class);
 

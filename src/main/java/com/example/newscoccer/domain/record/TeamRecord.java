@@ -31,7 +31,7 @@ public  class TeamRecord extends BaseEntity {
     protected int oppositeScore;
 
     //점유율
-    protected int share;
+    protected double share;
     //코너 킥
     protected int cornerKick;
     //프리킥
@@ -66,7 +66,7 @@ public  class TeamRecord extends BaseEntity {
 
 
 
-    public void teamUpdate(int score,int oppositeScore , int share , int cornerKick,int freeKick){
+    public void teamUpdate(int score,int oppositeScore , double share , int cornerKick,int freeKick){
         this.score = score;
         this.oppositeScore = oppositeScore;
         this.share = share;
