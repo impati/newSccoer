@@ -1,6 +1,7 @@
 package com.example.newscoccer.auto.Game;
 
 import com.example.newscoccer.RegisterService.round.common.GoalAssistPair.GoalAssistPairDto;
+import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
 import com.example.newscoccer.domain.record.GoalType;
 import com.example.newscoccer.support.RandomNumber;
@@ -8,6 +9,7 @@ import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Data
 public class AutoGameDto {
     private Long teamId;//
@@ -68,8 +70,10 @@ public class AutoGameDto {
                 freeKicker.setShooting(freeKicker.getShooting() + 1);
                 freeKicker.setValidShooting(freeKicker.getValidShooting() + 1);
                 if(n > 200){
-                    freeKicker.setGoal(freeKicker.getGoal() + 1);
-                    goalAssistPairs.add(new GoalAssistPairDto(freeKicker.getPlayerId(),null, GoalType.PENALTYKICK));
+                    if(!isSuperSave()) {
+                        freeKicker.setGoal(freeKicker.getGoal() + 1);
+                        goalAssistPairs.add(new GoalAssistPairDto(freeKicker.getPlayerId(), null, GoalType.PENALTYKICK));
+                    }
                 }
             }
             else { // 프리킥
@@ -78,8 +82,10 @@ public class AutoGameDto {
                     freeKicker.setValidShooting(freeKicker.getValidShooting() + 1);
                 }
                 if (rn * 2 < n) {
-                    freeKicker.setGoal(freeKicker.getGoal() + 1);
-                    goalAssistPairs.add(new GoalAssistPairDto(freeKicker.getPlayerId(), null, GoalType.FREEKICK));
+                    if(!isSuperSave()) {
+                        freeKicker.setGoal(freeKicker.getGoal() + 1);
+                        goalAssistPairs.add(new GoalAssistPairDto(freeKicker.getPlayerId(), null, GoalType.FREEKICK));
+                    }
                 }
             }
             oppositeFoul -=1;
@@ -88,35 +94,36 @@ public class AutoGameDto {
 
 
     /**
-     *  한명 당
-     *  normal 0.065
-     *  heading 0.023
-     *  mid 0.015
      *
-     *  // 포지션에 따라 다름을 부여
      */
     public void updateGoalAndAssist(){
-        int pass = passSum / 10;
+        int pass = passSum / 5;
         for(var ele : playerList){
             int normal = ele.normalShooting(pass / 5);
             while (normal != 0) {
-                AutoPersonalData assistant = decisionAssistant();
-                assistant.setAssist(assistant.getAssist() + 1);
-                goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(),assistant.getPlayerId(), GoalType.NOMAL));
+                if(!isSuperSave()) {
+                    AutoPersonalData assistant = decisionAssistant();
+                    assistant.setAssist(assistant.getAssist() + 1);
+                    goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.NOMAL));
+                }
                 normal -=1;
             }
             int heading = ele.heading(pass / 10);
             while(heading !=0 ){
-                AutoPersonalData assistant = decisionAssistant();
-                assistant.setAssist(assistant.getAssist() + 1);
-                goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.HEADING));
+                if(!isSuperSave()) {
+                    AutoPersonalData assistant = decisionAssistant();
+                    assistant.setAssist(assistant.getAssist() + 1);
+                    goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.HEADING));
+                }
                 heading -=1;
             }
-            int mid = ele.midShooting(pass / 10);
+            int mid = ele.midShooting(pass / 6);
             while(mid !=0 ){
-                AutoPersonalData assistant = decisionAssistant();
-                assistant.setAssist(assistant.getAssist() + 1);
-                goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.LONGKICK));
+                if(!isSuperSave()) {
+                    AutoPersonalData assistant = decisionAssistant();
+                    assistant.setAssist(assistant.getAssist() + 1);
+                    goalAssistPairs.add(new GoalAssistPairDto(ele.getPlayerId(), assistant.getPlayerId(), GoalType.LONGKICK));
+                }
                 mid -=1;
             }
         }
@@ -145,9 +152,11 @@ public class AutoGameDto {
             if(rn < n) scorer.setShooting(scorer.getShooting() + 1);
             if(rn * 2 < n) scorer.setValidShooting(scorer.getValidShooting() + 1);
             if(rn * 3 < n) {
-                scorer.setGoal(scorer.getGoal() +1);
-                cornerKicker.setAssist(cornerKicker.getAssist() + 1);
-                goalAssistPairs.add(new GoalAssistPairDto(scorer.getPlayerId(), cornerKicker.getPlayerId(), GoalType.HEADING));
+                if(!isSuperSave()) {
+                    scorer.setGoal(scorer.getGoal() + 1);
+                    cornerKicker.setAssist(cornerKicker.getAssist() + 1);
+                    goalAssistPairs.add(new GoalAssistPairDto(scorer.getPlayerId(), cornerKicker.getPlayerId(), GoalType.HEADING));
+                }
             }
 
             cornerKick -=1;
@@ -255,4 +264,25 @@ public class AutoGameDto {
         return null;
     }
 
+    /**
+     *  평균 스텟 70 기준 -> 2할
+     *         100 기준 -> 3할
+     * @return
+     */
+    private boolean isSuperSave(){
+        AutoPersonalData goalKeeper = returnOppositeGoalKeeper();
+        int value = goalKeeper.goalKeeperStat();
+        int rn = RandomNumber.returnRandomNumber(0, 1000);
+        int n = RandomNumber.returnRandomNumber(0, value);
+        if(rn * 2 < n) {
+            goalKeeper.setDefense(goalKeeper.getDefense() + 1);
+            return true; // 막았음
+        }
+
+        else return false;
+    }
+
+    private AutoPersonalData returnOppositeGoalKeeper(){
+        return opposite.playerList.stream().filter(p->p.getParticipatePosition() == Position.GK).findFirst().orElse(null);
+    }
 }

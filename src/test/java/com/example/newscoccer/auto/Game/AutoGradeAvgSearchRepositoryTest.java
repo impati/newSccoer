@@ -78,9 +78,10 @@ class AutoGradeAvgSearchRepositoryTest {
             playerChampionsRecordRepository.save(pcr);
         }
 
-        GradeDto dto = repository.recordAvg();
+        GradeDto dto = repository.recordAvg().orElse(new GradeDto(28.3,1.4,1.05,1.9,16.8));
 
         System.out.println("dto = " + dto);
+
 
 
 

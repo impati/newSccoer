@@ -11,16 +11,16 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QTeamChampionsRecord is a Querydsl query type for TeamChampionsRecord
+ * QTeamLeagueRecord is a Querydsl query type for TeamLeagueRecord
  */
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
-public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
+public class QTeamLeagueRecord extends EntityPathBase<TeamLeagueRecord> {
 
-    private static final long serialVersionUID = -1549144294L;
+    private static final long serialVersionUID = 1970155201L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QTeamChampionsRecord teamChampionsRecord = new QTeamChampionsRecord("teamChampionsRecord");
+    public static final QTeamLeagueRecord teamLeagueRecord = new QTeamLeagueRecord("teamLeagueRecord");
 
     public final QTeamRecord _super;
 
@@ -32,8 +32,6 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
 
     // inherited
     public final com.example.newscoccer.domain.director.QDirector director;
-
-    public final NumberPath<Integer> FirstOrSecond = createNumber("FirstOrSecond", Integer.class);
 
     //inherited
     public final NumberPath<Integer> foul;
@@ -67,13 +65,13 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
     //inherited
     public final NumberPath<Double> rating;
 
-    public final com.example.newscoccer.domain.Round.QChampionsRound round;
+    public final com.example.newscoccer.domain.Round.QLeagueRound round;
 
     //inherited
     public final NumberPath<Integer> score;
 
     //inherited
-    public final NumberPath<Integer> share;
+    public final NumberPath<Double> share;
 
     //inherited
     public final NumberPath<Integer> shooting;
@@ -84,23 +82,23 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
     //inherited
     public final NumberPath<Integer> validShooting;
 
-    public QTeamChampionsRecord(String variable) {
-        this(TeamChampionsRecord.class, forVariable(variable), INITS);
+    public QTeamLeagueRecord(String variable) {
+        this(TeamLeagueRecord.class, forVariable(variable), INITS);
     }
 
-    public QTeamChampionsRecord(Path<? extends TeamChampionsRecord> path) {
+    public QTeamLeagueRecord(Path<? extends TeamLeagueRecord> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QTeamChampionsRecord(PathMetadata metadata) {
+    public QTeamLeagueRecord(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QTeamChampionsRecord(PathMetadata metadata, PathInits inits) {
-        this(TeamChampionsRecord.class, metadata, inits);
+    public QTeamLeagueRecord(PathMetadata metadata, PathInits inits) {
+        this(TeamLeagueRecord.class, metadata, inits);
     }
 
-    public QTeamChampionsRecord(Class<? extends TeamChampionsRecord> type, PathMetadata metadata, PathInits inits) {
+    public QTeamLeagueRecord(Class<? extends TeamLeagueRecord> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QTeamRecord(type, metadata, inits);
         this.cornerKick = _super.cornerKick;
@@ -116,7 +114,7 @@ public class QTeamChampionsRecord extends EntityPathBase<TeamChampionsRecord> {
         this.pass = _super.pass;
         this.rank = _super.rank;
         this.rating = _super.rating;
-        this.round = inits.isInitialized("round") ? new com.example.newscoccer.domain.Round.QChampionsRound(forProperty("round")) : null;
+        this.round = inits.isInitialized("round") ? new com.example.newscoccer.domain.Round.QLeagueRound(forProperty("round"), inits.get("round")) : null;
         this.score = _super.score;
         this.share = _super.share;
         this.shooting = _super.shooting;

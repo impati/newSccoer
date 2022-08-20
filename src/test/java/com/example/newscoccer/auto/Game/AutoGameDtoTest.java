@@ -214,9 +214,6 @@ class AutoGameDtoTest {
 
 
 
-
-
-
     @Test
     @DisplayName("코너킥")
     public void cornerKick() throws Exception{
@@ -243,6 +240,31 @@ class AutoGameDtoTest {
         System.out.println("goal = " + ((double)goal) / 1000 ) ;
 
     }
+
+
+
+
+    @Test
+    @DisplayName("isSuperSave")
+    public void superSave() throws Exception{
+        AutoPersonalData p = new AutoPersonalData(0L,"test",Position.GK,new Stat(70),1.0);
+        int value = p.goalKeeperStat();
+
+        int total = 1000 , count = 0 ;
+        int avgValue = 0;
+        for(int i = 0 ;i<total ;i++){
+            int rn = RandomNumber.returnRandomNumber(0, 1000);
+            int n = RandomNumber.returnRandomNumber(0, value);
+            if(rn * 2 < n) count +=1;
+            avgValue += value;
+        }
+
+
+        System.out.println("superSave P = "  + (double)(count/(double)1000));
+
+
+    }
+
 
 
 

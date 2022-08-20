@@ -2,6 +2,7 @@ package com.example.newscoccer.domain.Player;
 
 import com.example.newscoccer.domain.BaseEntity;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 public class Stat extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +58,7 @@ public class Stat extends BaseEntity {
     private int positioning; // 위치선정
     private int visualRange; // 시야
     private int sense; // 센스
+
 
     /**
      *
@@ -182,4 +185,52 @@ public class Stat extends BaseEntity {
                 ", sense=" + sense +
                 '}';
     }
+
+    // 스탯 평균 치
+    public Stat(int avg) {
+        //피지컬
+        this.acceleration = avg; // 가속력
+        this.speed = avg;//속력
+        this.physicalFight = avg;  //몸싸움
+
+        this.stamina = avg;// 체력
+        this.activeness = avg; // 적극성
+        this.jump = avg; //점프력
+        this.balance = avg; // 밸런스 - > 넘어지냐 안넘어지냐
+
+
+        // 패스
+        this.ballControl = avg; // 볼컨
+        this.crosses = avg;// 크로스
+
+        this.pass = avg; // 패스
+        this.longPass = avg; //롱 패스
+
+        //공격력
+        this.dribble = avg; // 드리블
+        this.goalDetermination = avg; // 결정력
+        this.midRangeShot = avg; // 중거리슛
+        this.shootPower = avg; // 슛파워
+        this.heading = avg; // 헤딩
+
+        //수비
+        this.defense = avg; //수비력
+        this.tackle = avg; // 태클
+        this.intercepting = avg; // 가로채기
+        this.slidingTackle = avg; // 슬라이딩 태클
+
+        //골기퍼
+        this.diving = avg; // 다이빙
+        this.handling = avg; // 핸들링
+        this.goalKick = avg; //골킥
+        this.speedReaction = avg; // 반응속도
+
+        //기타
+        this.positioning = avg; // 위치선정
+        this.visualRange = avg; // 시야
+        this.sense = avg; // 센스
+
+    }
+
+    
 }

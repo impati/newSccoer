@@ -2,7 +2,6 @@ package com.example.newscoccer.auto.Game;
 
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
-import com.example.newscoccer.support.RandomNumber;
 
 public class PassDecision {
 
@@ -23,7 +22,60 @@ public class PassDecision {
      *  9개
      */
 
-
+    /**
+     *  공격수 :
+     *  high   :minValue 1
+     *         :maxValue 64
+     *         :avg 25
+     *
+     *  normal :minValue 1
+     *         :maxValue 41
+     *         :avg 17
+     *
+     *  lower  :minValue 1
+     *         :maxValue 23
+     *         :avg 10
+     *
+     *  미드 필더
+     *  high :minValue 4
+     *       :maxValue 97
+     *       :avg 39
+     *
+     *  normal :minValue 3
+     *         :maxValue 70
+     *         :avg 28
+     *
+     *  lower :minValue 3
+     *        :maxValue 39
+     *        :avg 17
+     *
+     *
+     *  수비수
+     *
+     *  high :minValue 3
+     *       :maxValue 87
+     *       :avg 36
+     *
+     *  normal :minValue 3
+     *         :maxValue 60
+     *         :avg 26
+     *
+     *  lower :minValue 3
+     *        :maxValue 38
+     *        :avg 16
+     *
+     *
+     *  골기퍼
+     *  normal :minValue 0
+     *         :maxValue 10
+     *         :avg 3
+     *
+     *  lower :minValue 0
+     *        :maxValue 5
+     *        :avg 1
+     *
+     *
+     */
     public static int passDecision(Position position , double condition, Stat stat){
         int ret = stat.getBallControl() * 400;
         ret += stat.getCrosses() * 140;
@@ -34,15 +86,9 @@ public class PassDecision {
         ret += stat.getVisualRange() * 50;
         ret += stat.getBalance() * 40;
         ret += stat.getSense()* 40;
-
         // ret Max = 90000
         int ans  =  (int)(ret * (condition));
-
-        int modValue = 2000;
-        int s = RandomNumber.returnRandomNumber(0,ans / modValue) + 3;
-        int e = RandomNumber.returnRandomNumber(s,s + ans / modValue);
-        int value = RandomNumber.returnRandomNumber(s , e);
-        return value;
+        return AutoPositionUtils.passUtil(position,ans);
     }
 
 

@@ -2,7 +2,6 @@ package com.example.newscoccer.auto.Game;
 
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
-import com.example.newscoccer.support.RandomNumber;
 
 public class DefenseDecision {
 
@@ -29,6 +28,57 @@ public class DefenseDecision {
      */
 
 
+    /**
+     * 공격수
+     *   :minValue 1
+     *   :maxValue 20
+     *   :avg 8
+     *
+     *   :minValue 1
+     *   :maxValue 15
+     *   :avg 6
+     *
+     *   :minValue 1
+     *   :maxValue 9
+     *   :avg 3
+     *
+     *
+     * 미드 필더
+     *  :minValue 1
+     *  :maxValue 21
+     *  :avg 8
+     *
+     *  :minValue 1
+     *  :maxValue 14
+     *  :avg 6
+     *
+     *  :minValue 1
+     *  :maxValue 9
+     *  :avg 3
+     *
+     * 수비수
+     *   :minValue 3
+     *   :maxValue 49
+     *   :avg 20
+     *
+     *   :minValue 3
+     *   :maxValue 33
+     *   :avg 15
+     *
+     *   :minValue 3
+     *   :maxValue 21
+     *   :avg 9
+     *
+     * 골기퍼
+     *   :minValue 0
+     *   :maxValue 7
+     *   :avg 2
+     *
+     *   :minValue 0
+     *   :maxValue 4
+     *   :avg 1
+     *
+     */
     public static int defenseDecision(Position position , double condition , Stat stat){
         // 능력치
         int ret = stat.getDefense() * 300;
@@ -49,11 +99,7 @@ public class DefenseDecision {
 
         int ans  =(int)(ret * (condition));
 
-        int modValue = 4000;
-        int s = RandomNumber.returnRandomNumber(0,ans / modValue) + 3;
-        int e = RandomNumber.returnRandomNumber(s,s + ans / modValue);
-        int value = RandomNumber.returnRandomNumber(s , e);
-        return value;
+        return AutoPositionUtils.defenseUtil(position,ans);
 
 
     }

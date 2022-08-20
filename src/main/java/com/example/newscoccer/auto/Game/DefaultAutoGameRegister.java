@@ -84,9 +84,6 @@ public class DefaultAutoGameRegister implements AutoGameRegister{
         autoGameDtoB.updateFoul();
 
 
-
-
-
         // 프리킼
         autoGameDtoA.updateFreeKick();
         autoGameDtoB.updateFreeKick();
@@ -180,4 +177,119 @@ public class DefaultAutoGameRegister implements AutoGameRegister{
     private double returnCondition(){
         return RandomNumber.returnRandomNumber(0.7,1.4);
     }
+
+
+
+
+
+
+
+
+
+    public void autoGameRegisterForTest(Long roundId,GameRecordDto ret ,List<GoalAssistPairDto> nxt) {
+
+        Round round = roundRepository.findById(roundId).orElse(null);
+        RoundLineUpResponse resp = roundLineUp.lineUp(new RoundLineUpRequest(roundId));
+
+        // 선수
+        AutoGameDto autoGameDtoA = new AutoGameDto(resp.getTeamAId(),resp.getTeamAName());
+        AutoGameDto autoGameDtoB = new AutoGameDto(resp.getTeamBId(),resp.getTeamBName());
+
+        // 상대 객체를 참조
+        autoGameDtoA.setOpposite(autoGameDtoB);
+        autoGameDtoB.setOpposite(autoGameDtoA);
+
+
+        // 패스 디펜스 파울 세팅
+        passAndDefenseFoulSetting(resp.getPlayerListA(),autoGameDtoA);
+        passAndDefenseFoulSetting(resp.getPlayerListB(),autoGameDtoB);
+
+        // 점유율
+        autoGameDtoA.updateShare();
+        autoGameDtoB.updateShare();
+
+
+
+        // 파울
+        autoGameDtoA.updateFoul();
+        autoGameDtoB.updateFoul();
+
+
+        // 프리킼
+        autoGameDtoA.updateFreeKick();
+        autoGameDtoB.updateFreeKick();
+
+
+
+
+        //슈팅 골 어시
+        autoGameDtoA.updateGoalAndAssist();
+        autoGameDtoB.updateGoalAndAssist();
+
+
+
+
+
+        //코너킥
+        autoGameDtoA.updateCornerKick();
+        autoGameDtoB.updateCornerKick();
+
+
+        // test complete
+
+
+        // 스코어 세팅
+        autoGameDtoA.updateScore();
+        autoGameDtoB.updateScore();
+
+        // 평점
+
+        autoGameDtoA.getPlayerList().stream().forEach(p->{
+            autoGradeDecision.gradeDecision(p);
+        });
+        autoGameDtoB.getPlayerList().stream().forEach(p->{
+            autoGradeDecision.gradeDecision(p);
+        });
+
+        ret.setRoundId(roundId);
+
+
+        // 선수 정보 세팅
+        autoGameDtoA.getPlayerList().stream().map(p->new GameResultPlayerDto(p.getPlayerId(),p.getPlayerName(),p.getParticipatePosition(),
+                p.getGoal(),p.getAssist(),p.getPass(),
+                p.getShooting(),p.getValidShooting(),p.getFoul(),
+                p.getDefense(),p.getGrade()
+        )).forEach(ele->ret.getPlayers().add(ele));
+
+
+        autoGameDtoB.getPlayerList().stream().map(p->new GameResultPlayerDto(p.getPlayerId(),p.getPlayerName(),p.getParticipatePosition(),
+                p.getGoal(),p.getAssist(),p.getPass(),
+                p.getShooting(),p.getValidShooting(),p.getFoul(),
+                p.getDefense(),p.getGrade()
+        )).forEach(ele->ret.getPlayers().add(ele));
+
+
+        // 팀 정보 세팅
+
+
+        ret.getTeams().add(new GameResultTeamDto(autoGameDtoA.getTeamId(), autoGameDtoA.getTeamName(), autoGameDtoA.getScore(),
+                autoGameDtoA.getShare(), autoGameDtoA.getCornerKick(), autoGameDtoA.getFreeKick()));
+
+        ret.getTeams().add(new GameResultTeamDto(autoGameDtoB.getTeamId(), autoGameDtoB.getTeamName(), autoGameDtoB.getScore(),
+                autoGameDtoB.getShare(), autoGameDtoB.getCornerKick(), autoGameDtoB.getFreeKick()));
+
+//        gameRecordRegister.gameRecordRegister(ret);
+
+        // pair 정보 넘기기
+
+
+        autoGameDtoA.getGoalAssistPairs().stream().forEach(ele->nxt.add(ele));
+        autoGameDtoB.getGoalAssistPairs().stream().forEach(ele->nxt.add(ele));
+
+
+//        goalAssistPair.goalPairRegister(nxt,round);
+    }
+
+
+
 }

@@ -35,9 +35,15 @@ public class FoulDecision {
         int curValue = maxNum - (2 * ans);
         if(curValue < 0 ) return 0;
         else{
-
-            int modValue = RandomNumber.returnRandomNumber(ret/1000  + 1,2 * (ret/1000)  + 1);
-            return RandomNumber.returnRandomNumber(0,curValue / modValue);
+            if(position == Position.GK){
+                int rn = RandomNumber.returnRandomNumber(0,1000);
+                if(rn == 1000) return 1;
+                else return 0;
+            }
+            else {
+                int modValue = RandomNumber.returnRandomNumber(ret / 1000 + 1, 2 * (ret / 1000) + 1);
+                return RandomNumber.returnRandomNumber(0, curValue / modValue);
+            }
         }
     }
 
