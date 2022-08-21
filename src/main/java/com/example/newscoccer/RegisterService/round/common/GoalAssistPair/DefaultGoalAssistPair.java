@@ -32,5 +32,5 @@ public class DefaultGoalAssistPair implements GoalAssistPair{
         });
         round.setRoundStatus(RoundStatus.DONE);
         gameDoneTroubleShooter.AfterGameDone(round);
-    }
+}
 }

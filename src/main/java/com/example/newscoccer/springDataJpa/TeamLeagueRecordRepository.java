@@ -41,7 +41,7 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
      *  + roundStatus.DONE 이어야함.
      */
     @Query("select tlr From TeamLeagueRecord tlr " +
-            " join tlr.round r " +
+            " join fetch tlr.round r " +
             " join fetch tlr.team t " +
             " where t.league =:league and r.roundSt = 45 and r.season = :season" +
             " order by tlr.rank ")

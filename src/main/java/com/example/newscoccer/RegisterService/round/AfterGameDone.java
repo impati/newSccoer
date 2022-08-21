@@ -1,10 +1,12 @@
 package com.example.newscoccer.RegisterService.round;
 
+import com.example.newscoccer.RegisterService.round.common.game.EloRatingSystem;
 import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
 import com.example.newscoccer.domain.Round.RoundTemplate;
 import com.example.newscoccer.domain.Season;
+import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.record.MatchResult;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.*;
@@ -59,9 +61,12 @@ public class AfterGameDone implements GameDoneTroubleShooter{
 
     private final LeagueRoundGenerator leagueRoundGenerator;
     private final ChampionsRoundGenerator championsRoundGenerator;
-
+    private final EloRatingSystem eloRatingSystem;
     @Override
     public void AfterGameDone(Round round) {
+        // 레이팅 반영.
+        eloRatingSystem.ratingSetting(round);
+
         RoundFeature<Void> feature = new RoundFeature<Void>() {
             @Override
             public Void leagueSolved() {
@@ -69,7 +74,6 @@ public class AfterGameDone implements GameDoneTroubleShooter{
                 leagueRankCalc(round);
                 // 남아 있는 경기가 없으면 시즌 업데이트
                 isLeagueRemain(round);
-
                 return null;
             }
 
@@ -81,7 +85,12 @@ public class AfterGameDone implements GameDoneTroubleShooter{
         };
         new RoundTemplate().action(round,feature);
 
+
+
         if(roundRepository.findRemainCount(round.getSeason()).equals(0L)){
+            // -> 시즌 보상 (레이팅)
+            eloRatingSystem.seasonCompensation(SeasonUtils.currentSeason);
+            // 시즌 조회
             Season season = seasonRepository.findById(1L).orElse(null);
             // 시즌에 아무 경기도 남아 있지 않는다면 시즌 + 1
             season.seasonUpdate();

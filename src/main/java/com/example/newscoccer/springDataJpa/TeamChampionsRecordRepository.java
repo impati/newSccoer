@@ -166,4 +166,13 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
 
 
 
+
+
+    @Query(" select tcr from TeamChampionsRecord tcr " +
+            " join tcr.round r " +
+            " where r.season =:season " +
+            " order by tcr.createDate desc ")
+    List<TeamChampionsRecord> findAllBySeason(@Param("season")int season);
+
+
 }

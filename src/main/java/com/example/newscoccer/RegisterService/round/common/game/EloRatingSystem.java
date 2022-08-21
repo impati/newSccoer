@@ -1,21 +1,23 @@
 package com.example.newscoccer.RegisterService.round.common.game;
 
+import com.example.newscoccer.domain.League;
+import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundFeature;
 import com.example.newscoccer.domain.Round.RoundTemplate;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.*;
-import com.example.newscoccer.springDataJpa.PlayerChampionsRecordRepository;
-import com.example.newscoccer.springDataJpa.PlayerLeagueRecordRepository;
-import com.example.newscoccer.springDataJpa.TeamChampionsRecordRepository;
-import com.example.newscoccer.springDataJpa.TeamLeagueRecordRepository;
+import com.example.newscoccer.springDataJpa.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
@@ -40,7 +42,9 @@ public class EloRatingSystem {
     private static int VI = 400;
     private static Integer K = 20;
 
-    public void teamRatingSetting(Round round){
+    private final LeagueRepository leagueRepository;
+
+    public void ratingSetting(Round round){
 
         RoundFeature<Void> roundFeature = new RoundFeature<>() {
             @Override
@@ -87,6 +91,71 @@ public class EloRatingSystem {
         new RoundTemplate().action(round,roundFeature);
 
     }
+
+    /**
+     *
+     * 리그 - 1위 +50
+     *     - 2위 +25
+     *     - 3위 +12
+     *     - 4위 + 6
+     *
+     *     - 5 , 6 , 7 , 8 ( + 2  + 2 + 1 +1)
+     *     - 9 , 10,11, 12 ( 0 0 0 0 )
+     *     - 13, 14,15  16 (-2 -2 -4 -5)
+     *
+     *
+     * 챔피언스 리그 - 우승 ->70
+     *            - 준우승 ->40
+     *            - 4강 -> 20
+     *            - 8강 -> 10
+     *
+     */
+    public void seasonCompensation(int season){
+
+        // 리그
+        int leagueCompensation[] = new int[]{50,25,12,6,2,2,1,1,0,0,0,0,-2,-2,-4,-5};
+        List<League> leagueList = leagueRepository.findAll();
+        for (League league : leagueList) {
+            List<TeamLeagueRecord> teamLeagueRecord = teamLeagueRecordRepository.findBySeasonTopN(league, season, PageRequest.of(0, 16));
+
+            for(int i = 0;i<16;i++){
+
+                Team team = teamLeagueRecord.get(i).getTeam();
+                Round round = teamLeagueRecord.get(i).getRound();
+                int value = leagueCompensation[i];
+                team.setRating(team.getRating() + value);
+
+                playerLeagueRecordRepository.findByTeamAndRound(team,round)
+                        .stream().forEach(p->{
+                            Player player = p.getPlayer();
+                            player.setRating(player.getRating() + value);
+                        });
+            }
+        }
+        //챔피언스
+        Map<Team,Integer> teamRankMap = new HashMap<>();
+
+        teamChampionsRecordRepository.findAllBySeason(season).stream()
+                .forEach(tcr->{
+                    Team team = tcr.getTeam();
+                    if(!teamRankMap.containsKey(team)){
+                       teamRankMap.put(team,tcr.getRank());
+                    }
+                });
+        int championsCompensation[] = new int[]{0,70,40,0,20,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+        for(var ele : teamRankMap.keySet()){
+            int value = teamRankMap.get(ele);
+                ele.setRating(ele.getRating() + championsCompensation[value]);
+                playerChampionsRecordRepository.findByTeamAndSeason(ele,season)
+                        .stream().forEach(pr->{
+                            Player player = pr.getPlayer();
+                            player.setRating(player.getRating() + championsCompensation[value]);
+                        });
+        }
+    }
+
+
+
 
     private void calcPlayerRating(List<PlayerRecord> playerRecord , RatingInfo ratingInfo){
 
