@@ -75,7 +75,8 @@ public class AutoGradeDecision {
  *
  *
  *
- *  standard
+ *
+ standard
 
  Position =ST
  goal = 1.104 assist = 0.974 defense = 13.372 pass = 27.804 Shooting = 4.266 validShooting = 2.108 foul = 1.742 grade = 89.092

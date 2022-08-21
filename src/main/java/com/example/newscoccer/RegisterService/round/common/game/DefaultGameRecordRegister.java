@@ -41,7 +41,8 @@ public class DefaultGameRecordRegister implements GameRecordRegister{
      * 4. 승부 결과를 결정
      * 5. 선수들 데이터 세팅 -> 합산 혹은 평균을 팀 데이터에 전달.
      * 6. 팀 데이터 세팅
-     * 7. PAIR Status 로 설정.
+     * 7. 레이팅 세팅
+     * 8. PAIR Status 로 설정.
      *
      */
     @Override
