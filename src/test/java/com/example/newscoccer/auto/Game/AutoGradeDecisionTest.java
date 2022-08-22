@@ -9,12 +9,13 @@ class AutoGradeDecisionTest {
 
 
     void init(AutoGameDto dtoA,AutoGameDto dtoB){
-        for(int i = 0;i<10;i++){
+        Position positions [] = Position.values();
+        for(int i = 0;i<positions.length;i++){
             Stat stat = new Stat();
             stat.update(70,70,70,70,70,70,
                     70,70,70,70,70,70,70,70,70,
                     70,70,70,70,70,70,70,70,70,70,70,70);
-            AutoPersonalData personalData =  new AutoPersonalData(0L,"testPlayer", Position.ST,stat,1.0);
+            AutoPersonalData personalData =  new AutoPersonalData(0L,"testPlayer", positions[i],stat,1.0);
             // 패스
             personalData.setPass(PassDecision.passDecision(personalData.getParticipatePosition(),personalData.getCondition(),personalData.getStat()));
             // 디펜스
@@ -25,12 +26,12 @@ class AutoGradeDecisionTest {
             dtoA.getPlayerList().add(personalData);
 
         }
-        for(int i = 0;i<10;i++){
+        for(int i = 0;i< positions.length;i++){
             Stat stat = new Stat();
             stat.update(70,70,70,70,70,70,
                     70,70,70,70,70,70,70,70,70,
                     70,70,70,70,70,70,70,70,70,70,70,70);
-            AutoPersonalData personalData =  new AutoPersonalData(0L,"testPlayer", Position.ST,stat,1.0);
+            AutoPersonalData personalData =  new AutoPersonalData(0L,"testPlayer", positions[i],stat,1.0);
             // 패스
             personalData.setPass(PassDecision.passDecision(personalData.getParticipatePosition(),personalData.getCondition(),personalData.getStat()));
             // 디펜스

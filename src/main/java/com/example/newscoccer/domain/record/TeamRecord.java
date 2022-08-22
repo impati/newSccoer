@@ -66,12 +66,13 @@ public  class TeamRecord extends BaseEntity {
 
 
 
-    public void teamUpdate(int score,int oppositeScore , double share , int cornerKick,int freeKick){
+    public void teamUpdate(int score,int oppositeScore , double share , int cornerKick,int freeKick ){
         this.score = score;
         this.oppositeScore = oppositeScore;
         this.share = share;
         this.cornerKick = cornerKick;
         this.freeKick = freeKick;
+        this.rating = team.getRating();
 
     }
     // 선수들의 총합기록  -> 매겨변수가 이미 계산되어 넘어옴.

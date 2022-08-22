@@ -117,7 +117,7 @@ public class EloRatingSystem {
         List<League> leagueList = leagueRepository.findAll();
         for (League league : leagueList) {
             List<TeamLeagueRecord> teamLeagueRecord = teamLeagueRecordRepository.findBySeasonTopN(league, season, PageRequest.of(0, 16));
-
+            if(teamLeagueRecord.size() != 16)continue;
             for(int i = 0;i<16;i++){
 
                 Team team = teamLeagueRecord.get(i).getTeam();
@@ -144,9 +144,11 @@ public class EloRatingSystem {
                 });
         int championsCompensation[] = new int[]{0,70,40,0,20,0,0,0,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
         for(var ele : teamRankMap.keySet()){
+
             int value = teamRankMap.get(ele);
+            log.info("[team = {}rank = {}] , plus = {}" ,ele, value,championsCompensation[value]);
                 ele.setRating(ele.getRating() + championsCompensation[value]);
-                playerChampionsRecordRepository.findByTeamAndSeason(ele,season)
+                playerChampionsRecordRepository.findPlayerParticipate(ele.getId(),season)
                         .stream().forEach(pr->{
                             Player player = pr.getPlayer();
                             player.setRating(player.getRating() + championsCompensation[value]);

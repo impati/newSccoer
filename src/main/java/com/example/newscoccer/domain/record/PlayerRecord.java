@@ -92,6 +92,7 @@ public class PlayerRecord extends BaseEntity {
         this.grade = grade;
         this.matchResult = matchResult;
         this.isBest = false;
+        this.rating = team.getRating();
     }
 
 
