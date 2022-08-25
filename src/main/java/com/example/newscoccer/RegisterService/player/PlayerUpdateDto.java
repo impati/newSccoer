@@ -1,7 +1,9 @@
 package com.example.newscoccer.RegisterService.player;
 
 import com.example.newscoccer.domain.DataTransferObject;
+import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
+import com.example.newscoccer.domain.Player.Stat;
 import lombok.Data;
 
 /**
@@ -54,6 +56,42 @@ public class PlayerUpdateDto extends DataTransferObject {
     private int positioning; // 위치선정
     private int visualRange; // 시야
     private int sense; // 센스
+
+
+    public void settingData(Player player){
+        Stat stat = player.getStat();
+        this.name = player.getName();
+        this.teamId = player.getTeam().getId();
+        this.position = player.getPosition();
+
+        this.acceleration = stat.getAcceleration();
+        this.speed = stat.getSpeed();
+        this.physicalFight = stat.getPhysicalFight();
+        this.stamina = stat.getStamina();
+        this.activeness = stat.getActiveness();
+        this.jump = stat.getJump();
+        this.balance = stat.getBalance();
+        this.ballControl = stat.getBallControl();
+        this.crosses = stat.getCrosses();
+        this.pass = stat.getPass();
+        this.longPass = stat.getLongPass();
+        this.dribble = stat.getDribble();
+        this.goalDetermination = stat.getGoalDetermination();
+        this.midRangeShot = stat.getMidRangeShot();
+        this.shootPower = stat.getShootPower();
+        this.heading = stat.getHeading();
+        this.defense = stat.getDefense();
+        this.tackle = stat.getTackle();
+        this.slidingTackle = stat.getSlidingTackle();
+        this.intercepting = stat.getIntercepting();
+        this.diving = stat.getDiving();
+        this.handling = stat.getHandling();
+        this.goalKick = stat.getGoalKick();
+        this.speedReaction = stat.getSpeedReaction();
+        this.positioning = stat.getPositioning();
+        this.visualRange = stat.getVisualRange();
+        this.sense = stat.getSense();
+    }
 
 
 }

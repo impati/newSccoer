@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+  <!-- Spinner Start -->
+  <div th:insert="~{fragment/spinner :: spinner}"></div>
+  <!-- Spinner End -->
+  <!-- Sidebar Start -->
+  <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+  <!-- Sidebar End -->
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+    <div th:insert="~{fragment/navbar :: navbar}"></div>
+    <!-- Navbar End -->
+
+    <nav>
+      <div>
+          <span   th:each ="n : ${#numbers.sequence(0,Seasons)}">
+            <button type="button" class="btn btn-outline-info m-2" th:text="|Season  ${n}|" th:onclick="|location.href='@{/player/{playerId}(playerId=${playerId},season=${n})}'|"></button>
+          </span>
+      </div>
+
+    </nav>
+
+    <!--내용 -->
+    <div class="container-fluid pt-4 px-4">
+      <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h4 class="mb-4" th:text="${simpleResp.playerName}"></h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>이름</th>
+                  <th>팀</th>
+                  <th>포지션</th>
+                  <th>레이팅</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${simpleResp.playerName}"></td>
+                  <td th:text="${simpleResp.teamName}"></td>
+                  <td th:text="${simpleResp.position}"></td>
+                  <td th:text="${simpleResp.currentRating}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">리그</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>순위</th>
+                  <th>골</th>
+                  <th>어시</th>
+                  <th>패스</th>
+                  <th>슈팅</th>
+                  <th>유효 슈팅</th>
+                  <th>파울</th>
+                  <th>차단</th>
+                  <th>승</th>
+                  <th>무</th>
+                  <th>패</th>
+                  <th>MVP</th>
+                  <th>평균 평점</th>
+                  <th>경기 수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${leagueResp.rank}"></td>
+                  <td th:text="${leagueResp.goal}"></td>
+                  <td th:text="${leagueResp.assist}"></td>
+                  <td th:text="${leagueResp.pass}"></td>
+                  <td th:text="${leagueResp.shooting}"></td>
+                  <td th:text="${leagueResp.validShooting}"></td>
+                  <td th:text="${leagueResp.foul}"></td>
+                  <td th:text="${leagueResp.defense}"></td>
+                  <td th:text="${leagueResp.win}"></td>
+                  <td th:text="${leagueResp.draw}"></td>
+                  <td th:text="${leagueResp.lose}"></td>
+                  <td th:text="${leagueResp.isBest}"></td>
+                  <td th:text="${leagueResp.avgGrade}"></td>
+                  <td th:text="${leagueResp.gameNumber}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">챔피언스</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>순위</th>
+                  <th>골</th>
+                  <th>어시</th>
+                  <th>패스</th>
+                  <th>슈팅</th>
+                  <th>유효 슈팅</th>
+                  <th>파울</th>
+                  <th>차단</th>
+                  <th>승</th>
+                  <th>무</th>
+                  <th>패</th>
+                  <th>MVP</th>
+                  <th>평균 평점</th>
+                  <th>경기 수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${championsResp.rank}"></td>
+
+                  <td th:text="${championsResp.goal}"></td>
+                  <td th:text="${championsResp.assist}"></td>
+                  <td th:text="${championsResp.pass}"></td>
+                  <td th:text="${championsResp.shooting}"></td>
+                  <td th:text="${championsResp.validShooting}"></td>
+                  <td th:text="${championsResp.foul}"></td>
+                  <td th:text="${championsResp.defense}"></td>
+
+                  <td th:text="${championsResp.win}"></td>
+                  <td th:text="${championsResp.draw}"></td>
+                  <td th:text="${championsResp.lose}"></td>
+                  <td th:text="${championsResp.isBest}"></td>
+                  <td th:text="${championsResp.avgGrade}"></td>
+                  <td th:text="${championsResp.gameNumber}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">전체 기록</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>골</th>
+                  <th>어시</th>
+                  <th>패스</th>
+                  <th>슈팅</th>
+                  <th>유효 슈팅</th>
+                  <th>파울</th>
+                  <th>차단</th>
+                  <th>승</th>
+                  <th>무</th>
+                  <th>패</th>
+                  <th>MVP</th>
+                  <th>평균 평점</th>
+                  <th>경기 수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${totalResp.goal}"></td>
+                  <td th:text="${totalResp.assist}"></td>
+                  <td th:text="${totalResp.pass}"></td>
+                  <td th:text="${totalResp.shooting}"></td>
+                  <td th:text="${totalResp.validShooting}"></td>
+                  <td th:text="${totalResp.foul}"></td>
+                  <td th:text="${totalResp.defense}"></td>
+                  <td th:text="${totalResp.win}"></td>
+                  <td th:text="${totalResp.draw}"></td>
+                  <td th:text="${totalResp.lose}"></td>
+                  <td th:text="${totalResp.isBest}"></td>
+                  <td th:text="${totalResp.avgGrade}"></td>
+                  <td th:text="${totalResp.gameNumber}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">업적</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>리그 우승</th>
+                  <th>리그 준우승</th>
+                  <th>리그 3위</th>
+                  <th>리그 4위</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${totalResp.leagueFirst}"></td>
+                  <td th:text="${totalResp.leagueSecond}"></td>
+                  <td th:text="${totalResp.leagueThird}"></td>
+                  <td th:text="${totalResp.leagueFour}"></td>
+                </tr>
+                </tbody>
+              </table>
+
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>챔피언스 우승</th>
+                  <th>챔피언스 준우승</th>
+                  <th>챔피언스 3위</th>
+                  <th>챔피언스 4위</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${totalResp.championsFirst}"></td>
+                  <td th:text="${totalResp.championsSecond}"></td>
+                  <td th:text="${totalResp.championsThird}"></td>
+                  <td th:text="${totalResp.championsFour}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div th:insert="~{fragment/footer :: copy}"></div>
+    <!-- Footer End -->
+  </div>
+  <!-- Content End -->
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>

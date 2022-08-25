@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+  <!-- Spinner Start -->
+  <div th:insert="~{fragment/spinner :: spinner}"></div>
+  <!-- Spinner End -->
+  <!-- Sidebar Start -->
+  <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+  <!-- Sidebar End -->
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+    <div th:insert="~{fragment/navbar :: navbar}"></div>
+    <!-- Navbar End -->
+
+    <!-- 내용 -->
+
+    <!-- Footer Start -->
+    <div th:insert="~{fragment/footer :: copy}"></div>
+    <!-- Footer End -->
+  </div>
+  <!-- Content End -->
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>
