@@ -14,4 +14,6 @@ public class TeamTotalInfoResponse extends RankInfo {
     private int lost;
     private int diff;
 
+
+
 }

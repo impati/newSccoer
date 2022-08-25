@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * 모든 선수들의 스탯을 랜덤으로 결정, 포지션에 따라 .
+ */
 @Component
 @Transactional
 @RequiredArgsConstructor

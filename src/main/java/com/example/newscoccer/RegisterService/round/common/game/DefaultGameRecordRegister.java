@@ -72,7 +72,7 @@ public class DefaultGameRecordRegister implements GameRecordRegister{
             public Void championsSolved() {
                 List<TeamChampionsRecord > tcrList = teamChampionsRecordRepository.findByRound(round);
                 TeamChampionsRecord tcrA = tcrList.get(0);
-                TeamChampionsRecord tcrB = tcrList.get(0);
+                TeamChampionsRecord tcrB = tcrList.get(1);
 
                 scoreFirst(dto,tcrA,tcrB);
 

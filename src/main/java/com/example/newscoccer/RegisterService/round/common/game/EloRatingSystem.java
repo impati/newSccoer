@@ -146,7 +146,7 @@ public class EloRatingSystem {
         for(var ele : teamRankMap.keySet()){
 
             int value = teamRankMap.get(ele);
-            log.info("[team = {}rank = {}] , plus = {}" ,ele, value,championsCompensation[value]);
+
                 ele.setRating(ele.getRating() + championsCompensation[value]);
                 playerChampionsRecordRepository.findPlayerParticipate(ele.getId(),season)
                         .stream().forEach(pr->{

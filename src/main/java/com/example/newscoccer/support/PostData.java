@@ -2,6 +2,7 @@ package com.example.newscoccer.support;
 
 import com.example.newscoccer.RegisterService.round.ChampionsRoundGenerator;
 import com.example.newscoccer.RegisterService.round.LeagueRoundGenerator;
+import com.example.newscoccer.auto.AutoStatConfig;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.*;
 import com.example.newscoccer.domain.Season;
@@ -47,6 +48,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class PostData {
+    private final AutoStatConfig autoStatConfig;
     private final SeasonRepository seasonRepository;
     private final LeagueRepository leagueRepository;
     private final TeamRepository teamRepository;
@@ -195,6 +197,9 @@ public class PostData {
                     .stream()
                     .forEach(p->p.setMain(true));
         });
+
+        //처음 등록된 선수들의 스탯을 랜덤을 결정함.
+        autoStatConfig.playerStatConfig();
     }
     private List<Player> decisionMain(List<Player> playerList , Position [] positions , int n){
         List<Player> ret = new ArrayList<>();

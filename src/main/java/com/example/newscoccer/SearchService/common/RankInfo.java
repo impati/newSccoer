@@ -8,7 +8,7 @@ import com.example.newscoccer.domain.record.PlayerChampionsRecord;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
-import lombok.Getter;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 
 @Slf4j
-@Getter
+@Data
 public class RankInfo extends DataTransferObject {
     private int leagueFirst;
     private int leagueSecond;

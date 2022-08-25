@@ -64,12 +64,13 @@ public interface PlayerChampionsRecordRepository extends JpaRepository<PlayerCha
      * @param season
      * @return
      */
-    @Query(" select distinct p from PlayerChampionsRecord pcr " +
+    @Query(" select  p from PlayerChampionsRecord pcr " +
             " join pcr.player p " +
             " join fetch p.team t " +
             " join pcr.round r " +
             " where t in(:teamList) and r.season = :season " +
-            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE ")
+            " and r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE " +
+            " group by p.id ")
     List<Player> findPlayerByTeamListAndSeason(@Param("teamList") List<Team> teamList , @Param("season") int season);
 
     /**

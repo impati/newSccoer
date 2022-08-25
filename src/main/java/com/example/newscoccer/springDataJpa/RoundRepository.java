@@ -32,6 +32,17 @@ public interface RoundRepository extends JpaRepository<Round,Long> {
 
 
     /**
+     *
+     * @param season
+     * @param roundSt 로 리그 라운드들을 찾음
+     * @return
+     */
+    @Query("select lr from LeagueRound  lr " +
+            " where lr.season = :season and lr.roundSt = :roundSt ")
+    List<Round> findLeagueRound(@Param("season") int season,@Param("roundSt") int roundSt); /**
+
+
+    /**
      * 리그의 season + roundSt 에 남아있는 경기가 있나?
      * @param season
      * @param roundSt

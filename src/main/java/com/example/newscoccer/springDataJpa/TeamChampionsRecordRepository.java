@@ -5,7 +5,6 @@ import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
-import com.example.newscoccer.domain.record.TeamLeagueRecord;
 import com.example.newscoccer.springDataJpa.dto.TeamScoreDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -54,7 +53,7 @@ public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampio
             " join tcr.team t " +
             " join tcr.round r " +
             "where r.season = :season and r.roundSt = :roundSt")
-    List<TeamLeagueRecord> findBySeasonAndRoundSt(@Param("season") int season , @Param("roundSt") int roundSt);
+    List<TeamChampionsRecord> findBySeasonAndRoundSt(@Param("season") int season , @Param("roundSt") int roundSt);
 
     /**
      * 시즌 , 라운드 , 인덱스 정보 로 챔피언스 결과를 가져옴.

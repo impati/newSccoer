@@ -44,6 +44,8 @@ public class DefaultSearchPlayerRecord implements SearchPlayerRecord {
     public SearchPlayerRecordResponse searchLeaguePlayerRecord(Long leagueId, int season, SortType sortType , Direction direction) {
         SearchPlayerRecordResponse resp = new SearchPlayerRecordResponse();
         List<Team> teamList = teamRepository.findByLeague(leagueId);
+
+
         playerLeagueRecordRepository.findPlayerByTeamListAndSeason(teamList,season)
                 .stream()
                 .forEach(p->{

@@ -27,6 +27,7 @@ public  class Season {
 
     public void championsUpdate(){
         currentChampionsRoundSt /= 2;
+        SeasonUtilsUpdate();
     }
     public void seasonUpdate(){
         currentSeason += 1;

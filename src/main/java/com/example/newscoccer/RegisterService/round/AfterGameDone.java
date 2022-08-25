@@ -85,8 +85,6 @@ public class AfterGameDone implements GameDoneTroubleShooter{
         };
         new RoundTemplate().action(round,feature);
 
-
-
         if(roundRepository.findRemainCount(round.getSeason()).equals(0L)){
             // -> 시즌 보상 (레이팅)
             eloRatingSystem.seasonCompensation(SeasonUtils.currentSeason);

@@ -29,7 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class DefaultGameRecordRegisterTest {
+class
+DefaultGameRecordRegisterTest {
 
     @Autowired
     GameRecordRegister gameRecordRegister;
