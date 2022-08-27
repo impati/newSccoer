@@ -20,7 +20,7 @@ public class DirectorRepositoryQuerydslImpl implements DirectorRepositoryQueryds
     public List<Director> findDirectorList(String name , League league , Team team) {
 
         return jpaQueryFactory.selectFrom(director)
-                .leftJoin(director.team, QTeam.team)
+                .leftJoin(director.team, QTeam.team).fetchJoin()
                 .where(nameSearch(name),teamSearch(team),leagueSearch(league))
                 .fetch();
 

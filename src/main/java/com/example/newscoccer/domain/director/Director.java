@@ -30,6 +30,7 @@ public class Director extends BaseEntity {
     // 연관관계 편의 메서드
     public void changeTeam(Team team){
         if(team == null){
+            if(this.team !=null) this.team.setDirector(null);
             this.setTeam(null);
         }
         else {

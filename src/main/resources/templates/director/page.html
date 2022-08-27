@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+  <!-- Spinner Start -->
+  <div th:insert="~{fragment/spinner :: spinner}"></div>
+  <!-- Spinner End -->
+  <!-- Sidebar Start -->
+  <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+  <!-- Sidebar End -->
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+    <div th:insert="~{fragment/navbar :: navbar}"></div>
+    <!-- Navbar End -->
+
+    <nav>
+      <div>
+                <span   th:each ="n : ${#numbers.sequence(0,Seasons)}">
+                <button type="button" class="btn btn-outline-info m-2" th:text="|Season  ${n}|" th:onclick="|location.href='@{/director/{directorId}(directorId=${directorId},season=${n})}'|"></button>
+                </span>
+      </div>
+
+    </nav>
+
+
+    <!--내용 -->
+
+    <div class="container-fluid pt-4 px-4">
+      <div class="row g-4">
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h4 class="mb-4" th:text="${simpleInfoResponse.name}"></h4>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>이름</th>
+                  <th>팀</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${simpleInfoResponse.name}"></td>
+                  <td th:text="${simpleInfoResponse.teamName}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">리그</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>순위</th>
+                  <th>승</th>
+                  <th>무</th>
+                  <th>패</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${leagueInfoResponse.rank}"></td>
+                  <td th:text="${leagueInfoResponse.win}"></td>
+                  <td th:text="${leagueInfoResponse.draw}"></td>
+                  <td th:text="${leagueInfoResponse.lose}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">챔피언스</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>순위</th>
+                  <th>승</th>
+                  <th>무</th>
+                  <th>패</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${championsInfoResponse.rank}"></td>
+                  <td th:text="${championsInfoResponse.win}"></td>
+                  <td th:text="${championsInfoResponse.draw}"></td>
+                  <td th:text="${championsInfoResponse.lose}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">전체 기록</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>승</th>
+                  <th>무</th>
+                  <th>패</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${totalInfoResponse.win}"></td>
+                  <td th:text="${totalInfoResponse.draw}"></td>
+                  <td th:text="${totalInfoResponse.lose}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">업적</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>리그 우승</th>
+                  <th>리그 준우승</th>
+                  <th>리그 3위</th>
+                  <th>리그 4위</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${totalInfoResponse.leagueFirst}"></td>
+                  <td th:text="${totalInfoResponse.leagueSecond}"></td>
+                  <td th:text="${totalInfoResponse.leagueThird}"></td>
+                  <td th:text="${totalInfoResponse.leagueFour}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-12">
+          <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">업적</h6>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th>챔피언스 우승</th>
+                  <th>챔피언스 준우승</th>
+                  <th>챔피언스 3위</th>
+                  <th>챔피언스 4위</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td th:text="${totalInfoResponse.championsFirst}"></td>
+                  <td th:text="${totalInfoResponse.championsSecond}"></td>
+                  <td th:text="${totalInfoResponse.championsThird}"></td>
+                  <td th:text="${totalInfoResponse.championsFour}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div th:insert="~{fragment/footer :: copy}"></div>
+    <!-- Footer End -->
+  </div>
+  <!-- Content End -->
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>

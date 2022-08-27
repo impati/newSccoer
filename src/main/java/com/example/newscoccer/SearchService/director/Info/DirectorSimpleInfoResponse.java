@@ -2,10 +2,12 @@ package com.example.newscoccer.SearchService.director.Info;
 
 import com.example.newscoccer.domain.DataTransferObject;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Data
 public class DirectorSimpleInfoResponse extends DataTransferObject {
     private String name;
     private String teamName;

@@ -13,16 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class DefaultDirectorSimpleInfo implements EntitySimpleInfo<DirectorSimpleInfoRequest , DirectorSimpleInfoResponse> {
     private final DirectorRepository  directorRepository;
 
-    public DirectorSimpleInfoResponse simpleInfo(Long entityId) {
-        Director director = directorRepository.findById(entityId).orElse(null);
-        return  new DirectorSimpleInfoResponse(director.getName(),director.getTeam().getName());
-    }
+
     /**
      * req , EntityId를 이용하여 감독 정보를 가져온다.
      */
     @Override
     public DirectorSimpleInfoResponse simpleInfo(DirectorSimpleInfoRequest req) {
         Director director = directorRepository.findById(req.getDirectorId()).orElse(null);
-        return  new DirectorSimpleInfoResponse(director.getName(),director.getTeam().getName());
+        DirectorSimpleInfoResponse resp = new DirectorSimpleInfoResponse();
+        resp.setName(director.getName());
+        if(director.getTeam() !=null) resp.setTeamName(director.getTeam().getName());
+        return  resp;
     }
 }

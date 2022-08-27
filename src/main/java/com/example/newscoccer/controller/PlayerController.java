@@ -1,4 +1,4 @@
-package com.example.newscoccer.controller.player;
+package com.example.newscoccer.controller;
 
 import com.example.newscoccer.RegisterService.player.PlayerUpdate;
 import com.example.newscoccer.RegisterService.player.PlayerUpdateDto;
