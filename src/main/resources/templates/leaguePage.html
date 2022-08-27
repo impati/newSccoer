@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+  <!-- Spinner Start -->
+  <div th:insert="~{fragment/spinner :: spinner}"></div>
+  <!-- Spinner End -->
+  <!-- Sidebar Start -->
+  <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+  <!-- Sidebar End -->
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+    <div th:insert="~{fragment/navbar :: navbar}"></div>
+    <!-- Navbar End -->
+
+    <div class="container-fluid pt-4 px-4">
+      <div class="col-xl-12">
+        <div class="bg-light rounded h-100 p-4">
+          <h6 class="mb-4" th:text="${leagueName}">Responsive Table</h6>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>팀</th>
+                <th>레이팅</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr th:each="team,i: ${teams}">
+                <td th:text="${i.count}"></td>
+                <td ><a th:text="${team.name}" th:href="@{|/team/${team.teamId}|}" ></a></td>
+                <td th:text="${team.rating}"></td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Start -->
+    <div th:insert="~{fragment/footer :: copy}"></div>
+    <!-- Footer End -->
+  </div>
+  <!-- Content End -->
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>
