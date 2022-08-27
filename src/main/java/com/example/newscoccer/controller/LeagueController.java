@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * GET /league/{leagueId}  리그 페이지 레이팅순 정렬
+ */
 @Slf4j
 @Controller
 @RequiredArgsConstructor
