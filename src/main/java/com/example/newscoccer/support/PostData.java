@@ -11,6 +11,7 @@ import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.springDataJpa.*;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,7 @@ import java.util.List;
  * ==> 시즌 라운드, 챔피언스 라운드는 재사용 가능성이 있으며 개발 단계의 클래스만이 이를 의존하지 않음.
  *
  */
+@Slf4j
 @Component
 @RequiredArgsConstructor
 @Transactional
@@ -75,6 +77,7 @@ public class PostData {
 
             leagueSeasonSetting();
             championsSeasonSetting();
+            log.info("===============end===================");
         }
         else{
             Season season = seasonRepository.findById(1L).get();

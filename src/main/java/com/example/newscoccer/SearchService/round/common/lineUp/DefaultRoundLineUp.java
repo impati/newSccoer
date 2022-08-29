@@ -48,7 +48,7 @@ public class DefaultRoundLineUp implements RoundLineUp{
             @Override
             public RoundLineUpResponse leagueSolved() {
                 RoundLineUpResponse resp = new RoundLineUpResponse();
-
+                resp.setLineUpDone(false);
                 List<TeamLeagueRecord> tlr = teamLeagueRecordRepository.findByRound(round);
                 Team teamA = tlr.get(0).getTeam();
                 Team teamB = tlr.get(1).getTeam();
@@ -66,7 +66,7 @@ public class DefaultRoundLineUp implements RoundLineUp{
                     });
                 }
                 else{// 라인업이 결정되었을 때
-
+                    resp.setLineUpDone(true);
                     resp.setPlayerListA(playerLeagueRecordRepository.findByTeamAndRound(teamA,round).stream()
                             .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
                             .collect(toList()));
@@ -75,6 +75,7 @@ public class DefaultRoundLineUp implements RoundLineUp{
                             .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
                             .collect(toList()));
                 }
+                positionSort(resp);
 
                 return resp;
             }
@@ -109,13 +110,27 @@ public class DefaultRoundLineUp implements RoundLineUp{
                             .collect(toList()));
 
                 }
-
+                positionSort(resp);
                 return resp;
             }
         };
 
 
         return roundTemplate.action(round,roundFeature);
+    }
+
+    private void positionSort(RoundLineUpResponse resp){
+        resp.getPlayerListA().sort((e1,e2)->{
+            if(e1.getPosition().ordinal() > e2.getPosition().ordinal()) return 1;
+            else if(e1.getPosition().ordinal() > e2.getPosition().ordinal()) return 0;
+            else return -1;
+        });
+
+        resp.getPlayerListB().sort((e1,e2)->{
+            if(e1.getPosition().ordinal() > e2.getPosition().ordinal()) return 1;
+            else if(e1.getPosition().ordinal() > e2.getPosition().ordinal()) return 0;
+            else return -1;
+        });
     }
 
 }

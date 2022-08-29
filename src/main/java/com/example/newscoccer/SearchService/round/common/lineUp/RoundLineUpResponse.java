@@ -18,8 +18,12 @@ public class RoundLineUpResponse extends DataTransferObject {
     private String teamBName;
     private List<RoundLineUpDto> playerListA = new ArrayList<>();
     private List<RoundLineUpDto> playerListB = new ArrayList<>();
+    private boolean lineUpDone = false;
 
 
+//    public boolean getLineUpDone(){
+//         return lineUpDone;
+//    }
     public void teamAUpdate(Team team){
         this.teamAId = team.getId();
         this.teamAName = team.getName();

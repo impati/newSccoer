@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+  <!-- Spinner Start -->
+  <div th:insert="~{fragment/spinner :: spinner}"></div>
+  <!-- Spinner End -->
+  <!-- Sidebar Start -->
+  <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+  <!-- Sidebar End -->
+
+  <!-- Content Start -->
+  <div class="content">
+    <!-- Navbar Start -->
+    <div th:insert="~{fragment/navbar :: navbar}"></div>
+    <!-- Navbar End -->
+
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link btn btn-lg btn-secondary m-2" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                aria-selected="true" th:onclick="|location.href='@{/round/{type}/{roundId}/strategy(type=${type}, roundId=${roundId})}'|" >상대 전력</button>
+        <button class="nav-link  btn btn-lg btn-secondary m-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                aria-selected="true" th:onclick="|location.href='@{/round/{type}/{roundId}/line-up(type=${type}, roundId=${roundId})}'|">라인업</button>
+        <button class="nav-link btn btn-lg btn-secondary m-2" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
+                aria-selected="true" th:onclick="|location.href='@{/round/{type}/{roundId}/game(type=${type} ,roundId=${roundId})}'|">경기 기록</button>
+      </div>
+    </nav>
+
+
+
+
+
+    <div th:unless="${roundLineUpResponse.lineUpDone}" class="container-fluid pt-4 px-4" th:object="${newData}">
+      <form th:action="@{/round/{type}/{st}/line-up/(type=${type},st=${roundId})}" class="form-inline" method="post">
+        <div class="row g-4">
+
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+              <h6 class="mb-4" th:text="${roundLineUpResponse.teamAName}"></h6>
+              <div class="form-group mb-2">
+                <div class="btn-group-vertical me-2" role="group">
+                  <div th:each="player: ${roundLineUpResponse.playerListA}" class="form-control" >
+
+                    <select th:field="*{joinPosition}" class="d-xxl-inline" >
+                      <option th:value="${player.position}" th:text="${player.position}">포지션</option>
+                      <option th:each="position : ${positionList}"
+                              th:value="${position}"
+                              th:text="${position}"></option>
+                    </select>
+                    <input type="checkbox"  th:field="*{joinPlayer}" th:value="${player.playerId}"   class="d-xxl-inline" >
+                    <label
+                           th:text="${player.playerName}" class="btn btn-outline-link m-2"></label>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+              <h6 class="mb-4" th:text="${roundLineUpResponse.teamBName}"></h6>
+              <div class="form-group mb-2">
+                <div class="btn-group-vertical me-2" role="group">
+                  <div th:each="player: ${roundLineUpResponse.playerListB}" class="form-control" >
+
+                    <select th:field="*{joinPosition}" class="d-xxl-inline" >
+                      <option th:value="${player.position}" th:text="${player.position}">포지션</option>
+                      <option th:each="position : ${positionList}"
+                              th:value="${position}"
+                              th:text="${position}"></option>
+                    </select>
+                    <input type="checkbox"  th:field="*{joinPlayer}" th:value="${player.playerId}"   class="d-xxl-inline" >
+                    <label
+                           th:text="${player.playerName}" class="btn btn-outline-link m-2"></label>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">라인업 저장 후 경기 시작.</button>
+      </form>
+    </div>
+
+
+    <div th:if="${roundLineUpResponse.lineUpDone}" class="container-fluid pt-4 px-4" th:object="${newData}" disabled>
+
+        <div class="row g-4">
+
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+              <h6 class="mb-4" th:text="${roundLineUpResponse.teamAName}"></h6>
+              <div class="form-group mb-2">
+                <div class="btn-group-vertical me-2" role="group">
+                  <div th:each="player: ${roundLineUpResponse.playerListA}" class="form-control" disabled>
+
+                    <select th:field="*{joinPosition}" class="d-xxl-inline" disabled>
+                      <option th:value="${player.position}" th:text="${player.position}">포지션</option>
+                      <option th:each="position : ${positionList}"
+                              th:value="${position}"
+                              th:text="${position}"></option>
+                    </select>
+                    <input type="checkbox"  th:field="*{joinPlayer}" th:value="${player.playerId}"   class="d-xxl-inline" disabled>
+                    <label
+                            th:text="${player.playerName}" class="btn btn-outline-link m-2"></label>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-sm-12 col-xl-6">
+            <div class="bg-light rounded h-100 p-4">
+              <h6 class="mb-4" th:text="${roundLineUpResponse.teamBName}"></h6>
+              <div class="form-group mb-2">
+                <div class="btn-group-vertical me-2" role="group">
+                  <div th:each="player: ${roundLineUpResponse.playerListB}" class="form-control" >
+
+                    <select th:field="*{joinPosition}" class="d-xxl-inline" disabled>
+                      <option th:value="${player.position}" th:text="${player.position}">포지션</option>
+                      <option th:each="position : ${positionList}"
+                              th:value="${position}"
+                              th:text="${position}"></option>
+                    </select>
+                    <input type="checkbox"  th:field="*{joinPlayer}" th:value="${player.playerId}"   class="d-xxl-inline" disabled>
+                    <label
+                            th:text="${player.playerName}" class="btn btn-outline-link m-2"></label>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Footer Start -->
+    <div th:insert="~{fragment/footer :: copy}"></div>
+    <!-- Footer End -->
+  </div>
+  <!-- Content End -->
+  <!-- Back to Top -->
+  <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>

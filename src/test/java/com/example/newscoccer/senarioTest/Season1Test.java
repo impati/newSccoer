@@ -215,7 +215,7 @@ public class Season1Test {
 
 
 
-    @Test
+//    @Test
     @DisplayName("0 시즌 전부 끝")
     public void seasonALl() throws Exception{
         // given
@@ -245,7 +245,8 @@ public class Season1Test {
     PlayerRepository playerRepository;
     @Autowired
     TeamRepository teamRepository;
-    @Test
+
+//    @Test
     @DisplayName("0시즌 끝 순위 결과 ")
     public void seasonRank() throws Exception{
         // given

@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoundInfoDto {
+    private Long roundId;
     private Team teamA;
     private Team teamB;
 

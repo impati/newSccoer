@@ -3,9 +3,9 @@ package com.example.newscoccer.SearchService.director;
 import com.example.newscoccer.RegisterService.director.DirectorUpdate;
 import com.example.newscoccer.SearchService.director.search.DirectorSearch;
 import com.example.newscoccer.SearchService.director.search.DirectorSearchRequest;
+import com.example.newscoccer.SearchService.director.search.DirectorSearchResponse;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Team;
-import com.example.newscoccer.domain.director.Director;
 import com.example.newscoccer.springDataJpa.DirectorRepository;
 import com.example.newscoccer.springDataJpa.LeagueRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
@@ -36,27 +36,27 @@ class DefaultDirectorSearchTest {
     @Test
     @DisplayName("감독 서치 기능 with 동적 쿼리 이름만 ")
     void directorSearchNameOnly(){
-        List<Director> directorList = directorSearch.directorSearch(new DirectorSearchRequest("스", null, null));
-        directorList.stream().forEach(element->{
-            Assertions.assertThat(element.getName().contains("스")).isTrue();
+        List<DirectorSearchResponse> resp = directorSearch.directorSearch(new DirectorSearchRequest("스", null, null));
+        resp.stream().forEach(element->{
+            Assertions.assertThat(element.getDirectorName().contains("스")).isTrue();
         });
-        System.out.println(directorList.size());
+        System.out.println(resp.size());
 
     }
 
     @Test
     @DisplayName("감독 서치 기능 with 리그만  ")
     void directorSearchLeagueOnly(){
-        List<Director> directorList = directorSearch.directorSearch(new DirectorSearchRequest(null ,1L, null));
+        List<DirectorSearchResponse> directorList = directorSearch.directorSearch(new DirectorSearchRequest(null, 1L, null));
         Assertions.assertThat(directorList.size()).isEqualTo(16);
     }
 
     @Test
     @DisplayName("감독 서치 기능 with 리그 , 이름 ")
     void directorSearchLeagueOnlyAndName(){
-        List<Director> directorList = directorSearch.directorSearch(new DirectorSearchRequest("스" ,1L, null));
+        List<DirectorSearchResponse> directorList = directorSearch.directorSearch(new DirectorSearchRequest("스" ,1L, null));
         directorList.stream().forEach(element->{
-            Assertions.assertThat(element.getName().contains("스")).isTrue();
+            Assertions.assertThat(element.getDirectorName().contains("스")).isTrue();
         });
 
         System.out.println(directorList.size());
@@ -77,11 +77,11 @@ class DefaultDirectorSearchTest {
         directorUpdate.directorSave("testDirector",findTeam.getId());
 
 
-        List<Director> directorList = directorSearch.directorSearch(new DirectorSearchRequest("testDirector", league.getId(), findTeam.getId()));
+        List<DirectorSearchResponse> directorList = directorSearch.directorSearch(new DirectorSearchRequest("testDirector", league.getId(), findTeam.getId()));
         Assertions.assertThat(directorList.size()).isEqualTo(1);
-        Assertions.assertThat(directorList.get(0).getName()).isEqualTo("testDirector");
+        Assertions.assertThat(directorList.get(0).getDirectorName()).isEqualTo("testDirector");
 
-        Assertions.assertThat(directorList.get(0).getTeam()).isEqualTo(findTeam);
+        Assertions.assertThat(directorList.get(0).getDirectorName()).isEqualTo("testDirector");
     }
 
 }

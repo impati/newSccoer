@@ -45,6 +45,7 @@ public class DefaultLeagueRoundInfo implements LeagueRoundInfo{
             else{
                 Round round = tlr.getRound();
                 RoundInfoDto roundInfoDto = new RoundInfoDto();
+                roundInfoDto.setRoundId(round.getId());
                 roundInfoDto.setTeamA(tlr.getTeam());
                 roundInfoDto.setScoreA(tlr.getScore());
                 roundInfoDto.setDone(round.getRoundStatus() == RoundStatus.DONE ? true : false);
