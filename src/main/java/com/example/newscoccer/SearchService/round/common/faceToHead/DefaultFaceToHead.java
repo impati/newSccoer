@@ -208,7 +208,7 @@ public class DefaultFaceToHead implements FaceToHead{
                 teamLeagueRecordRepository.findByRoundListAndTeam(roundList,tlrB.getTeam(), PageRequest.of(0,5))
                         .stream()
                         .forEach(tlr->{
-                            SimpleRecordResultDto dto = new SimpleRecordResultDto();
+                            SimpleRecordResultDto dto = new SimpleRecordResultDto(tlr.getRound().getSeason(),tlr.getRound().getRoundSt());
                             dto.updateTeamA(tlrA.getTeam().getName(),tlr.getOppositeScore(), MatchResultUtils.oppositeMatchResult(tlr.getMatchResult()));
                             dto.updateTeamB(tlr.getTeam().getName(),tlr.getScore(),tlr.getMatchResult());
                             resp.getSimpleRecordResultDtoList().add(dto);
@@ -229,7 +229,7 @@ public class DefaultFaceToHead implements FaceToHead{
                 teamChampionsRecordRepository.findByRoundListAndTeam(roundList,tcrB.getTeam(), PageRequest.of(0,5))
                         .stream()
                         .forEach(tlr->{
-                            SimpleRecordResultDto dto = new SimpleRecordResultDto();
+                            SimpleRecordResultDto dto = new SimpleRecordResultDto(tlr.getRound().getSeason(),tlr.getRound().getRoundSt());
                             dto.updateTeamA(tcrA.getTeam().getName(),tlr.getOppositeScore(), MatchResultUtils.oppositeMatchResult(tlr.getMatchResult()));
                             dto.updateTeamB(tlr.getTeam().getName(),tlr.getScore(),tlr.getMatchResult());
                             resp.getSimpleRecordResultDtoList().add(dto);
@@ -268,6 +268,7 @@ public class DefaultFaceToHead implements FaceToHead{
                                     });
                             resp.getRecordList().add(dto);
                         });
+
                 return resp;
             }
 

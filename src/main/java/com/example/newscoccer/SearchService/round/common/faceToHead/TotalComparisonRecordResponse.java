@@ -4,7 +4,9 @@ import com.example.newscoccer.domain.DataTransferObject;
 import com.example.newscoccer.domain.record.MatchResult;
 import com.example.newscoccer.domain.record.MatchResultUtils;
 
-
+/**
+ * 양팀 총 상대 전적 .
+ */
 public class TotalComparisonRecordResponse extends DataTransferObject {
     private String teamAName;
 
@@ -14,13 +16,6 @@ public class TotalComparisonRecordResponse extends DataTransferObject {
 
     private double avgGoalA;
     private double avgGoalB;
-
-
-    private int sumGoalA;
-    private int sumGoalB;
-    private int sz = 0;
-
-
 
     private int winB;
     private int drawB;
@@ -57,6 +52,12 @@ public class TotalComparisonRecordResponse extends DataTransferObject {
         sz ++;
         avgCalc();
     }
+
+    private int sumGoalA;
+    private int sumGoalB;
+    private int sz = 0;
+
+
 
     private void avgCalc(){
         avgGoalA = Math.round((sumGoalA / (double)sz) * 100 ) / 100.0;

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div th:insert="~{fragment/spinner :: spinner}"></div>
+    <!-- Spinner End -->
+    <!-- Sidebar Start -->
+    <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        <div th:insert="~{fragment/navbar :: navbar}"></div>
+        <!-- Navbar End -->
+
+        <!-- 내용 -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="row g-4">
+
+                <div class="col-x1-12 ">
+                    <div class="bg-light rounded h-100 p-4 ">
+                        <h6 class="mb-4 text-sm-center">상대 전력</h6>
+                        <table class="table table-borderless text-sm-center">
+                            <thead >
+                            <tr>
+                                <th scope="col" th:text="${comparisonA.teamName}"></th>
+                                <th scope="col" th:text="|VS|"></th>
+                                <th scope="col" th:text="${comparisonB.teamName}"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="${comparisonA.total}">John</td>
+                                <td>시즌 성적</td>
+                                <td th:text="${comparisonB.total}">John</td>
+                            </tr>
+                            <tr>
+                                <td th:text="${comparisonA.recent}">John</td>
+                                <td>최근 경기</td>
+                                <td th:text="${comparisonB.recent}">John</td>
+                            </tr>
+                            <tr>
+                                <td th:text="${comparisonA.avgScore}">John</td>
+                                <td>퍙군 득점</td>
+                                <td th:text="${comparisonB.avgScore}">John</td>
+                            </tr>
+                            <tr>
+                                <td th:text="${comparisonA.avgLost}">John</td>
+                                <td>평균 실점</td>
+                                <td th:text="${comparisonB.avgLost}">John</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-x1-12 align-items-center">
+                    <div class="bg-light rounded h-100 p-4 text-sm-center">
+                        <h6 class="mb-4">최근 양팀 맞대결</h6>
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th scope="col" th:text="${comparisonA.teamName}"></th>
+                                <th scope="col" th:text="|  VS |"></th>
+                                <th scope="col" th:text="${comparisonB.teamName}"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="showDown: ${recentShowDown}">
+                                <td th:text="|${showDown.teamAName} ${showDown.scoreA} ${showDown.matchResultA}|">John</td>
+                                <td th:text="|${showDown.season} 시즌 ${showDown.roundSt} 라운드 |"></td>
+                                <td th:text="|${showDown.teamBName} ${showDown.scoreB} ${showDown.matchResultB}|" >John</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-x1-12 align-items-center">
+                    <div class="bg-light rounded h-100 p-4 text-sm-center">
+                        <h6 class="mb-4">전체 양팀 맞대결</h6>
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th scope="col" th:text="${comparisonA.teamName}"></th>
+                                <th scope="col" th:text="|  VS |"></th>
+                                <th scope="col" th:text="${comparisonB.teamName}"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="|${totalShowDown.winA} 승 ${totalShowDown.drawA} 무 ${totalShowDown.loseA} 패|">John</td>
+                                <td th:text="| |"></td>
+                                <td th:text="|${totalShowDown.winB} 승 ${totalShowDown.drawB} 무 ${totalShowDown.loseB} 패|">John</td>
+                            </tr>
+
+
+                            <tr>
+                                <td th:text="| ${totalShowDown.avgGoalA} 평균 득점 |">John</td>
+                                <td th:text="| |"></td>
+                                <td th:text="| ${totalShowDown.avgGoalB} 평균 득점 |">John</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-sm-12 col-xl-6 align-items-center">
+                    <div class="bg-light rounded h-100 p-4 text-sm-center">
+                        <h6 class="mb-4">탑 플레이어</h6>
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th scope="col" th:text="${comparisonA.teamName}"></th>
+                                <th scope="col" th:text="|득점|"></th>
+                                <th scope="col" th:text="|도움|"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="player: ${teamATopPlayer}">
+                                <td th:text="${player.playerName}">John</td>
+                                <td th:text="${player.goal}"></td>
+                                <td th:text="${player.assist}"></td>
+                                <td th:text="${player.rating}"></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-xl-6 align-items-center">
+                    <div class="bg-light rounded h-100 p-4 text-sm-center">
+                        <h6 class="mb-4">탑 플레이어</h6>
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th scope="col" th:text="${comparisonB.teamName}"></th>
+                                <th scope="col" th:text="|득점|"></th>
+                                <th scope="col" th:text="|도움|"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="player: ${teamBTopPlayer}">
+                                <td th:text="${player.playerName}">John</td>
+                                <td th:text="${player.goal}"></td>
+                                <td th:text="${player.assist}"></td>
+                                <td th:text="${player.rating}"></td>
+                            </tr>
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- Footer Start -->
+        <div th:insert="~{fragment/footer :: copy}"></div>
+        <!-- Footer End -->
+    </div>
+    <!-- Content End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>

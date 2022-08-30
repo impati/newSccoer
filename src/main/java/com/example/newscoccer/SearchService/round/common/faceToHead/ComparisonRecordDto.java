@@ -14,8 +14,13 @@ public class ComparisonRecordDto {
     private int win;
     private int draw;
     private int lose;
+    // toString of win + draw + lose
+    private String total;
     // 리그 : 5 최근 경기
     // 챔피언스 :시즌 경기
+
+    // toString of recentWin...
+    private String recent;
     private int recentWin;
     private int recentDraw;
     private int recentLose;
@@ -92,6 +97,16 @@ public class ComparisonRecordDto {
 
 
 
+
+
+
+    public String getTotal(){
+        return win + " 승 " + draw  + " 무 " + lose + " 패 ";
+    }
+
+    public String getRecent(){
+        return recentWin + " 승 " + recentDraw  + " 무 " + recentLose + " 패 ";
+    }
 
 
 

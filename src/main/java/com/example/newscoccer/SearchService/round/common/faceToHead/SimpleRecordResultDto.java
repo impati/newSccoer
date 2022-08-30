@@ -2,6 +2,7 @@ package com.example.newscoccer.SearchService.round.common.faceToHead;
 
 import com.example.newscoccer.domain.record.MatchResult;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -10,17 +11,26 @@ import lombok.Data;
  *  결과        결과
  */
 @Data
+@NoArgsConstructor
 public class SimpleRecordResultDto {
     private String teamAName;
     private int scoreA;
     private MatchResult matchResultA;
 
+    private int season;
+    private int roundSt;
+
+
     private String teamBName;
     private int scoreB;
     private MatchResult matchResultB;
 
+    public SimpleRecordResultDto(int season, int roundSt) {
+        this.season = season;
+        this.roundSt = roundSt;
+    }
 
-    public void updateTeamA(String name,int score,MatchResult matchResult){
+    public void updateTeamA(String name, int score, MatchResult matchResult){
         this.teamAName = name;
         this.scoreA = score;
         this.matchResultA = matchResult;

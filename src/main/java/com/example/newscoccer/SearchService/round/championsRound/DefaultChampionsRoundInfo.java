@@ -68,6 +68,7 @@ public class DefaultChampionsRoundInfo implements ChampionsRoundInfo{
                 dto.setScoreB(tcr.getScore());
             } else {
                 RoundInfoDto dto = new RoundInfoDto();
+                dto.setRoundId(round.getId());
                 dto.setTeamA(tcr.getTeam());
                 dto.setScoreA(tcr.getScore());
                 dto.setDone(round.getRoundStatus() == RoundStatus.DONE ? true : false);

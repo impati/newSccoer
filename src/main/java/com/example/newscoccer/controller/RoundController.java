@@ -5,6 +5,7 @@ import com.example.newscoccer.RegisterService.round.common.lineUp.LineUpResult;
 import com.example.newscoccer.RegisterService.round.common.lineUp.LineUpResultDto;
 import com.example.newscoccer.SearchService.round.championsRound.ChampionsRoundInfo;
 import com.example.newscoccer.SearchService.round.championsRound.ChampionsRoundInfoRequest;
+import com.example.newscoccer.SearchService.round.common.faceToHead.*;
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUp;
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUpRequest;
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUpResponse;
@@ -30,7 +31,9 @@ import java.util.List;
  *  Get round/league -> 리그 라운드 정보 , 4개 리그를 모두 보여줌 .
  *  Get round/champions ->챔피언스 라운드 정보
  *
- *  Get round/league/{roundId}/line-up,round/champions/{roundId}/line-up -> 라운드 공통 처리
+ *  Get ,POST round/league/{roundId}/line-up,round/champions/{roundId}/line-up -> 라운드 공통 처리
+ *
+ *  GET /round/power/{roundId} -> 상대 전력 페이지
  */
 @Slf4j
 @Controller
@@ -43,6 +46,7 @@ public class RoundController {
     private final ChampionsRoundInfo championsRoundInfo;
     private final RoundLineUp roundLineUp;
     private final LineUpRegister lineUpRegister;
+    private final FaceToHead faceToHead;
     @GetMapping("/league")
     public String leagueRound(@RequestParam(required = false) Integer season,
                               @RequestParam(required = false) Integer roundSt,
@@ -90,7 +94,10 @@ public class RoundController {
     }
 
 
-
+    /**
+     * 라인업 페이지
+     * TODO : 챔피언스 결승전일 경우 뷰를 다르게 내려주어야함.
+     */
     @GetMapping(value = {"/league/{roundId}/line-up","/champions/{roundId}/line-up"})
     public String lineUpPage(@PathVariable Long roundId ,HttpServletRequest req,Model model){
         if(req.getRequestURI().contains("league")) {
@@ -108,6 +115,11 @@ public class RoundController {
         return "round/lineUp";
     }
 
+
+    /**
+     * 라인업 저장
+     * @return
+     */
     @PostMapping(value = {"/league/{roundId}/line-up","/champions/{roundId}/line-up"})
     public String lineUp(@PathVariable Long roundId,@ModelAttribute NewData newData){
          NewData original = new NewData(roundLineUp.lineUp(new RoundLineUpRequest(roundId)));
@@ -123,6 +135,50 @@ public class RoundController {
         lineUpRegister.lineUpRegister(lineUpResultDto);
          return "redirect:";
     }
+
+
+    /**
+     *
+     * 상대 전력 페이지
+     * TODO : 데이터가 많이 들어간 후에 유효성 검증
+     */
+    @GetMapping("/power/{roundId}")
+    public String powerPage(@PathVariable Long roundId, Model model){
+
+        ComparisonRecordResponse comparisonResp = faceToHead.comparison(roundId);
+        model.addAttribute("comparisonA",comparisonResp.getRecordList().get(0));
+        model.addAttribute("comparisonB",comparisonResp.getRecordList().get(1));
+
+        RecentRecordResponse recentRecordResponse = faceToHead.recentRecord(roundId);
+        model.addAttribute("recentShowDown",recentRecordResponse.getSimpleRecordResultDtoList());
+
+
+        TopPlayerResponse topPlayerResponse = faceToHead.top5Player(roundId);
+        model.addAttribute("teamATopPlayer",topPlayerResponse.getTeamAPlayerList());
+        model.addAttribute("teamBTopPlayer",topPlayerResponse.getTeamBPlayerList());
+
+
+        TotalComparisonRecordResponse totalComparisonRecordResponse = faceToHead.totalComparison(roundId);
+        model.addAttribute("totalShowDown",totalComparisonRecordResponse);
+
+
+        return "round/power";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
