@@ -175,6 +175,7 @@ public class DefaultFaceToHead implements FaceToHead{
     }
     // 탑플레이어 중 조건에 맞게 정렳하고 5개만 가져옴 .
     private List<TopPlayerDto> sortingAndCut(List<TopPlayerDto> list){
+        if(list.size() < 5) return list;
         list.sort((e1,e2)->{
             if(e1.getGoal() + e1.getAssist() > e2.getGoal() + e2.getAssist()) return -1;
             else if(e1.getGoal() + e1.getAssist() < e2.getGoal() + e2.getAssist()) return 1;

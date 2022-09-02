@@ -1,9 +1,6 @@
 package com.example.newscoccer.SearchService.round.common.game;
 
-import com.example.newscoccer.domain.Round.Round;
-import com.example.newscoccer.domain.Round.RoundFeature;
-import com.example.newscoccer.domain.Round.RoundStatus;
-import com.example.newscoccer.domain.Round.RoundTemplate;
+import com.example.newscoccer.domain.Round.*;
 import com.example.newscoccer.domain.record.PlayerRecord;
 import com.example.newscoccer.domain.record.TeamChampionsRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
@@ -23,7 +20,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class DefaultGameResult implements GameResult{
     private final RoundRepository roundRepository;
@@ -34,6 +31,14 @@ public class DefaultGameResult implements GameResult{
     @Override
     public GameResultResponse gameResult(GameResultRequest req) {
         Round round = roundRepository.findById(req.getRoundId()).orElse(null);
+
+        log.info("round {}" , round.getClass());
+
+
+
+        if(round instanceof LeagueRound) log.info("true");
+        else log.info("false");
+
         GameResultResponse resp = gameRecord(round);
         if(round.getRoundStatus() == RoundStatus.DONE || round.getRoundStatus() == RoundStatus.PAIR) resp.setIsDone(true);
         else resp.setIsDone(false);

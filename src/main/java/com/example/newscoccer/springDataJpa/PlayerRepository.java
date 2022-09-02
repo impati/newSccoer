@@ -14,4 +14,6 @@ public interface PlayerRepository extends JpaRepository<Player,Long> ,PlayerRepo
     @Query(" select p from Player p " +
             " where p.id  in(:playerList)")
     List<Player> findByPlayerList(@Param("playerList") List<Long> playerList);
+
+
 }

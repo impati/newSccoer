@@ -54,7 +54,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class ="align-content-center">
-                                <tr th:each="round , i: ${ChampionsRoundInfoFirst}"  th:onclick="'location.href=' + '\'' + @{/round/champions/{roundId}/line-up (roundId=${round.roundId})} + '\''">
+                                <tr th:each="round , i: ${ChampionsRoundInfoFirst}"  th:onclick="'location.href=' + '\'' + @{/round/line-up/{roundId}  (roundId=${round.roundId})} + '\''">
                                     <td th:text="${round.teamA.name}"></td>
                                     <td th:if="${round.isDone}" th:text="${round.scoreA}"></td>
                                     <td th:unless="${round.isDone}"></td>
@@ -77,7 +77,7 @@
                                 </tr>
                                 </thead>
                                 <tbody class ="align-content-center">
-                                <tr th:each="round , i: ${ChampionsRoundInfoSecond}"  th:onclick="'location.href=' + '\'' + @{/round/champions/{roundId}/line-up (roundId=${round.roundId})} + '\''">
+                                <tr th:each="round , i: ${ChampionsRoundInfoSecond}"  th:onclick="'location.href=' + '\'' + @{/round/line-up/{roundId} (roundId=${round.roundId})} + '\''">
                                     <td th:text="${round.teamA.name}"></td>
                                     <td th:if="${round.isDone}" th:text="${round.scoreA}"></td>
                                     <td th:unless="${round.isDone}"></td>

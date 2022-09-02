@@ -21,8 +21,9 @@ public class LeagueRound extends Round{
     private League league;
 
     public LeagueRound(League league , int season, int roundSt) {
-        super(season, roundSt);
+        this.season = season;
+        this.roundSt = roundSt;
         this.league = league;
-        roundStatus = RoundStatus.INIT;
+        roundStatus = RoundStatus.YET;
     }
 }

@@ -57,7 +57,7 @@ public class DefaultRoundLineUp implements RoundLineUp{
                 resp.teamBUpdate(teamB);
 
                 //라인업이 결정되지 않았을 때
-                if(round.getRoundStatus() == RoundStatus.INIT) {
+                if(round.getRoundStatus() == RoundStatus.YET) {
                     playerRepository.findByTeam(teamA).stream().forEach(p -> {
                         resp.getPlayerListA().add(new RoundLineUpDto(p.getId(), p.getName(), p.getPosition()));
                     });
@@ -92,7 +92,8 @@ public class DefaultRoundLineUp implements RoundLineUp{
                 resp.teamBUpdate(teamB);
 
                 //라인업이 결정되지 않았을 때
-                if(round.getRoundStatus() == RoundStatus.INIT) {
+                if(round.getRoundStatus() == RoundStatus.YET) {
+                    resp.setLineUpDone(false);
                     playerRepository.findByTeam(teamA).stream().forEach(p -> {
                         resp.getPlayerListA().add(new RoundLineUpDto(p.getId(), p.getName(), p.getPosition()));
                     });
@@ -101,7 +102,7 @@ public class DefaultRoundLineUp implements RoundLineUp{
                     });
                 }
                 else{ // 라인업이 결정되었을 때
-
+                    resp.setLineUpDone(true);
                     resp.setPlayerListA(playerChampionsRecordRepository.findByTeamAndRound(teamA,round).stream()
                             .map(plr->new RoundLineUpDto(plr.getPlayer().getId(), plr.getPlayer().getName(), plr.getPosition()))
                             .collect(toList()));

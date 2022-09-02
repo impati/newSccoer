@@ -1,12 +1,14 @@
 package com.example.newscoccer.domain.record;
 
 import com.example.newscoccer.domain.BaseEntity;
-import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Round.Round;
 import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * 어시스터  아이디가 0인 경우 "없음"
+ */
 @Entity
 @Getter
 @Setter

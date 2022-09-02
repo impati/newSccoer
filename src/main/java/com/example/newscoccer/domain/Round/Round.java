@@ -28,11 +28,6 @@ public abstract class Round extends BaseEntity {
     @Enumerated(EnumType.STRING)
     protected RoundStatus roundStatus;
 
-    public Round(int season, int roundSt) {
-        this.season = season;
-        this.roundSt = roundSt;
-        this.roundStatus = RoundStatus.INIT;
-    }
 
 
     /**

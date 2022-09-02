@@ -18,8 +18,9 @@ public class ChampionsRound extends Round{
     private int index;
 
     public ChampionsRound(int season, int roundSt, int index) {
-        super(season, roundSt);
+        this.season = season;
+        this.roundSt = roundSt;
         this.index = index;
-        roundStatus = RoundStatus.INIT;
+        roundStatus = RoundStatus.YET;
     }
 }

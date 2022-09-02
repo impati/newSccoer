@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div th:insert="~{fragment/spinner :: spinner}"></div>
+    <!-- Spinner End -->
+    <!-- Sidebar Start -->
+    <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        <div th:insert="~{fragment/navbar :: navbar}"></div>
+        <!-- Navbar End -->
+
+        <!-- 내용 -->
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link btn btn-lg btn-secondary m-2" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                        aria-selected="true" th:onclick="|location.href='@{/round/power/{roundId}(roundId=${roundId})}'|" >상대 전력</button>
+                <button class="nav-link  btn btn-lg btn-secondary m-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                        aria-selected="true" th:onclick="|location.href='@{/round/line-up/{roundId}(roundId=${roundId})}'|">라인업</button>
+                <button class="nav-link btn btn-lg btn-secondary m-2" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
+                        aria-selected="true" th:onclick="|location.href='@{/round/game/{roundId}(roundId=${roundId})}'|">경기 기록</button>
+            </div>
+        </nav>
+
+
+        <div class="container-fluid pt-4 px-4">
+            <div class="row vh-100 bg-light rounded align-items-center justify-content-center mx-0">
+                <div class="col-md-6 text-center">
+                    <h3>경기 시작 전입니다.</h3>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Footer Start -->
+        <div th:insert="~{fragment/footer :: copy}"></div>
+        <!-- Footer End -->
+    </div>
+    <!-- Content End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>

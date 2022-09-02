@@ -47,7 +47,7 @@ public class DefaultLineUpRegister implements LineUpRegister{
                                     PlayerLeagueRecord.createPlayerRecord(player,p.getPosition(),player.getTeam(),round);
                             playerLeagueRecordRepository.save(plr);
                         });
-                round.setRoundStatus(RoundStatus.YET);
+                round.setRoundStatus(RoundStatus.ING);
 
                 return null;
             }
@@ -63,7 +63,7 @@ public class DefaultLineUpRegister implements LineUpRegister{
                                     PlayerChampionsRecord.createPlayerRecord(player,p.getPosition(),player.getTeam(),round);
                             playerChampionsRecordRepository.save(pcr);
                         });
-                round.setRoundStatus(RoundStatus.YET);
+                round.setRoundStatus(RoundStatus.ING);
 
                 return null;
             }

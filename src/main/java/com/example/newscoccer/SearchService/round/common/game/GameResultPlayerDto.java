@@ -36,6 +36,20 @@ public class GameResultPlayerDto extends DataTransferObject {
         this.position = position;
     }
 
+    public void dataSetting(int goal,int assist,int pass,
+                            int shooting,int validShooting,
+                            int foul,int defense,int grade){
+
+        this.goal = goal;
+        this.assist = assist;
+        this.pass = pass;
+        this.shooting = shooting;
+        this.validShooting = validShooting;
+        this.foul = foul;
+        this.defense = defense;
+        this.grade = grade;
+    }
+
 
 
 

@@ -156,7 +156,7 @@ public class DefaultAutoGameRegister implements AutoGameRegister{
         autoGameDtoB.getGoalAssistPairs().stream().forEach(ele->nxt.add(ele));
 
 
-        goalAssistPair.goalPairRegister(nxt,round);
+        goalAssistPair.goalPairRegister(nxt,round.getId());
     }
     private void passAndDefenseFoulSetting(List<RoundLineUpDto> list , AutoGameDto autoGameDto){
         for (var lineUpInfo : list) {

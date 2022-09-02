@@ -119,7 +119,7 @@ class DefaultRoundLineUpTest {
 
         }
             LeagueRound round = new LeagueRound(league,0,1000);
-            round.setRoundStatus(RoundStatus.INIT);
+            round.setRoundStatus(RoundStatus.YET);
             roundRepository.save(round);
 
             TeamLeagueRecord teamLeagueRecordA = TeamLeagueRecord.create(round,team);
