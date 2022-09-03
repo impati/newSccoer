@@ -3,8 +3,12 @@ package com.example.newscoccer.support;
 import com.example.newscoccer.RegisterService.round.ChampionsRoundGenerator;
 import com.example.newscoccer.RegisterService.round.LeagueRoundGenerator;
 import com.example.newscoccer.auto.AutoStatConfig;
+import com.example.newscoccer.auto.Game.AutoGameRegister;
+import com.example.newscoccer.auto.lineUp.AutoLineUp;
 import com.example.newscoccer.domain.League;
-import com.example.newscoccer.domain.Player.*;
+import com.example.newscoccer.domain.Player.Player;
+import com.example.newscoccer.domain.Player.Position;
+import com.example.newscoccer.domain.Player.Stat;
 import com.example.newscoccer.domain.Season;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
@@ -18,7 +22,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.BufferedReader;
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,7 +62,10 @@ public class PostData {
     private final LeagueRoundGenerator leagueRoundGenerator;
     private final ChampionsRoundGenerator championsRoundGenerator;
     private final String filePath = "src/main/java/com/example/newscoccer/support/";
-
+    private final RoundRepository roundRepository;
+    private final AutoLineUp autoLineUp;
+    private final AutoGameRegister autoGameRegister;
+    private final int initialSize = 5;
     /**
      * 처음 한번만 .
      * 시즌이라는 기록도 없을 그 순간만.
@@ -77,6 +83,10 @@ public class PostData {
 
             leagueSeasonSetting();
             championsSeasonSetting();
+
+
+
+
             log.info("===============end===================");
         }
         else{

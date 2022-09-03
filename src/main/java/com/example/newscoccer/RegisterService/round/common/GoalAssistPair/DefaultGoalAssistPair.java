@@ -1,7 +1,6 @@
 package com.example.newscoccer.RegisterService.round.common.GoalAssistPair;
 
 import com.example.newscoccer.RegisterService.round.GameDoneTroubleShooter;
-import com.example.newscoccer.domain.Round.LeagueRound;
 import com.example.newscoccer.domain.Round.Round;
 import com.example.newscoccer.domain.Round.RoundStatus;
 import com.example.newscoccer.domain.record.Duo;
@@ -35,17 +34,7 @@ public class DefaultGoalAssistPair implements GoalAssistPair{
             Duo duo = Duo.create(d.getGoalPlayer(),d.getAssistPlayer(),d.getGoalType(),round);
             duoRepository.save(duo);
         });
-        if(round  instanceof LeagueRound) log.info("true");
-        else log.info("roundId = {}",false);
-
-        log.info("round {}",round);
-        log.info("round {} roundSt {} , roundStatus {},season {}",round.getId(), round.getRoundSt(),round.getRoundStatus(),round.getSeason());
-
         round.setRoundStatus(RoundStatus.DONE);
         gameDoneTroubleShooter.AfterGameDone(round);
-
-
-
-
     }
 }

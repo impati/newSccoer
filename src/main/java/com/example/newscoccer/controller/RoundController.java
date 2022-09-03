@@ -206,8 +206,6 @@ public class RoundController {
     public String gamePairPage(@PathVariable Long roundId , Model model){
 
         GameResultResponse resp = gameResult.gameResult(new GameResultRequest(roundId));
-        log.info("teamA = {}",resp.getTeamA());
-        log.info("teamB = {}",resp.getTeamB());
         model.addAttribute("gameResult",resp);
         model.addAttribute("goalTypeList", GoalType.values());
 
@@ -336,7 +334,7 @@ public class RoundController {
         private void teamProcess(GameRecordDto dto , int index, GameResultTeamDto teamDto){
             GameResultTeamDto teamDtoA = new GameResultTeamDto(teamDto.getTeamId(), teamDto.getTeamName());
             teamDtoA.setScore(scorePair.get(index));
-            teamDtoA.setShare(sharePair.get(index));
+            teamDtoA.setShare(Math.round(sharePair.get(index) * 100 ) / 100.0); // Math.round(a * 100) / 100.0
             teamDtoA.setCornerKick(cornerKickPair.get(index));
             teamDtoA.setFreeKick(freeKickPair.get(index));
             dto.getTeams().add(teamDtoA);
