@@ -73,7 +73,7 @@ public class RoundController {
         model.addAttribute("season",season);
         model.addAttribute("roundSt",roundSt);
         model.addAttribute("Seasons",SeasonUtils.currentSeason);
-        model.addAttribute("lastRound", SeasonUtils.currentLeagueRoundSt);
+        model.addAttribute("lastRound", SeasonUtils.lastLeagueRoundSt);
         model.addAttribute("currentRound", SeasonUtils.currentLeagueRoundSt);
 
 
@@ -181,14 +181,12 @@ public class RoundController {
     public String gamePage(@PathVariable Long roundId , Model model){
         Round round = roundRepository.findById(roundId).orElse(null);
 
-
-
         if(round.getRoundStatus() == RoundStatus.YET) return "error/gameStartBeforeError";
         if(round.getRoundStatus() == RoundStatus.PAIR) return "redirect:/round/game-pair/" + roundId;
         if(round.getRoundStatus() == RoundStatus.DONE) return "redirect:/round/game-done/" + roundId;
 
         GameResultResponse gameResultResponse = gameResult.gameResult(new GameResultRequest(roundId));
-        log.info("resp = {}",gameResultResponse.getPlayerADtoList());
+
         model.addAttribute("gameResultResponse",gameResultResponse);
         model.addAttribute("gameData" , new GameData());
         return "round/game";
@@ -208,9 +206,10 @@ public class RoundController {
     public String gamePairPage(@PathVariable Long roundId , Model model){
 
         GameResultResponse resp = gameResult.gameResult(new GameResultRequest(roundId));
+        log.info("teamA = {}",resp.getTeamA());
+        log.info("teamB = {}",resp.getTeamB());
         model.addAttribute("gameResult",resp);
         model.addAttribute("goalTypeList", GoalType.values());
-
 
         int count = 0;
         count += resp.getPlayerADtoList().stream().mapToInt(ele->ele.getGoal()).sum();
@@ -234,9 +233,7 @@ public class RoundController {
 
     @PostMapping("/game-pair/{roundId}")
     public String gamePair(@PathVariable Long roundId , @ModelAttribute PairRecord pairRecord){
-        log.info("pairRecord {}",pairRecord);
         goalAssistPair.goalPairRegister(pairRecord.dataTransfer(),roundId);
-
         return "redirect:/round/game/" + roundId;
     }
 
@@ -245,9 +242,7 @@ public class RoundController {
     @GetMapping("/game-done/{roundId}")
     public String gameDonePage(@PathVariable Long roundId , Model model) {
         List<GoalAssistPairInfo> goalAssistPairInfos = goalAssistPairSearch.goalAssistPairSearch(roundId);
-
         model.addAttribute("duoResultResponse",goalAssistPairInfos);
-
         GameResultResponse resp = gameResult.gameResult(new GameResultRequest(roundId));
         model.addAttribute("gameResult",resp);
         return "round/gameDone";
@@ -341,9 +336,9 @@ public class RoundController {
         private void teamProcess(GameRecordDto dto , int index, GameResultTeamDto teamDto){
             GameResultTeamDto teamDtoA = new GameResultTeamDto(teamDto.getTeamId(), teamDto.getTeamName());
             teamDtoA.setScore(scorePair.get(index));
-            teamDtoA.setScore(sharePair.get(index));
-            teamDtoA.setScore(cornerKickPair.get(index));
-            teamDtoA.setScore(freeKickPair.get(index));
+            teamDtoA.setShare(sharePair.get(index));
+            teamDtoA.setCornerKick(cornerKickPair.get(index));
+            teamDtoA.setFreeKick(freeKickPair.get(index));
             dto.getTeams().add(teamDtoA);
         }
         private int playerProcess(GameRecordDto dto , int pos , List<GameResultPlayerDto> list){
