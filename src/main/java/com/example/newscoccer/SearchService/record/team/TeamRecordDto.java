@@ -20,7 +20,7 @@ public class TeamRecordDto {
 
 
     public TeamRecordDto(int rank, String teamName, int win, int draw, int lose, int gain, int lost) {
-        this.rank = rank;
+        this.rank = rank == 0 ? 16 : rank;
         this.teamName = teamName;
         this.win = win;
         this.draw = draw;

@@ -58,5 +58,41 @@ public class RecordController {
         return "record/league/playerRecord";
     }
 
+    @GetMapping("/champions/team")
+    public String championsTeamRecord(@RequestParam(required = false) Integer season,Model model ){
+
+        if(season == null) season = SeasonUtils.currentSeason;
+        model.addAttribute("Seasons", SeasonUtils.currentSeason);
+        model.addAttribute("season",season);
+        model.addAttribute("championsTeamRecordResponse",
+                searchTeamRecord.searchChampionsTeamRecord(season).getResultList());
+        return "record/champions/teamRecord";
+    }
+
+    @GetMapping("/champions/player")
+    public String championsPlayerRecord(@RequestParam(required = false) Integer season ,
+                                        @RequestParam(required = false) SortType sortType ,
+                                        Model model){
+
+        if(season == null) season = SeasonUtils.currentSeason;
+        if(sortType == null) sortType  = SortType.GOAL;
+
+        model.addAttribute("Seasons", SeasonUtils.currentSeason);
+        model.addAttribute("season",season);
+        model.addAttribute("sortType",sortType);
+
+        model.addAttribute("championsPlayerRecordResponse",
+                searchPlayerRecord.searchChampionsPlayerRecord(season,sortType,Direction.DESC).getResultList());
+
+        return "record/champions/playerRecord";
+    }
+
+
+
+
+
+
+
+
 
 }

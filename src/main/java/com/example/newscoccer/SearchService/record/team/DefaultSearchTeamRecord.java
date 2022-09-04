@@ -53,14 +53,12 @@ public class DefaultSearchTeamRecord implements SearchTeamRecord{
     @Override
     public SearchTeamRecordResponse searchChampionsTeamRecord(int season) {
         SearchTeamRecordResponse resp = new SearchTeamRecordResponse();
-
         teamChampionsRecordRepository.findTeamBySeason(season)
                 .stream()
                 .forEach(t->{
                     TeamChampionsInfoResponse ret = championsRecordInfo.recordInfo(new TeamChampionsInfoRequest(t.getId(), season));
                     resp.getResultList().add(new TeamRecordDto(ret.getRank(),t.getName(),ret.getWin(),ret.getDraw(),ret.getLose(),ret.getGain(),ret.getLost()));
                 });
-
         sorting(resp.getResultList(),SortType.RANK,Direction.ASC);
         return resp;
     }
