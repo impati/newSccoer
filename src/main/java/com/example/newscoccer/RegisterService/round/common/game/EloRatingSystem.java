@@ -50,6 +50,8 @@ public class EloRatingSystem {
             @Override
             public Void leagueSolved() {
 
+
+
                 List<TeamLeagueRecord> teamRecords = teamLeagueRecordRepository.findByRound(round);
 
                 //팀 레이팅 계산.
@@ -180,6 +182,7 @@ public class EloRatingSystem {
             r += 5*(((double)myGrade / ratingInfo.getAvgGrade()) - 1);
             r = Math.round(r * 100) / 100.0;
             pr.setRating(r);
+            pr.getPlayer().setRating(r);
         });
 
     }
@@ -193,7 +196,9 @@ public class EloRatingSystem {
         if(matchResult  == MatchResult.WIN) w = 1;
         else if(matchResult  == MatchResult.DRAW) w = 0.5;
         double r = team.getRating() + K * (w - we);
+        r = Math.round(r * 100) / 100.0;
         teamRecord.setRating(r);
+        teamRecord.getTeam().setRating(r);
     }
 
 

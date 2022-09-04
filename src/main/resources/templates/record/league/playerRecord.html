@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <div th:insert="~{fragment/header :: header}"></div>
+</head>
+
+<body>
+<div class="container-xxl position-relative bg-white d-flex p-0">
+    <!-- Spinner Start -->
+    <div th:insert="~{fragment/spinner :: spinner}"></div>
+    <!-- Spinner End -->
+    <!-- Sidebar Start -->
+    <div th:insert="~{fragment/sidebar :: sidebar}"></div>
+    <!-- Sidebar End -->
+
+    <!-- Content Start -->
+    <div class="content">
+        <!-- Navbar Start -->
+        <div th:insert="~{fragment/navbar :: navbar}"></div>
+        <!-- Navbar End -->
+
+        <!-- 내용 -->
+
+
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab1" role="tablist">
+                <button class="nav-link  btn btn-outline-primary m-2" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                        aria-selected="true" th:onclick="|location.href='@{/record/league/team}'|"><i class="fa fa-home me-2"></i>팀 순위</button>
+                <button class="nav-link  btn btn-outline-primary m-2" id="nav-profile-tab1" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                        aria-selected="true" th:onclick="|location.href='@{/record/league/player}'|"><i class="fa fa-home me-2"></i>선수 순위</button>
+            </div>
+
+
+            <div class="nav nav-tabs" id="nav-tab2" role="tablist">
+                <button class="nav-link btn btn-secondary rounded-pill m-2" id="nav-home-tab2" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home"
+                        aria-selected="true" th:onclick="|location.href='@{/record/league/1/player(season=${season} ,sortType=${sortType})}'|" >분데스리가</button>
+                <button class="nav-link  btn btn-success rounded-pill m-2" id="nav-profile-tab2" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile"
+                        aria-selected="true" th:onclick="|location.href='@{/record/league/2/player(season=${season},sortType=${sortType})}'|">라리가</button>
+                <button class="nav-link btn btn-danger rounded-pill m-2" id="nav-contact-tab2" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
+                        aria-selected="true" th:onclick="|location.href='@{/record/league/3/player(season=${season},sortType=${sortType})}'|">EPL</button>
+                <button class="nav-link btn btn-warning rounded-pill m-2" id="nav-contact-tab3" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact"
+                        aria-selected="true" th:onclick="|location.href='@{/record/league/4/player(season=${season},sortType=${sortType})}'|">세리에</button>
+            </div>
+        </nav>
+
+
+        <div>
+                <span   th:each ="n : ${#numbers.sequence(0,Seasons)}">
+                <button type="button" class="btn btn-outline-info m-2" th:text="|Season  ${n}|" th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${n},sortType=${sortType})}'|"></button>
+                </span>
+        </div>
+
+        <!--내용 -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-xl-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4"th:text="|${league.name} ${season} 시즌|"></h6>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>선수</th>
+                                <th>소속 팀</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=GOAL)}'|">득점</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=ASSIST)}'|">도움</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=ATTACKPOINT)}'|">공격포인트</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=SHOOTING)}'|">슈팅</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=VALIDSHOOTING)}'|">유효 슈팅</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=FOUL)}'|">파울</th>
+                                <th th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=PASS)}'|">패스</th>
+                                <th  th:onclick="|location.href='@{/record/league/{leagueId}/player(leagueId=${league.id},season=${season},sortType=DEFENSE)}'|">차단</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="recordPlayerLeague,i : ${leaguePlayerRecordResponse}">
+                                <td th:text="${i.count}"></td>
+                                <td th:text="${recordPlayerLeague.playerName}"></td>
+                                <td th:text="${recordPlayerLeague.teamName}"></td>
+                                <td th:text="${recordPlayerLeague.goal}"></td>
+                                <td th:text="${recordPlayerLeague.assist}"></td>
+                                <td th:text="${recordPlayerLeague.attackPoint}"></td>
+                                <td th:text="${recordPlayerLeague.shooting}"></td>
+                                <td th:text="${recordPlayerLeague.validShooting}"></td>
+                                <td th:text="${recordPlayerLeague.foul}"></td>
+                                <td th:text="${recordPlayerLeague.pass}"></td>
+                                <td th:text="${recordPlayerLeague.defense}"></td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+<!--        <div class="row-cols-1">-->
+<!--            <div>-->
+
+<!--                <button type="button" class="btn btn-outline-link m-2" th:text="| <- |" th:unless="${customPage.getStart() == 0}"   th:onclick="|location.href='@{${curUrl} (page=${customPage.getCurPage() - 1})}'|"></button>-->
+
+<!--                <span   th:each ="n : ${#numbers.sequence(customPage.getStart(),customPage.getEnd())}">-->
+<!--                        <button type="button" class="btn btn-outline-dark m-2"  aria-pressed="true" th:text="|${n}|" th:if="${customPage.getCurPage() == n}" th:onclick="|location.href='@{${curUrl} (page=${n})}'|"></button>-->
+<!--                        <button type="button" class="btn btn-outline-info m-2"  aria-pressed="true" th:text="|${n}|" th:unless="${customPage.getCurPage() == n}" th:onclick="|location.href='@{${curUrl} (page=${n})}'|"></button>-->
+<!--                    </span>-->
+
+<!--                <button type="button" class="btn btn-outline-link m-2"th:text="| -> |" th:unless="${customPage.getEnd() == customPage.getLastPage()}"  th:onclick="|location.href='@{${curUrl} (page=${customPage.getCurPage() + 1})}'|"></button>-->
+
+<!--            </div>-->
+<!--        </div>-->
+
+
+
+        <!-- Footer Start -->
+        <div th:insert="~{fragment/footer :: copy}"></div>
+        <!-- Footer End -->
+    </div>
+    <!-- Content End -->
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+</div>
+<!-- JavaScript Libraries -->
+<div th:insert="~{fragment/libraries :: libraries}"></div>
+<!-- Template Javascript -->
+<script src="/js/main.js"></script>
+</body>
+</html>

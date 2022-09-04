@@ -17,7 +17,10 @@ public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueReco
 
     List<TeamLeagueRecord> findByTeam(Team team);
 
-    @Query("select tlr from  TeamLeagueRecord tlr join tlr.team t on t.id = :team ")
+    @Query("select tlr from  TeamLeagueRecord tlr " +
+            " join tlr.team t on t.id = :team " +
+            " join tlr.round r " +
+            " where r.roundStatus = com.example.newscoccer.domain.Round.RoundStatus.DONE ")
     List<TeamLeagueRecord> findByTeam(@Param("team") Long teamId);
 
     /**
