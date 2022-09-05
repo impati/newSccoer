@@ -48,6 +48,7 @@ public class DefaultTeamChampionsInfo implements EntityRecordInfo<TeamChampionsI
                     resp.getParticipatePlayers().add(new ParticipatePlayer(p.getId(),p.getName(),p.getPosition(),p.getRating(), Math.toIntExact(participate.getParticipateCount())));
                 });
 
+        resp.sortParticipatePlayerByRating();
         return resp;
     }
 }

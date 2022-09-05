@@ -52,6 +52,7 @@ public class DefaultTeamLeagueInfo implements EntityRecordInfo<TeamLeagueInfoReq
                             .add(new ParticipatePlayer(player.getId(),player.getName(),player.getPosition(),player.getRating(), Math.toIntExact(participatePlayer.getParticipateCount())));
                 });
 
+        resp.sortParticipatePlayerByRating();
         return resp;
     }
 }

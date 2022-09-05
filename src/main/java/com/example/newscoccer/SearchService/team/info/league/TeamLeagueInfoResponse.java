@@ -26,7 +26,13 @@ public class TeamLeagueInfoResponse extends DataTransferObject {
     private int diff;
 
     private List<ParticipatePlayer> participatePlayers = new ArrayList<>();
-
+    public void sortParticipatePlayerByRating(){
+        participatePlayers.sort((e1,e2)->{
+            if(e1.getRating() > e2.getRating()) return -1;
+            else if(e1.getRating() == e2.getRating()) return 0;
+            else return 1;
+        });
+    }
 
 }
 
