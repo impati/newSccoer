@@ -1,0 +1,338 @@
+ teamName = 레버쿠젠 rank = 1 win = 20 draw = 15 lose = 10 gain = 66 lost = 50 diff = 16 gameNumber = 45
+ teamName = 함부르크 rank = 2 win = 20 draw = 13 lose = 12 gain = 70 lost = 54 diff = 16 gameNumber = 45
+ teamName = 뒤셀도르트 rank = 3 win = 19 draw = 15 lose = 11 gain = 58 lost = 42 diff = 16 gameNumber = 45
+ teamName = 우니온 베를린 rank = 4 win = 18 draw = 13 lose = 14 gain = 60 lost = 52 diff = 8 gameNumber = 45
+ teamName = 쾰른 rank = 5 win = 19 draw = 10 lose = 16 gain = 59 lost = 63 diff = -4 gameNumber = 45
+ teamName = 호펜하임 rank = 6 win = 17 draw = 14 lose = 14 gain = 52 lost = 45 diff = 7 gameNumber = 45
+ teamName = 묀헨글라트바흐 rank = 7 win = 19 draw = 7 lose = 19 gain = 51 lost = 63 diff = -12 gameNumber = 45
+ teamName = 볼프스부르크 rank = 8 win = 16 draw = 15 lose = 14 gain = 60 lost = 54 diff = 6 gameNumber = 45
+ teamName = 아우크스부르크 rank = 9 win = 16 draw = 14 lose = 15 gain = 62 lost = 67 diff = -5 gameNumber = 45
+ teamName = 마인츠 rank = 10 win = 17 draw = 10 lose = 18 gain = 69 lost = 62 diff = 7 gameNumber = 45
+ teamName = 에센 rank = 11 win = 15 draw = 15 lose = 15 gain = 59 lost = 57 diff = 2 gameNumber = 45
+ teamName = 바이에른 뮌헨 rank = 12 win = 14 draw = 11 lose = 20 gain = 49 lost = 54 diff = -5 gameNumber = 45
+ teamName = 프랑크부르크 rank = 13 win = 12 draw = 17 lose = 16 gain = 44 lost = 56 diff = -12 gameNumber = 45
+ teamName = 도르트문트 rank = 14 win = 13 draw = 12 lose = 20 gain = 57 lost = 63 diff = -6 gameNumber = 45
+ teamName = 라이프치히 rank = 15 win = 12 draw = 12 lose = 21 gain = 57 lost = 68 diff = -11 gameNumber = 45
+ teamName = 슈투트가르트 rank = 16 win = 10 draw = 13 lose = 22 gain = 36 lost = 59 diff = -23 gameNumber = 45
+ teamName = 파리 생제르맹 rank = 1 win = 4 draw = 1 lose = 2 gain = 13 lost = 7 diff = 6
+ teamName = 아틀레티코 마드리드 rank = 2 win = 3 draw = 2 lose = 2 gain = 7 lost = 5 diff = 2
+ teamName = 바르셀로나 rank = 4 win = 4 draw = 1 lose = 1 gain = 7 lost = 5 diff = 2
+ teamName = 리버풀 rank = 4 win = 2 draw = 3 lose = 1 gain = 8 lost = 6 diff = 2
+ teamName = 바이에른 뮌헨 rank = 8 win = 3 draw = 0 lose = 1 gain = 5 lost = 3 diff = 2
+ teamName = 도르트문트 rank = 8 win = 3 draw = 0 lose = 1 gain = 6 lost = 2 diff = 4
+ teamName = 맨체스터 시티 rank = 8 win = 1 draw = 1 lose = 2 gain = 3 lost = 4 diff = -1
+ teamName = 첼시 rank = 8 win = 1 draw = 1 lose = 2 gain = 6 lost = 5 diff = 1
+ teamName = 프랑크부르크 rank = 16 win = 0 draw = 1 lose = 1 gain = 2 lost = 3 diff = -1
+ teamName = 라이프치히 rank = 16 win = 0 draw = 1 lose = 1 gain = 2 lost = 6 diff = -4
+ teamName = 레알 마드리드 rank = 16 win = 0 draw = 1 lose = 1 gain = 1 lost = 2 diff = -1
+ teamName = 세비야 rank = 16 win = 0 draw = 0 lose = 2 gain = 1 lost = 3 diff = -2
+ teamName = 맨체스터 유나이티드 rank = 16 win = 1 draw = 0 lose = 1 gain = 2 lost = 5 diff = -3
+ teamName = 나폴리 rank = 16 win = 0 draw = 1 lose = 1 gain = 2 lost = 3 diff = -1
+ teamName = 밀란 rank = 16 win = 0 draw = 1 lose = 1 gain = 0 lost = 2 diff = -2
+ teamName = 유벤투스 rank = 16 win = 0 draw = 0 lose = 2 gain = 0 lost = 4 diff = -4
+ teamName = 레버쿠젠 rank = 1 win = 20 draw = 15 lose = 10 gain = 66 lost = 50 diff = 16 gameNumber = 45
+ teamName = 함부르크 rank = 2 win = 20 draw = 13 lose = 12 gain = 70 lost = 54 diff = 16 gameNumber = 45
+ teamName = 뒤셀도르트 rank = 3 win = 19 draw = 15 lose = 11 gain = 58 lost = 42 diff = 16 gameNumber = 45
+ teamName = 우니온 베를린 rank = 4 win = 18 draw = 13 lose = 14 gain = 60 lost = 52 diff = 8 gameNumber = 45
+ teamName = 쾰른 rank = 5 win = 19 draw = 10 lose = 16 gain = 59 lost = 63 diff = -4 gameNumber = 45
+ teamName = 호펜하임 rank = 6 win = 17 draw = 14 lose = 14 gain = 52 lost = 45 diff = 7 gameNumber = 45
+ teamName = 묀헨글라트바흐 rank = 7 win = 19 draw = 7 lose = 19 gain = 51 lost = 63 diff = -12 gameNumber = 45
+ teamName = 볼프스부르크 rank = 8 win = 16 draw = 15 lose = 14 gain = 60 lost = 54 diff = 6 gameNumber = 45
+ teamName = 아우크스부르크 rank = 9 win = 16 draw = 14 lose = 15 gain = 62 lost = 67 diff = -5 gameNumber = 45
+ teamName = 마인츠 rank = 10 win = 17 draw = 10 lose = 18 gain = 69 lost = 62 diff = 7 gameNumber = 45
+ teamName = 에센 rank = 11 win = 15 draw = 15 lose = 15 gain = 59 lost = 57 diff = 2 gameNumber = 45
+ teamName = 바이에른 뮌헨 rank = 12 win = 14 draw = 11 lose = 20 gain = 49 lost = 54 diff = -5 gameNumber = 45
+ teamName = 프랑크부르크 rank = 13 win = 12 draw = 17 lose = 16 gain = 44 lost = 56 diff = -12 gameNumber = 45
+ teamName = 도르트문트 rank = 14 win = 13 draw = 12 lose = 20 gain = 57 lost = 63 diff = -6 gameNumber = 45
+ teamName = 라이프치히 rank = 15 win = 12 draw = 12 lose = 21 gain = 57 lost = 68 diff = -11 gameNumber = 45
+ teamName = 슈투트가르트 rank = 16 win = 10 draw = 13 lose = 22 gain = 36 lost = 59 diff = -23 gameNumber = 45
+ teamName = 파리 생제르맹 rank = 1 win = 4 draw = 1 lose = 2 gain = 13 lost = 7 diff = 6
+ teamName = 아틀레티코 마드리드 rank = 2 win = 3 draw = 2 lose = 2 gain = 7 lost = 5 diff = 2
+ teamName = 바르셀로나 rank = 4 win = 4 draw = 1 lose = 1 gain = 7 lost = 5 diff = 2
+ teamName = 리버풀 rank = 4 win = 2 draw = 3 lose = 1 gain = 8 lost = 6 diff = 2
+ teamName = 바이에른 뮌헨 rank = 8 win = 3 draw = 0 lose = 1 gain = 5 lost = 3 diff = 2
+ teamName = 도르트문트 rank = 8 win = 3 draw = 0 lose = 1 gain = 6 lost = 2 diff = 4
+ teamName = 맨체스터 시티 rank = 8 win = 1 draw = 1 lose = 2 gain = 3 lost = 4 diff = -1
+ teamName = 첼시 rank = 8 win = 1 draw = 1 lose = 2 gain = 6 lost = 5 diff = 1
+ teamName = 프랑크부르크 rank = 16 win = 0 draw = 1 lose = 1 gain = 2 lost = 3 diff = -1
+ teamName = 라이프치히 rank = 16 win = 0 draw = 1 lose = 1 gain = 2 lost = 6 diff = -4
+ teamName = 레알 마드리드 rank = 16 win = 0 draw = 1 lose = 1 gain = 1 lost = 2 diff = -1
+ teamName = 세비야 rank = 16 win = 0 draw = 0 lose = 2 gain = 1 lost = 3 diff = -2
+ teamName = 맨체스터 유나이티드 rank = 16 win = 1 draw = 0 lose = 1 gain = 2 lost = 5 diff = -3
+ teamName = 나폴리 rank = 16 win = 0 draw = 1 lose = 1 gain = 2 lost = 3 diff = -1
+ teamName = 밀란 rank = 16 win = 0 draw = 1 lose = 1 gain = 0 lost = 2 diff = -2
+ teamName = 유벤투스 rank = 16 win = 0 draw = 0 lose = 2 gain = 0 lost = 4 diff = -4
+teams = TeamTotalInfoResponse(win=17, draw=11, lose=66, gain=54, lost=57, diff=-3)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=7, pass=6, shooting=6, validShooting=5, foul=0, defense=29, win=17, draw=11, lose=21, isBest=0, avgGrade=0.0, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=11, assist=0, pass=500, shooting=13, validShooting=13, foul=267, defense=192, win=17, draw=11, lose=21, isBest=0, avgGrade=14.96, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=0, pass=540, shooting=11, validShooting=8, foul=175, defense=227, win=17, draw=11, lose=21, isBest=3, avgGrade=13.59, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=30, assist=3, pass=513, shooting=259, validShooting=68, foul=216, defense=202, win=17, draw=11, lose=21, isBest=39, avgGrade=64.1, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=5, pass=768, shooting=2, validShooting=2, foul=25, defense=1030, win=17, draw=11, lose=21, isBest=3, avgGrade=24.08, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=664, shooting=3, validShooting=0, foul=29, defense=979, win=17, draw=11, lose=21, isBest=2, avgGrade=21.84, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=7, pass=736, shooting=6, validShooting=2, foul=60, defense=925, win=17, draw=11, lose=21, isBest=4, avgGrade=23.63, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=0, pass=745, shooting=5, validShooting=2, foul=47, defense=892, win=17, draw=11, lose=21, isBest=0, avgGrade=22.02, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=2, pass=891, shooting=16, validShooting=4, foul=52, defense=683, win=17, draw=11, lose=21, isBest=0, avgGrade=16.98, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=5, pass=990, shooting=11, validShooting=7, foul=250, defense=511, win=17, draw=11, lose=21, isBest=0, avgGrade=16.12, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=2, pass=959, shooting=15, validShooting=13, foul=82, defense=621, win=17, draw=11, lose=21, isBest=0, avgGrade=18.1, gameNumber=49)
+teams = TeamTotalInfoResponse(win=16, draw=12, lose=66, gain=63, lost=65, diff=-2)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=6, pass=7, shooting=3, validShooting=0, foul=0, defense=30, win=16, draw=12, lose=21, isBest=0, avgGrade=0.0, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=3, pass=507, shooting=13, validShooting=9, foul=215, defense=220, win=16, draw=12, lose=21, isBest=0, avgGrade=13.8, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=12, assist=1, pass=536, shooting=20, validShooting=16, foul=316, defense=194, win=16, draw=12, lose=21, isBest=1, avgGrade=17.43, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=1, pass=464, shooting=14, validShooting=10, foul=276, defense=170, win=16, draw=12, lose=21, isBest=0, avgGrade=13.08, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=1, pass=694, shooting=5, validShooting=2, foul=66, defense=816, win=16, draw=12, lose=21, isBest=2, avgGrade=20.51, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=3, pass=748, shooting=5, validShooting=2, foul=45, defense=900, win=16, draw=12, lose=21, isBest=2, avgGrade=22.43, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=5, pass=849, shooting=4, validShooting=2, foul=49, defense=751, win=16, draw=12, lose=21, isBest=3, avgGrade=19.02, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=2, pass=1008, shooting=4, validShooting=3, foul=34, defense=1010, win=16, draw=12, lose=21, isBest=4, avgGrade=25.67, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=10, pass=972, shooting=15, validShooting=9, foul=89, defense=665, win=16, draw=12, lose=21, isBest=1, avgGrade=19.14, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=1, pass=998, shooting=11, validShooting=8, foul=172, defense=541, win=16, draw=12, lose=21, isBest=1, avgGrade=16.31, gameNumber=49)
+playerInfo = PlayerTotalInfoResponse(goal=32, assist=3, pass=826, shooting=251, validShooting=74, foul=102, defense=597, win=16, draw=12, lose=21, isBest=37, avgGrade=50.59, gameNumber=49)
+teams = TeamTotalInfoResponse(win=20, draw=15, lose=57, gain=66, lost=50, diff=16)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=6, pass=3, shooting=4, validShooting=1, foul=0, defense=37, win=20, draw=15, lose=10, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=0, pass=454, shooting=14, validShooting=7, foul=159, defense=197, win=20, draw=15, lose=10, isBest=0, avgGrade=13.33, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=2, pass=555, shooting=14, validShooting=11, foul=238, defense=161, win=20, draw=15, lose=10, isBest=0, avgGrade=16.36, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=35, assist=2, pass=468, shooting=253, validShooting=76, foul=141, defense=175, win=20, draw=15, lose=10, isBest=39, avgGrade=70.93, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=2, pass=931, shooting=2, validShooting=2, foul=42, defense=719, win=20, draw=15, lose=10, isBest=1, avgGrade=18.71, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=2, pass=812, shooting=4, validShooting=2, foul=28, defense=718, win=20, draw=15, lose=10, isBest=2, avgGrade=19.73, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=6, pass=690, shooting=1, validShooting=0, foul=45, defense=772, win=20, draw=15, lose=10, isBest=1, avgGrade=18.56, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=4, pass=801, shooting=2, validShooting=2, foul=27, defense=782, win=20, draw=15, lose=10, isBest=1, avgGrade=20.4, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=9, pass=859, shooting=9, validShooting=7, foul=108, defense=529, win=20, draw=15, lose=10, isBest=0, avgGrade=17.04, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=1, pass=845, shooting=19, validShooting=12, foul=93, defense=596, win=20, draw=15, lose=10, isBest=0, avgGrade=18.84, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=4, pass=945, shooting=11, validShooting=8, foul=140, defense=562, win=20, draw=15, lose=10, isBest=1, avgGrade=17.87, gameNumber=45)
+teams = TeamTotalInfoResponse(win=18, draw=13, lose=61, gain=60, lost=52, diff=8)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=7, pass=7, shooting=3, validShooting=2, foul=0, defense=30, win=18, draw=13, lose=14, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=1, pass=466, shooting=23, validShooting=17, foul=178, defense=185, win=18, draw=13, lose=14, isBest=0, avgGrade=18.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=1, pass=484, shooting=14, validShooting=8, foul=246, defense=179, win=18, draw=13, lose=14, isBest=2, avgGrade=14.11, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=10, assist=0, pass=511, shooting=18, validShooting=13, foul=272, defense=172, win=18, draw=13, lose=14, isBest=1, avgGrade=16.93, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=1, pass=953, shooting=2, validShooting=2, foul=21, defense=906, win=18, draw=13, lose=14, isBest=2, avgGrade=22.98, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=1, pass=749, shooting=0, validShooting=0, foul=21, defense=814, win=18, draw=13, lose=14, isBest=0, avgGrade=18.6, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=5, pass=889, shooting=2, validShooting=1, foul=42, defense=693, win=18, draw=13, lose=14, isBest=1, avgGrade=19.62, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=1, pass=680, shooting=4, validShooting=3, foul=28, defense=1058, win=18, draw=13, lose=14, isBest=2, avgGrade=28.22, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=5, pass=836, shooting=12, validShooting=9, foul=127, defense=483, win=18, draw=13, lose=14, isBest=0, avgGrade=16.24, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=3, pass=829, shooting=11, validShooting=4, foul=104, defense=491, win=18, draw=13, lose=14, isBest=0, avgGrade=15.2, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=33, assist=9, pass=996, shooting=263, validShooting=84, foul=66, defense=577, win=18, draw=13, lose=14, isBest=37, avgGrade=59.78, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+teams = TeamTotalInfoResponse(win=12, draw=18, lose=62, gain=46, lost=59, diff=-13)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=8, pass=3, shooting=3, validShooting=2, foul=0, defense=17, win=12, draw=18, lose=17, isBest=0, avgGrade=0.0, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=10, assist=3, pass=548, shooting=20, validShooting=13, foul=216, defense=202, win=12, draw=18, lose=17, isBest=0, avgGrade=17.53, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=1, pass=544, shooting=21, validShooting=14, foul=205, defense=214, win=12, draw=18, lose=17, isBest=0, avgGrade=17.62, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=9, assist=1, pass=564, shooting=19, validShooting=14, foul=274, defense=167, win=12, draw=18, lose=17, isBest=0, avgGrade=17.4, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=3, pass=688, shooting=5, validShooting=0, foul=29, defense=840, win=12, draw=18, lose=17, isBest=0, avgGrade=20.85, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=16, assist=1, pass=790, shooting=245, validShooting=48, foul=30, defense=896, win=12, draw=18, lose=17, isBest=47, avgGrade=158.3, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=6, pass=612, shooting=2, validShooting=1, foul=35, defense=794, win=12, draw=18, lose=17, isBest=0, avgGrade=19.32, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=2, pass=926, shooting=3, validShooting=1, foul=21, defense=997, win=12, draw=18, lose=17, isBest=0, avgGrade=24.81, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=0, pass=1010, shooting=14, validShooting=9, foul=218, defense=465, win=12, draw=18, lose=17, isBest=0, avgGrade=16.72, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=2, pass=900, shooting=14, validShooting=9, foul=193, defense=565, win=12, draw=18, lose=17, isBest=0, avgGrade=17.06, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=5, pass=787, shooting=17, validShooting=11, foul=98, defense=587, win=12, draw=18, lose=17, isBest=0, avgGrade=17.3, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+teams = TeamTotalInfoResponse(win=19, draw=10, lose=61, gain=59, lost=63, diff=-4)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=8, pass=22, shooting=0, validShooting=0, foul=0, defense=15, win=19, draw=10, lose=16, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=35, assist=1, pass=458, shooting=249, validShooting=78, foul=219, defense=182, win=19, draw=10, lose=16, isBest=40, avgGrade=70.76, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=1, pass=453, shooting=10, validShooting=5, foul=210, defense=167, win=19, draw=10, lose=16, isBest=0, avgGrade=11.58, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=0, pass=471, shooting=12, validShooting=7, foul=338, defense=185, win=19, draw=10, lose=16, isBest=0, avgGrade=13.07, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=1, pass=564, shooting=8, validShooting=4, foul=42, defense=653, win=19, draw=10, lose=16, isBest=2, avgGrade=21.31, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=2, pass=620, shooting=3, validShooting=2, foul=38, defense=797, win=19, draw=10, lose=16, isBest=2, avgGrade=21.09, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=5, pass=644, shooting=2, validShooting=2, foul=33, defense=921, win=19, draw=10, lose=16, isBest=0, avgGrade=23.82, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=3, pass=805, shooting=1, validShooting=1, foul=22, defense=876, win=19, draw=10, lose=16, isBest=0, avgGrade=21.47, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=3, pass=970, shooting=16, validShooting=10, foul=93, defense=535, win=19, draw=10, lose=16, isBest=0, avgGrade=18.62, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=6, pass=854, shooting=15, validShooting=11, foul=206, defense=512, win=19, draw=10, lose=16, isBest=0, avgGrade=17.71, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=3, pass=827, shooting=14, validShooting=9, foul=62, defense=543, win=19, draw=10, lose=16, isBest=1, avgGrade=17.22, gameNumber=45)
+teams = TeamTotalInfoResponse(win=12, draw=13, lose=67, gain=59, lost=74, diff=-15)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=4, pass=7, shooting=2, validShooting=0, foul=0, defense=25, win=12, draw=13, lose=22, isBest=0, avgGrade=0.0, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=3, pass=535, shooting=13, validShooting=9, foul=405, defense=156, win=12, draw=13, lose=22, isBest=0, avgGrade=14.45, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=12, assist=0, pass=530, shooting=21, validShooting=13, foul=199, defense=177, win=12, draw=13, lose=22, isBest=0, avgGrade=17.15, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=1, pass=426, shooting=10, validShooting=6, foul=319, defense=180, win=12, draw=13, lose=22, isBest=0, avgGrade=11.09, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=2, pass=824, shooting=1, validShooting=0, foul=29, defense=798, win=12, draw=13, lose=22, isBest=0, avgGrade=17.91, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=8, pass=717, shooting=3, validShooting=2, foul=29, defense=961, win=12, draw=13, lose=22, isBest=0, avgGrade=24.36, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=7, pass=738, shooting=1, validShooting=1, foul=26, defense=906, win=12, draw=13, lose=22, isBest=0, avgGrade=21.53, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=23, assist=2, pass=751, shooting=237, validShooting=62, foul=41, defense=782, win=12, draw=13, lose=22, isBest=47, avgGrade=160.15, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=6, pass=870, shooting=16, validShooting=9, foul=65, defense=601, win=12, draw=13, lose=22, isBest=0, avgGrade=18.09, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=2, pass=932, shooting=16, validShooting=10, foul=253, defense=527, win=12, draw=13, lose=22, isBest=0, avgGrade=17.45, gameNumber=47)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=2, pass=733, shooting=14, validShooting=9, foul=84, defense=600, win=12, draw=13, lose=22, isBest=0, avgGrade=16.17, gameNumber=47)
+teams = TeamTotalInfoResponse(win=17, draw=14, lose=59, gain=52, lost=45, diff=7)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=5, pass=22, shooting=1, validShooting=1, foul=0, defense=49, win=17, draw=14, lose=14, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=2, pass=492, shooting=20, validShooting=14, foul=174, defense=204, win=17, draw=14, lose=14, isBest=2, avgGrade=17.13, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=5, pass=502, shooting=11, validShooting=7, foul=295, defense=171, win=17, draw=14, lose=14, isBest=0, avgGrade=13.67, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=0, pass=492, shooting=14, validShooting=10, foul=272, defense=207, win=17, draw=14, lose=14, isBest=1, avgGrade=15.24, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=4, pass=623, shooting=1, validShooting=0, foul=49, defense=744, win=17, draw=14, lose=14, isBest=0, avgGrade=17.78, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=3, pass=675, shooting=3, validShooting=3, foul=29, defense=790, win=17, draw=14, lose=14, isBest=4, avgGrade=21.69, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=3, pass=692, shooting=2, validShooting=2, foul=58, defense=608, win=17, draw=14, lose=14, isBest=2, avgGrade=16.16, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=3, pass=633, shooting=4, validShooting=2, foul=49, defense=771, win=17, draw=14, lose=14, isBest=3, avgGrade=20.98, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=2, pass=745, shooting=11, validShooting=10, foul=95, defense=603, win=17, draw=14, lose=14, isBest=1, avgGrade=16.69, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=29, assist=3, pass=781, shooting=238, validShooting=65, foul=83, defense=541, win=17, draw=14, lose=14, isBest=34, avgGrade=51.36, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=0, pass=926, shooting=12, validShooting=10, foul=126, defense=466, win=17, draw=14, lose=14, isBest=0, avgGrade=16.67, gameNumber=45)
+teams = TeamTotalInfoResponse(win=19, draw=15, lose=58, gain=58, lost=42, diff=16)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=6, pass=3, shooting=2, validShooting=1, foul=0, defense=25, win=19, draw=15, lose=11, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=1, pass=544, shooting=12, validShooting=6, foul=187, defense=155, win=19, draw=15, lose=11, isBest=0, avgGrade=13.6, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=10, assist=0, pass=418, shooting=13, validShooting=11, foul=203, defense=161, win=19, draw=15, lose=11, isBest=0, avgGrade=13.91, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=2, pass=460, shooting=11, validShooting=8, foul=198, defense=184, win=19, draw=15, lose=11, isBest=1, avgGrade=13.22, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=5, pass=642, shooting=2, validShooting=1, foul=38, defense=823, win=19, draw=15, lose=11, isBest=1, avgGrade=20.76, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=0, pass=760, shooting=3, validShooting=1, foul=21, defense=787, win=19, draw=15, lose=11, isBest=1, avgGrade=20.02, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=4, pass=617, shooting=1, validShooting=1, foul=29, defense=874, win=19, draw=15, lose=11, isBest=2, avgGrade=21.4, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=8, pass=594, shooting=7, validShooting=3, foul=29, defense=852, win=19, draw=15, lose=11, isBest=5, avgGrade=25.38, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=35, assist=0, pass=755, shooting=243, validShooting=80, foul=227, defense=514, win=19, draw=15, lose=11, isBest=34, avgGrade=53.18, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=1, pass=889, shooting=11, validShooting=4, foul=60, defense=624, win=19, draw=15, lose=11, isBest=1, avgGrade=17.42, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=0, pass=875, shooting=10, validShooting=8, foul=200, defense=475, win=19, draw=15, lose=11, isBest=0, avgGrade=15.6, gameNumber=45)
+teams = TeamTotalInfoResponse(win=17, draw=10, lose=63, gain=69, lost=62, diff=7)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=9, pass=3, shooting=1, validShooting=1, foul=0, defense=22, win=17, draw=10, lose=18, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=36, assist=2, pass=399, shooting=260, validShooting=78, foul=446, defense=150, win=17, draw=10, lose=18, isBest=41, avgGrade=71.27, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=2, pass=506, shooting=16, validShooting=15, foul=239, defense=190, win=17, draw=10, lose=18, isBest=0, avgGrade=17.18, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=3, pass=501, shooting=16, validShooting=10, foul=210, defense=181, win=17, draw=10, lose=18, isBest=0, avgGrade=15.69, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=6, pass=767, shooting=4, validShooting=2, foul=33, defense=826, win=17, draw=10, lose=18, isBest=0, avgGrade=22.58, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=2, pass=756, shooting=5, validShooting=4, foul=12, defense=887, win=17, draw=10, lose=18, isBest=3, avgGrade=25.42, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=10, pass=762, shooting=3, validShooting=1, foul=36, defense=828, win=17, draw=10, lose=18, isBest=2, avgGrade=22.76, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=1, pass=735, shooting=3, validShooting=1, foul=44, defense=808, win=17, draw=10, lose=18, isBest=1, avgGrade=20.49, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=8, assist=0, pass=847, shooting=20, validShooting=15, foul=178, defense=449, win=17, draw=10, lose=18, isBest=0, avgGrade=17.31, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=3, pass=877, shooting=21, validShooting=9, foul=197, defense=451, win=17, draw=10, lose=18, isBest=0, avgGrade=17.18, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=0, pass=826, shooting=13, validShooting=9, foul=138, defense=488, win=17, draw=10, lose=18, isBest=0, avgGrade=16.11, gameNumber=45)
+teams = TeamTotalInfoResponse(win=16, draw=15, lose=59, gain=60, lost=54, diff=6)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=5, pass=9, shooting=4, validShooting=2, foul=1, defense=29, win=16, draw=15, lose=14, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=39, assist=0, pass=548, shooting=251, validShooting=86, foul=288, defense=180, win=16, draw=15, lose=14, isBest=41, avgGrade=75.36, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=2, pass=480, shooting=12, validShooting=6, foul=193, defense=169, win=16, draw=15, lose=14, isBest=0, avgGrade=12.91, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=0, pass=469, shooting=21, validShooting=13, foul=254, defense=188, win=16, draw=15, lose=14, isBest=1, avgGrade=16.49, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=4, pass=842, shooting=2, validShooting=1, foul=38, defense=806, win=16, draw=15, lose=14, isBest=0, avgGrade=21.2, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=5, pass=739, shooting=3, validShooting=3, foul=34, defense=781, win=16, draw=15, lose=14, isBest=1, avgGrade=21.6, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=2, pass=714, shooting=1, validShooting=0, foul=42, defense=835, win=16, draw=15, lose=14, isBest=0, avgGrade=19.69, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=2, pass=816, shooting=4, validShooting=1, foul=17, defense=1023, win=16, draw=15, lose=14, isBest=3, avgGrade=27.11, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=1, pass=847, shooting=8, validShooting=5, foul=89, defense=493, win=16, draw=15, lose=14, isBest=0, avgGrade=15.2, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=2, pass=897, shooting=11, validShooting=6, foul=227, defense=434, win=16, draw=15, lose=14, isBest=0, avgGrade=15.36, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=9, assist=5, pass=635, shooting=17, validShooting=13, foul=97, defense=443, win=16, draw=15, lose=14, isBest=0, avgGrade=15.44, gameNumber=45)
+teams = TeamTotalInfoResponse(win=19, draw=7, lose=64, gain=51, lost=63, diff=-12)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=6, pass=8, shooting=1, validShooting=0, foul=0, defense=28, win=19, draw=7, lose=19, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=3, pass=477, shooting=12, validShooting=7, foul=419, defense=148, win=19, draw=7, lose=19, isBest=0, avgGrade=13.33, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=2, pass=504, shooting=15, validShooting=9, foul=118, defense=212, win=19, draw=7, lose=19, isBest=0, avgGrade=15.09, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=1, pass=409, shooting=9, validShooting=5, foul=297, defense=168, win=19, draw=7, lose=19, isBest=0, avgGrade=10.82, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=777, shooting=3, validShooting=1, foul=22, defense=870, win=19, draw=7, lose=19, isBest=0, avgGrade=21.96, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=2, pass=696, shooting=5, validShooting=3, foul=41, defense=718, win=19, draw=7, lose=19, isBest=0, avgGrade=20.8, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=25, assist=4, pass=618, shooting=232, validShooting=62, foul=28, defense=746, win=19, draw=7, lose=19, isBest=45, avgGrade=164.49, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=0, pass=577, shooting=4, validShooting=1, foul=87, defense=687, win=19, draw=7, lose=19, isBest=0, avgGrade=18.09, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=3, pass=713, shooting=7, validShooting=6, foul=66, defense=646, win=19, draw=7, lose=19, isBest=0, avgGrade=16.18, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=4, pass=825, shooting=9, validShooting=7, foul=62, defense=669, win=19, draw=7, lose=19, isBest=0, avgGrade=17.82, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=2, pass=868, shooting=12, validShooting=9, foul=68, defense=719, win=19, draw=7, lose=19, isBest=0, avgGrade=19.02, gameNumber=45)
+teams = TeamTotalInfoResponse(win=16, draw=14, lose=60, gain=62, lost=67, diff=-5)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=1, pass=5, shooting=1, validShooting=1, foul=0, defense=16, win=16, draw=14, lose=15, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=0, pass=525, shooting=17, validShooting=11, foul=235, defense=197, win=16, draw=14, lose=15, isBest=0, avgGrade=15.96, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=1, pass=517, shooting=11, validShooting=8, foul=301, defense=180, win=16, draw=14, lose=15, isBest=1, avgGrade=14.33, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=2, pass=538, shooting=16, validShooting=12, foul=191, defense=184, win=16, draw=14, lose=15, isBest=0, avgGrade=16.49, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=9, pass=714, shooting=2, validShooting=2, foul=53, defense=673, win=16, draw=14, lose=15, isBest=2, avgGrade=18.29, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=4, pass=759, shooting=3, validShooting=1, foul=49, defense=770, win=16, draw=14, lose=15, isBest=1, avgGrade=19.84, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=3, pass=670, shooting=3, validShooting=1, foul=78, defense=780, win=16, draw=14, lose=15, isBest=1, avgGrade=20.04, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=3, pass=624, shooting=2, validShooting=2, foul=44, defense=777, win=16, draw=14, lose=15, isBest=4, avgGrade=20.24, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=4, pass=698, shooting=11, validShooting=8, foul=47, defense=606, win=16, draw=14, lose=15, isBest=0, avgGrade=16.4, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=0, pass=786, shooting=10, validShooting=9, foul=296, defense=431, win=16, draw=14, lose=15, isBest=0, avgGrade=14.24, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=39, assist=0, pass=803, shooting=247, validShooting=79, foul=161, defense=530, win=16, draw=14, lose=15, isBest=36, avgGrade=54.47, gameNumber=45)
+teams = TeamTotalInfoResponse(win=10, draw=13, lose=67, gain=36, lost=59, diff=-23)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=3, pass=5, shooting=2, validShooting=0, foul=0, defense=14, win=10, draw=13, lose=22, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=2, pass=476, shooting=18, validShooting=14, foul=172, defense=186, win=10, draw=13, lose=22, isBest=0, avgGrade=16.44, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=1, pass=509, shooting=11, validShooting=7, foul=201, defense=194, win=10, draw=13, lose=22, isBest=0, avgGrade=13.49, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=2, pass=452, shooting=14, validShooting=8, foul=286, defense=154, win=10, draw=13, lose=22, isBest=0, avgGrade=13.07, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=3, pass=746, shooting=2, validShooting=1, foul=31, defense=801, win=10, draw=13, lose=22, isBest=4, avgGrade=20.18, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=2, pass=587, shooting=4, validShooting=3, foul=39, defense=746, win=10, draw=13, lose=22, isBest=3, avgGrade=20.87, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=1, pass=540, shooting=1, validShooting=1, foul=23, defense=886, win=10, draw=13, lose=22, isBest=2, avgGrade=21.56, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=1, pass=730, shooting=0, validShooting=0, foul=30, defense=802, win=10, draw=13, lose=22, isBest=3, avgGrade=18.33, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=3, pass=662, shooting=10, validShooting=9, foul=59, defense=555, win=10, draw=13, lose=22, isBest=0, avgGrade=14.98, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=7, assist=0, pass=740, shooting=16, validShooting=13, foul=143, defense=535, win=10, draw=13, lose=22, isBest=1, avgGrade=16.69, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=18, assist=2, pass=846, shooting=230, validShooting=54, foul=115, defense=511, win=10, draw=13, lose=22, isBest=32, avgGrade=48.36, gameNumber=45)
+teams = TeamTotalInfoResponse(win=20, draw=13, lose=59, gain=70, lost=54, diff=16)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=10, pass=4, shooting=0, validShooting=0, foul=0, defense=12, win=20, draw=13, lose=12, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=42, assist=4, pass=419, shooting=248, validShooting=74, foul=171, defense=176, win=20, draw=13, lose=12, isBest=37, avgGrade=69.73, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=9, assist=0, pass=548, shooting=17, validShooting=14, foul=173, defense=224, win=20, draw=13, lose=12, isBest=0, avgGrade=18.07, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=9, assist=0, pass=517, shooting=17, validShooting=15, foul=465, defense=146, win=20, draw=13, lose=12, isBest=1, avgGrade=17.18, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=6, pass=709, shooting=6, validShooting=3, foul=53, defense=753, win=20, draw=13, lose=12, isBest=2, avgGrade=22.38, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=3, assist=4, pass=692, shooting=6, validShooting=4, foul=47, defense=802, win=20, draw=13, lose=12, isBest=3, avgGrade=23.96, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=0, pass=690, shooting=3, validShooting=2, foul=24, defense=873, win=20, draw=13, lose=12, isBest=2, avgGrade=22.6, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=4, pass=834, shooting=4, validShooting=3, foul=42, defense=835, win=20, draw=13, lose=12, isBest=1, avgGrade=23.27, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=3, pass=849, shooting=10, validShooting=5, foul=73, defense=543, win=20, draw=13, lose=12, isBest=0, avgGrade=16.07, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=9, assist=0, pass=846, shooting=13, validShooting=10, foul=187, defense=470, win=20, draw=13, lose=12, isBest=0, avgGrade=16.24, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=4, pass=846, shooting=11, validShooting=8, foul=52, defense=621, win=20, draw=13, lose=12, isBest=0, avgGrade=17.91, gameNumber=45)
+teams = TeamTotalInfoResponse(win=15, draw=15, lose=60, gain=59, lost=57, diff=2)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=12, pass=5, shooting=2, validShooting=0, foul=0, defense=12, win=15, draw=15, lose=15, isBest=0, avgGrade=0.0, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=35, assist=1, pass=618, shooting=270, validShooting=88, foul=271, defense=172, win=15, draw=15, lose=15, isBest=42, avgGrade=79.33, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=5, assist=2, pass=593, shooting=15, validShooting=11, foul=288, defense=180, win=15, draw=15, lose=15, isBest=0, avgGrade=16.96, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=12, assist=1, pass=566, shooting=21, validShooting=16, foul=140, defense=207, win=15, draw=15, lose=15, isBest=0, avgGrade=19.73, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=0, pass=0, shooting=0, validShooting=0, foul=0, defense=0, win=0, draw=0, lose=0, isBest=0, avgGrade=0.0, gameNumber=0)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=3, pass=833, shooting=3, validShooting=2, foul=77, defense=760, win=15, draw=15, lose=15, isBest=2, avgGrade=20.24, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=1, assist=1, pass=831, shooting=1, validShooting=1, foul=50, defense=769, win=15, draw=15, lose=15, isBest=0, avgGrade=18.71, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=0, assist=5, pass=652, shooting=2, validShooting=1, foul=44, defense=746, win=15, draw=15, lose=15, isBest=0, avgGrade=19.04, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=2, assist=4, pass=727, shooting=6, validShooting=3, foul=30, defense=796, win=15, draw=15, lose=15, isBest=1, avgGrade=23.2, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=6, pass=871, shooting=14, validShooting=8, foul=86, defense=558, win=15, draw=15, lose=15, isBest=0, avgGrade=17.87, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=6, assist=3, pass=685, shooting=18, validShooting=12, foul=63, defense=629, win=15, draw=15, lose=15, isBest=0, avgGrade=17.76, gameNumber=45)
+playerInfo = PlayerTotalInfoResponse(goal=4, assist=0, pass=769, shooting=12, validShooting=9, foul=249, defense=496, win=15, draw=15, lose=15, isBest=0, avgGrade=15.31, gameNumber=45)
+2022-08-25 17:17:24.050  INFO 24420 --- [           main] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@6e6d5d29 testClass = Season1Test, testInstance = com.example.newscoccer.senarioTest.Season1Test@45502ba2, testMethod = seasonRank@Season1Test, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@5c530d1e testClass = Season1Test, locations = '{}', classes = '{class com.example.newscoccer.NewScoccerApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@13d9cbf5, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@74f6c5d8, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@4bbf6d0e, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@13bc8645, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5f20155b, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@6c3f5566], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -> true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -> true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -> false]]
+2022-08-25 17:17:24.077  INFO 24420 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2022-08-25 17:17:24.080  INFO 24420 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2022-08-25 17:17:24.100  INFO 24420 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+Process finished with exit code 0
