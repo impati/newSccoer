@@ -18,14 +18,19 @@ import com.example.newscoccer.controller.form.DirectorForm;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.director.Director;
+import com.example.newscoccer.exception.NotFoundEntity;
 import com.example.newscoccer.springDataJpa.DirectorRepository;
 import com.example.newscoccer.springDataJpa.LeagueRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -65,13 +70,7 @@ public class DirectorController {
      */
     @GetMapping("/register")
     public String directorRegisterPage(Model model){
-        List<Team> teamList = teamRepository.findAll();
-
-        Team team = Team.createTeam(null,"팀 없음");
-        team.setId(null);
-        teamList.add(team);
-
-        model.addAttribute("teamList",teamList);
+        model.addAttribute("teamList",getTeamList());
         model.addAttribute("directorForm",new DirectorForm());
         return "director/register";
     }
@@ -79,10 +78,33 @@ public class DirectorController {
      * 감독 등록
      */
     @PostMapping("/register")
-    public String directorRegister(@ModelAttribute DirectorForm directorForm){
+    public String directorRegister(@Validated  @ModelAttribute DirectorForm directorForm,
+                                   BindingResult bindingResult, Model model){
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("teamList",getTeamList());
+            return "director/register";
+        }
         directorUpdate.directorSave(directorForm.getDirectorName(),directorForm.getTeamId());
         return "redirect:/director/directors";
     }
+
+    /**
+     * 팀 전체 리스트와
+     * {
+     *      리그 : null ,
+     *      id : null
+     * }
+     * 인 팀을 저장한 후 리턴
+     * @return
+     */
+    private List<Team> getTeamList(){
+        List<Team> teamList = teamRepository.findAll();
+        Team team = Team.createTeam(null,"팀 없음");
+        team.setId(null);
+        teamList.add(team);
+        return teamList;
+    }
+
 
     @GetMapping("/directors")
     public String directorList(@ModelAttribute DirectorSearchRequest directorSearchRequest ,Model model){
@@ -111,25 +133,24 @@ public class DirectorController {
     @GetMapping("/edit/{directorId}")
     public String directorEditPage(@PathVariable Long directorId  , Model model){
         Director director = directorRepository.findById(directorId).orElse(null);
+        if(director == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"감독이 없습니다",new NotFoundEntity("감독이 없음"));
+
         DirectorForm directorForm = new DirectorForm();
         directorForm.setDirectorName(director.getName());
         if(director.getTeam()!=null)directorForm.setTeamId(director.getTeam().getId());
 
         model.addAttribute("directorForm",directorForm);
 
-        List<Team> teamList = teamRepository.findAll();
-        Team team = Team.createTeam(null,"팀 없음");
-        team.setId(null);
-        teamList.add(team);
-
-        model.addAttribute("teamList",teamList);
-
+        model.addAttribute("teamList",getTeamList());
         return "director/edit";
     }
 
-
     @PostMapping("/edit/{directorId}")
-    public String directorEdit(@PathVariable Long directorId,@ModelAttribute DirectorForm directorForm){
+    public String directorEdit(@PathVariable Long directorId,@Validated @ModelAttribute DirectorForm directorForm,BindingResult bindingResult , Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("teamList",getTeamList());
+            return "director/edit";
+        }
         directorUpdate.directorEdit(directorId,directorForm.getDirectorName(),directorForm.getTeamId());
         return "redirect:/director/edit/"+directorId;
     }

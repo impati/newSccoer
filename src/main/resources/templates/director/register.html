@@ -31,6 +31,10 @@
                 <label for="exampleInputEmail1" class="form-label">이름</label>
                 <input type="text" th:field="*{directorName}" class="form-control" id="exampleInputEmail1"
                        aria-describedby="emailHelp">
+                <!--오류 처리-->
+                <div class="field-error" th:errors="*{directorName}">
+                  이름 오류
+                </div>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                 </div>
               </div>
