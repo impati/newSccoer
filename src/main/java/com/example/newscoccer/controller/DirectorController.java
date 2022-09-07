@@ -25,6 +25,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -79,7 +81,11 @@ public class DirectorController {
      * 감독 등록
      */
     @PostMapping("/register")
-    public String directorRegister(@ModelAttribute DirectorForm directorForm){
+    public String directorRegister(@Validated  @ModelAttribute DirectorForm directorForm,
+                                   BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "director/register";
+        }
         directorUpdate.directorSave(directorForm.getDirectorName(),directorForm.getTeamId());
         return "redirect:/director/directors";
     }
