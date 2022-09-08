@@ -19,14 +19,19 @@ import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.SeasonUtils;
 import com.example.newscoccer.domain.Team;
+import com.example.newscoccer.exception.NotFoundEntity;
 import com.example.newscoccer.springDataJpa.LeagueRepository;
 import com.example.newscoccer.springDataJpa.PlayerRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -77,7 +82,14 @@ public class PlayerController {
      * 선수 등록
      */
     @PostMapping("/register")
-    public String playerRegister(@ModelAttribute PlayerUpdateDto playerUpdateDto){
+    public String playerRegister(@Validated @ModelAttribute PlayerUpdateDto playerUpdateDto,
+                                 BindingResult bindingResult , Model model){
+        if(bindingResult.hasErrors()){
+            model.addAttribute("teamList",teamRepository.findAll());
+            model.addAttribute("positionList",Position.values());
+            bindingResult.reject(null,"능력치는 0 부터 120 값을 가집니다.");
+            return "player/register";
+        }
         playerUpdate.registerPlayer(playerUpdateDto);
         return "redirect:/player/players";
     }
@@ -93,10 +105,6 @@ public class PlayerController {
         model.addAttribute("leagueList",leagueRepository.findAll());
         if(playerSearchRequest.getLeagueId() != null)
             model.addAttribute("teams",teamRepository.findByLeague(playerSearchRequest.getLeagueId()));
-
-        log.info("name = {} , leagueId = {} , teamId = {} , PositionList = {}" ,
-                playerSearchRequest.getPlayerName(),playerSearchRequest.getLeagueId(),
-                playerSearchRequest.getTeamId(),playerSearchRequest.getPositions());
 
         model.addAttribute("playerSearchResponse",playerSearch.playerSearch(playerSearchRequest));
         return "player/players";
@@ -138,6 +146,8 @@ public class PlayerController {
         PlayerUpdateDto playerUpdateDto = new PlayerUpdateDto();
 
         Player player = playerRepository.findById(playerId).orElse(null);
+        if(player == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"선수가 없습니다.", new NotFoundEntity("선수가 없습니다."));
+
         playerUpdateDto.settingData(player);
 
         model.addAttribute("playerUpdateDto",playerUpdateDto);

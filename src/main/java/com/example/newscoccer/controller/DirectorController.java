@@ -79,14 +79,9 @@ public class DirectorController {
      */
     @PostMapping("/register")
     public String directorRegister(@Validated  @ModelAttribute DirectorForm directorForm,
-<<<<<<< HEAD
-                                   BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-=======
                                    BindingResult bindingResult, Model model){
         if(bindingResult.hasErrors()) {
             model.addAttribute("teamList",getTeamList());
->>>>>>> badd74ca18cd65f16c98f86c1ad38808a1e90884
             return "director/register";
         }
         directorUpdate.directorSave(directorForm.getDirectorName(),directorForm.getTeamId());

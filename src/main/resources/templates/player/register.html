@@ -30,6 +30,10 @@
                                 <label for="exampleInputEmail1" class="form-label">이름</label>
                                 <input type="text" th:field="*{name}" class="form-control" id="exampleInputEmail1"
                                        aria-describedby="emailHelp">
+                                <div class="field-error" th:errors="*{name}">
+                                    수량 오류
+                                </div>
+
                                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.
                                 </div>
                             </div>
@@ -144,6 +148,11 @@
 
                                 <span class="input-group-text col-1 " id="basic-addon28">센스</span>
                                 <input type="text" class="col-1" th:field ="*{sense}"  aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                            <div th:if="${#fields.hasGlobalErrors()}">
+                                <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+                                   th:text="${err}">글로벌 오류 메시지</p>
                             </div>
 
 
