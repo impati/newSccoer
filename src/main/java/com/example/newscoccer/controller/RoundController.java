@@ -28,9 +28,11 @@ import com.example.newscoccer.springDataJpa.LeagueRepository;
 import com.example.newscoccer.springDataJpa.RoundRepository;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,12 +66,18 @@ public class RoundController {
     private final RoundRepository roundRepository;
     private final GoalAssistPair goalAssistPair;
     private final GoalAssistPairSearch goalAssistPairSearch;
+
+    /**
+     * season , roundSt 가 정상 입력이 아닌 경우 : 빈 정보  vs  NotFound
+     */
     @GetMapping("/league")
     public String leagueRound(@RequestParam(required = false) Integer season,
                               @RequestParam(required = false) Integer roundSt,
                               Model model){
         if(season == null) season = SeasonUtils.currentSeason;
         if(roundSt == null) roundSt = SeasonUtils.currentLeagueRoundSt;
+        if(season < 0 || season > SeasonUtils.currentSeason) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if(roundSt < 0 || roundSt > SeasonUtils.lastLeagueRoundSt) throw  new ResponseStatusException(HttpStatus.NOT_FOUND);
         model.addAttribute("season",season);
         model.addAttribute("roundSt",roundSt);
         model.addAttribute("Seasons",SeasonUtils.currentSeason);
@@ -102,6 +110,8 @@ public class RoundController {
 
         if(season == null) season = SeasonUtils.currentSeason;
         if(roundSt == null) roundSt = SeasonUtils.currentChampionsRoundSt;
+        if(season < 0 || season > SeasonUtils.currentSeason) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        if(roundSt % 2 != 0 ||  roundSt > 16) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         model.addAttribute("roundSt",roundSt);
         model.addAttribute("season",season);
         model.addAttribute("Seasons",SeasonUtils.currentSeason);
