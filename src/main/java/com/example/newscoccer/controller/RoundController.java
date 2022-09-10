@@ -33,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,6 +67,7 @@ public class RoundController {
     private final RoundRepository roundRepository;
     private final GoalAssistPair goalAssistPair;
     private final GoalAssistPairSearch goalAssistPairSearch;
+    private final static String lineUpErrorMessage = "경기에 참가할 수 있는 선수는 11명이며 골기퍼는 반드시 한명이 있어야 합니다.";
 
     /**
      * season , roundSt 가 정상 입력이 아닌 경우 : 빈 정보  vs  NotFound
@@ -128,8 +130,10 @@ public class RoundController {
      * 라인업 페이지
      */
     @GetMapping(value = {"/line-up/{roundId}"})
-    public String lineUpPage(@PathVariable Long roundId ,Model model){
+    public String lineUpPage(@PathVariable Long roundId ,
+                             @RequestParam(required = false,value ="error-message")Boolean errorMessage ,Model model){
 
+        model.addAttribute("errorMessage",errorMessage == null ? null :lineUpErrorMessage);
         model.addAttribute("roundId",roundId);
         model.addAttribute("positionList", Position.values());
         RoundLineUpResponse resp = roundLineUp.lineUp(new RoundLineUpRequest(roundId));
@@ -139,20 +143,38 @@ public class RoundController {
     }
 
     /*
+     *
+     *
+     *
      * 라인업 저장
-     * @return
+     *
+     * A팀 11명 , B팀 11명 , 각각 골기퍼는 한명씩만 .
+     *
+     *
+     * - 주요기능 :newData 와 original 를 비교해서  lineUpRegister 에 전달.
+     * - validation : A 팀 : 11 , B 팀 : 11 이러한 과정 중 A팀 인덱스 보다 적은 수가 11명 선택 ,  A 팀 인덱스보다 큰 수가 11명 선택 -> value = 11110
+     *              : 골기퍼 한명씩 , 11명 이하일때 , 이상일 때 각각 한명씩 있는지 확인 후 10010 나와야함.
      */
     @PostMapping(value = {"/line-up/{roundId}"})
-    public String lineUp(@PathVariable Long roundId,@ModelAttribute NewData newData){
-         NewData original = new NewData(roundLineUp.lineUp(new RoundLineUpRequest(roundId)));
+    public String lineUp(@PathVariable Long roundId, @ModelAttribute NewData newData , RedirectAttributes redirectAttributes){
+        RoundLineUpResponse resp = roundLineUp.lineUp(new RoundLineUpRequest(roundId));
+        NewData original = new NewData(resp);
         LineUpResultDto lineUpResultDto = new LineUpResultDto();
         lineUpResultDto.setRoundId(roundId);
-
-        newData.getJoinPlayer().stream().forEach(p->{
+        int hasError = 0;
+        for (var p : newData.getJoinPlayer()) {
             int index = original.getJoinPlayer().indexOf(p);
             Position position = newData.getJoinPosition().get(index);
-            lineUpResultDto.getParticipatePlayer().add( new LineUpResult(p,position));
-        });
+            if(index < resp.getPlayerListA().size()) hasError += 10;
+            else hasError += 1000;
+            lineUpResultDto.addParticipatePlayer(new LineUpResult(p,position));
+        }
+
+        if(lineUpResultDto.getValue() != 10010) hasError += 1;
+        if(hasError != 11110){
+            redirectAttributes.addAttribute("error-message",true);
+            return "redirect:/round/line-up/" + roundId;
+        }
 
         lineUpRegister.lineUpRegister(lineUpResultDto);
          return "redirect:/round/line-up/" + roundId;
@@ -294,8 +316,8 @@ public class RoundController {
     @Data
     @NoArgsConstructor
     static class NewData{
-        List<Position> joinPosition = new ArrayList<>();
-        List<Long> joinPlayer = new ArrayList<>();
+        private List<Position> joinPosition = new ArrayList<>();
+        private List<Long> joinPlayer = new ArrayList<>();
 
         public NewData(RoundLineUpResponse resp) {
             resp.getPlayerListA().stream().forEach(p->{
@@ -304,6 +326,7 @@ public class RoundController {
             resp.getPlayerListB().stream().forEach(p->{
                 joinPlayer.add(p.getPlayerId());
             });
+
         }
     }
 

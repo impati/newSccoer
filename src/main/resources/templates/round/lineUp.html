@@ -89,6 +89,12 @@
           </div>
 
 
+
+          <div th:if="${errorMessage}">
+            <p class="field-error" th:text="${errorMessage}">글로벌 오류 메시지</p>
+          </div>
+
+
         </div>
         <button type="submit" class="btn btn-primary mb-2">라인업 저장 후 경기 시작.</button>
       </form>
