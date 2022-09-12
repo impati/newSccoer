@@ -178,6 +178,12 @@
           </div>
 
 
+
+          <div th:if="${error}">
+            <p class="field-error" th:text="${error}">글로벌 오류 메시지</p>
+          </div>
+
+
           <button type="submit" class="btn btn-primary mb-2">경기 종료</button>
 
         </form>

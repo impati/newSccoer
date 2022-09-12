@@ -18,6 +18,8 @@ import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUpReque
 import com.example.newscoccer.SearchService.round.common.lineUp.RoundLineUpResponse;
 import com.example.newscoccer.SearchService.round.leagueRound.LeagueRoundInfo;
 import com.example.newscoccer.SearchService.round.leagueRound.LeagueRoundInfoRequest;
+import com.example.newscoccer.controller.validator.GameValidator;
+import com.example.newscoccer.controller.validator.NotFoundValidation;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Round.Round;
@@ -37,7 +39,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  *  Get round/league -> 리그 라운드 정보 , 4개 리그를 모두 보여줌 .
@@ -68,6 +71,9 @@ public class RoundController {
     private final GoalAssistPair goalAssistPair;
     private final GoalAssistPairSearch goalAssistPairSearch;
     private final static String lineUpErrorMessage = "경기에 참가할 수 있는 선수는 11명이며 골기퍼는 반드시 한명이 있어야 합니다.";
+    private final static String gamePageErrorMessage = "데이터 일관성이 맞지 않습니다 "+ System.lineSeparator() +" - 1.골 일관성 "+ System.lineSeparator() + "- 2.기록 일관성 "+
+            System.lineSeparator() +"- 3.점유율 일관성 ";
+    private final static String gamePairErrorMessage = "득점자와 도움자를 제대로 입력해주세요";
 
     /**
      * season , roundSt 가 정상 입력이 아닌 경우 : 빈 정보  vs  NotFound
@@ -114,10 +120,10 @@ public class RoundController {
         if(roundSt == null) roundSt = SeasonUtils.currentChampionsRoundSt;
         if(season < 0 || season > SeasonUtils.currentSeason) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         if(roundSt % 2 != 0 ||  roundSt > 16) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
         model.addAttribute("roundSt",roundSt);
         model.addAttribute("season",season);
         model.addAttribute("Seasons",SeasonUtils.currentSeason);
-
         model.addAttribute("ChampionsRoundInfoFirst",championsRoundInfo.championsRoundInformation(new ChampionsRoundInfoRequest(season, roundSt)).getFirstRound());
         model.addAttribute("ChampionsRoundInfoSecond",championsRoundInfo.championsRoundInformation(new ChampionsRoundInfoRequest(season, roundSt)).getSecondRound());
 
@@ -129,6 +135,7 @@ public class RoundController {
     /**
      * 라인업 페이지
      */
+    @NotFoundValidation
     @GetMapping(value = {"/line-up/{roundId}"})
     public String lineUpPage(@PathVariable Long roundId ,
                              @RequestParam(required = false,value ="error-message")Boolean errorMessage ,Model model){
@@ -186,6 +193,7 @@ public class RoundController {
      * 상대 전력 페이지
      * TODO : 데이터가 많이 들어간 후에 유효성 검증
      */
+    @NotFoundValidation
     @GetMapping("/power/{roundId}")
     public String powerPage(@PathVariable Long roundId, Model model){
 
@@ -209,35 +217,45 @@ public class RoundController {
     /**
      * 게임 페이지
      */
+    @NotFoundValidation
     @GetMapping("/game/{roundId}")
-    public String gamePage(@PathVariable Long roundId , Model model){
+    public String gamePage(@PathVariable Long roundId , @RequestParam(required = false , value = "error") Boolean error ,  Model model){
         Round round = roundRepository.findById(roundId).orElse(null);
-
         if(round.getRoundStatus() == RoundStatus.YET) return "error/gameStartBeforeError";
         if(round.getRoundStatus() == RoundStatus.PAIR) return "redirect:/round/game-pair/" + roundId;
         if(round.getRoundStatus() == RoundStatus.DONE) return "redirect:/round/game-done/" + roundId;
 
+        model.addAttribute("error",error == null ? error : gamePageErrorMessage);
         GameResultResponse gameResultResponse = gameResult.gameResult(new GameResultRequest(roundId));
-
         model.addAttribute("gameResultResponse",gameResultResponse);
         model.addAttribute("gameData" , new GameData());
         return "round/game";
     }
 
+
     @PostMapping("/game/{roundId}")
-    public String game(@PathVariable Long roundId , @ModelAttribute GameData gameData){
+    public String game(@PathVariable Long roundId , @ModelAttribute GameData gameData , RedirectAttributes redirectAttributes){
         GameResultResponse resp = gameResult.gameResult(new GameResultRequest(roundId));
         GameRecordDto dto = gameData.dataTransfer(roundId, resp);
+
+        // validation 필요
+        if(GameValidator.gameRecordHasError(dto)){
+            redirectAttributes.addAttribute("error",true);
+            return "redirect:/round/game/" + roundId;
+        }
+
         gameRecordRegister.gameRecordRegister(dto);
         return "redirect:/round/game/" +  roundId;
     }
 
 
 
+    @NotFoundValidation
     @GetMapping("/game-pair/{roundId}")
-    public String gamePairPage(@PathVariable Long roundId , Model model){
+    public String gamePairPage(@PathVariable Long roundId , @RequestParam(required = false,value = "error") Boolean error, Model model){
 
         GameResultResponse resp = gameResult.gameResult(new GameResultRequest(roundId));
+        model.addAttribute("error",error == null ? null : gamePairErrorMessage);
         model.addAttribute("gameResult",resp);
         model.addAttribute("goalTypeList", GoalType.values());
 
@@ -248,10 +266,10 @@ public class RoundController {
         playerList.add(new PlayerSimInfo(0L,"없음"));
         playerList.addAll(
                 resp.getPlayerADtoList().stream()
-                        .map(ele->new PlayerSimInfo(ele.getPlayerId(),ele.getPlayerName())).collect(Collectors.toList()));
+                        .map(ele->new PlayerSimInfo(ele.getPlayerId(),ele.getPlayerName())).collect(toList()));
         playerList.addAll(
                 resp.getPlayerBDtoList().stream()
-                        .map(ele->new PlayerSimInfo(ele.getPlayerId(),ele.getPlayerName())).collect(Collectors.toList()));
+                        .map(ele->new PlayerSimInfo(ele.getPlayerId(),ele.getPlayerName())).collect(toList()));
 
         model.addAttribute("pairRecord",new PairRecord());
         model.addAttribute("count",count);
@@ -262,15 +280,26 @@ public class RoundController {
     }
 
     @PostMapping("/game-pair/{roundId}")
-    public String gamePair(@PathVariable Long roundId , @ModelAttribute PairRecord pairRecord){
+    public String gamePair(@PathVariable Long roundId , @ModelAttribute PairRecord pairRecord,RedirectAttributes redirectAttributes){
+
+        //validation
+
+        if(GameValidator.gamePairHasError(gameResult.gameResult(new GameResultRequest(roundId)),
+        pairRecord.getGoalPlayer(),pairRecord.getAssistPlayer())){
+            redirectAttributes.addAttribute("error",true);
+            return "redirect:/round/game-pair/" + roundId;
+        }
+
         goalAssistPair.goalPairRegister(pairRecord.dataTransfer(),roundId);
         return "redirect:/round/game/" + roundId;
     }
 
 
 
+    @NotFoundValidation
     @GetMapping("/game-done/{roundId}")
     public String gameDonePage(@PathVariable Long roundId , Model model) {
+
         List<GoalAssistPairInfo> goalAssistPairInfos = goalAssistPairSearch.goalAssistPairSearch(roundId);
         model.addAttribute("duoResultResponse",goalAssistPairInfos);
         GameResultResponse resp = gameResult.gameResult(new GameResultRequest(roundId));

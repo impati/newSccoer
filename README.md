@@ -47,6 +47,7 @@
 - Grade Decision
 
 ### TODO
+  - validation 리팩토링 (With 단일 책임 , AOP )
   - 시나리오 테스트 
   - 선수 목록 페이징 , 감독 목록 페이징 , 팀,선수 순위 페이징  
   - 유로파 도입 

@@ -1,18 +1,16 @@
 package com.example.newscoccer.controller;
 
+import com.example.newscoccer.controller.validator.NotFoundValidation;
 import com.example.newscoccer.domain.League;
-import com.example.newscoccer.exception.NotFoundEntity;
 import com.example.newscoccer.springDataJpa.LeagueRepository;
 import com.example.newscoccer.springDataJpa.TeamRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.server.ResponseStatusException;
 
 import static java.util.stream.Collectors.toList;
 
@@ -25,10 +23,11 @@ import static java.util.stream.Collectors.toList;
 public class LeagueController {
     private final TeamRepository teamRepository;
     private final LeagueRepository leagueRepository;
+
+    @NotFoundValidation
     @GetMapping("/league/{leagueId}")
     public String leaguePage(@PathVariable Long leagueId , Model model){
         League league = leagueRepository.findById(leagueId).orElse(null);
-        if(league == null) throw new ResponseStatusException(HttpStatus.NOT_FOUND,"리그가 없습니다.",new NotFoundEntity("리그가 없습니다."));
         model.addAttribute("leagueName",league.getName());
         model.addAttribute("teams",teamRepository.findByLeague(leagueId)
                 .stream().map(t->new TeamNameAndRating(t.getId(),t.getName(),t.getRating())).collect(toList()));

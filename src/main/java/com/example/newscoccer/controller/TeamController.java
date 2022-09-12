@@ -11,6 +11,7 @@ import com.example.newscoccer.SearchService.team.info.league.TeamLeagueInfoReque
 import com.example.newscoccer.SearchService.team.info.league.TeamLeagueInfoResponse;
 import com.example.newscoccer.SearchService.team.info.totalInfo.TeamTotalInfoRequest;
 import com.example.newscoccer.SearchService.team.info.totalInfo.TeamTotalInfoResponse;
+import com.example.newscoccer.controller.validator.NotFoundValidation;
 import com.example.newscoccer.domain.SeasonUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +35,7 @@ public class TeamController {
     private final EntityRecordInfo<TeamChampionsInfoRequest , TeamChampionsInfoResponse> championsInfo;
     private final EntityTotalInfo <TeamTotalInfoRequest, TeamTotalInfoResponse> totalInfo;
 
+    @NotFoundValidation
     @GetMapping("/{teamId}")
     public String teamPage(@PathVariable Long teamId,@RequestParam(required = false) Integer season, Model model){
         if(season == null) season = SeasonUtils.currentSeason;

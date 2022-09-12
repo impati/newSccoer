@@ -63,7 +63,6 @@ public class DefaultFaceToHead implements FaceToHead{
     @Override
     public TotalComparisonRecordResponse totalComparison(Long roundId) {
         Round round = roundRepository.findById(roundId).orElse(null);
-
         RoundFeature <List<TeamRecord>> feature = new RoundFeature<>() {
             @Override
             public List<TeamRecord> leagueSolved() {
@@ -111,7 +110,6 @@ public class DefaultFaceToHead implements FaceToHead{
     @Override
     public TopPlayerResponse top5Player(Long roundId) {
         Round round = roundRepository.findById(roundId).orElse(null);
-
         RoundFeature<TopPlayerResponse> feature = new RoundFeature<>() {
             @Override
             public TopPlayerResponse leagueSolved() {
@@ -313,6 +311,7 @@ public class DefaultFaceToHead implements FaceToHead{
 
         return new RoundTemplate().action(round,feature);
     }
+
 
 
 }

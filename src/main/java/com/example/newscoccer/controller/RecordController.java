@@ -2,6 +2,7 @@ package com.example.newscoccer.controller;
 
 import com.example.newscoccer.SearchService.record.player.SearchPlayerRecord;
 import com.example.newscoccer.SearchService.record.team.SearchTeamRecord;
+import com.example.newscoccer.controller.validator.NotFoundValidation;
 import com.example.newscoccer.domain.Direction;
 import com.example.newscoccer.domain.League;
 import com.example.newscoccer.domain.SeasonUtils;
@@ -24,11 +25,14 @@ public class RecordController {
     private final LeagueRepository leagueRepository;
     private final SearchTeamRecord searchTeamRecord;
     private final SearchPlayerRecord searchPlayerRecord;
+
+    @NotFoundValidation
     @GetMapping(value = {"/league/{leagueId}/team","league/team"})
     public String leagueTeamRank(@PathVariable(required = false) Long leagueId  ,
                                  @RequestParam(required = false) Integer season , Model model){
+
         if(leagueId == null) leagueId = 1L;
-        if(season == null) season = SeasonUtils.currentSeason;
+        season = seasonValidation(season);
         model.addAttribute("Seasons", SeasonUtils.currentSeason);
         model.addAttribute("season",season);
         League league = leagueRepository.findById(leagueId).orElse(null);
@@ -40,14 +44,19 @@ public class RecordController {
 
 
     //TODO : Direction.ASC 구현
+    @NotFoundValidation
     @GetMapping(value = {"/league/player","/league/{leagueId}/player"})
     public String leaguePlayerRecord(@PathVariable(required = false) Long leagueId ,
                                      @RequestParam(required = false) Integer season ,
                                      @RequestParam(required = false) SortType sortType , Model model){
+
         if(leagueId == null) leagueId = 1L;
-        if(season == null) season = SeasonUtils.currentSeason;
         if(sortType == null) sortType  = SortType.GOAL;
+        season = seasonValidation(season);
         League league = leagueRepository.findById(leagueId).orElse(null);
+
+
+
 
         model.addAttribute("Seasons", SeasonUtils.currentSeason);
         model.addAttribute("season",season);
@@ -61,7 +70,7 @@ public class RecordController {
     @GetMapping("/champions/team")
     public String championsTeamRecord(@RequestParam(required = false) Integer season,Model model ){
 
-        if(season == null) season = SeasonUtils.currentSeason;
+        season = seasonValidation(season);
         model.addAttribute("Seasons", SeasonUtils.currentSeason);
         model.addAttribute("season",season);
         model.addAttribute("championsTeamRecordResponse",
@@ -74,7 +83,7 @@ public class RecordController {
                                         @RequestParam(required = false) SortType sortType ,
                                         Model model){
 
-        if(season == null) season = SeasonUtils.currentSeason;
+        season = seasonValidation(season);
         if(sortType == null) sortType  = SortType.GOAL;
 
         model.addAttribute("Seasons", SeasonUtils.currentSeason);
@@ -88,6 +97,12 @@ public class RecordController {
     }
 
 
+
+    private int seasonValidation(Integer season){
+        if(season == null || season > SeasonUtils.currentSeason || season < 0 )
+            season = SeasonUtils.currentSeason;
+        return season;
+    }
 
 
 
