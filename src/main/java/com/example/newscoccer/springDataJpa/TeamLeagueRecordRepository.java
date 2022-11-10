@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueRecord ,Long> {
+public interface TeamLeagueRecordRepository extends JpaRepository<TeamLeagueRecord ,Long> ,TeamRecordRepository{
 
     List<TeamLeagueRecord> findByTeam(Team team);
 
