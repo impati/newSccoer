@@ -14,7 +14,7 @@ import org.springframework.data.repository.query.Param;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampionsRecord,Long> {
+public interface TeamChampionsRecordRepository extends JpaRepository<TeamChampionsRecord,Long> ,TeamRecordRepository{
 
 
     @Query("select tcr from TeamChampionsRecord tcr " +
