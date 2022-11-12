@@ -1,5 +1,7 @@
 package com.example.newscoccer.RegisterService.round.common.lineUp;
 
-public interface LineUpRegister {
+import com.example.newscoccer.domain.Round.RoundFunction;
+
+public interface LineUpRegister extends RoundFunction {
     void lineUpRegister(LineUpResultDto lineUpResultDto);
 }
