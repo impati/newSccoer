@@ -5,6 +5,7 @@ import com.example.newscoccer.domain.Player.Player;
 import com.example.newscoccer.domain.Player.Position;
 import com.example.newscoccer.domain.Player.Stat;
 import com.example.newscoccer.domain.Round.LeagueRound;
+import com.example.newscoccer.domain.Round.RoundResolver;
 import com.example.newscoccer.domain.Team;
 import com.example.newscoccer.domain.record.PlayerLeagueRecord;
 import com.example.newscoccer.domain.record.TeamLeagueRecord;
@@ -27,6 +28,9 @@ class DefaultLineUpRegisterTest {
 
     @Autowired
     LineUpRegister lineUpRegister;
+
+    @Autowired
+    RoundResolver roundResolver;
 
     @Autowired
     LeagueRepository leagueRepository;
@@ -92,7 +96,8 @@ class DefaultLineUpRegisterTest {
 
 
         // when
-        lineUpRegister.lineUpRegister(ret);
+        roundResolver.roundFunction(ret,LineUpRegister.class);
+        //lineUpRegister.lineUpRegister(ret);
 
 
         List<PlayerLeagueRecord> resultA = playerLeagueRecordRepository.findByTeamAndRound(teamA,leagueRound);
