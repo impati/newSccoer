@@ -1,6 +1,7 @@
 package com.example.newscoccer.RegisterService.round.common.lineUp;
 
 import com.example.newscoccer.domain.Player.Position;
+import com.example.newscoccer.domain.Round.RoundDto;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ import java.util.List;
  *
  * */
 @Data
-public class LineUpResultDto {
-    private Long roundId;
+public class LineUpResultDto extends RoundDto {
+
     private List<LineUpResult> participatePlayer = new ArrayList<>();
     private int value = 0;
     public void addParticipatePlayer(LineUpResult lineUpResult){
