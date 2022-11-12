@@ -13,6 +13,7 @@ import com.example.newscoccer.springDataJpa.PlayerRepository;
 import com.example.newscoccer.springDataJpa.RoundRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,8 +21,10 @@ import org.springframework.transaction.annotation.Transactional;
  * All type line up 저장을 처리
  * playerRecord  를 저장험,
  */
+
 @Slf4j
 @Service
+@Primary
 @Transactional
 @RequiredArgsConstructor
 public class DefaultLineUpRegister implements LineUpRegister{
@@ -72,4 +75,5 @@ public class DefaultLineUpRegister implements LineUpRegister{
 
         new RoundTemplate().action(round,roundFeature);
     }
+
 }

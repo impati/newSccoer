@@ -32,7 +32,7 @@ public class RoundResolver {
             if(feature.isInstance(function)){
 
                 if(function.supports(roundUtils.getRound(arg.getRoundId()))){
-                    function.feature(arg);
+                    function.feature(arg) ;
                     return ;
                 }
             }
