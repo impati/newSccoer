@@ -5,4 +5,6 @@ package com.example.newscoccer.domain.Round;
  */
 public interface RoundFunction {
     default boolean supports(Round round){return false;}
+    default <T> T feature(RoundDto roundDto,   Class<T> returnType){return null;}
+    default void feature(RoundDto roundDto){}
 }
