@@ -21,9 +21,6 @@ public class RoundLineUpResponse extends DataTransferObject {
     private boolean lineUpDone = false;
 
 
-//    public boolean getLineUpDone(){
-//         return lineUpDone;
-//    }
     public void teamAUpdate(Team team){
         this.teamAId = team.getId();
         this.teamAName = team.getName();
