@@ -15,6 +15,14 @@ import java.util.List;
 public class RoundResolver {
     private final List<RoundFunction> roundFunctionList ;
     private final RoundUtils roundUtils;
+
+    /**
+     * @param arg requestDto
+     * @param feature 사용하고자 하는 기능
+     * @param returnType responseDto.class
+     * @return
+     * @param <T> responseDto
+     */
     public <T> T roundFunction(RoundDto arg ,  Class feature,  Class<T> returnType){
         for(int i = 0;i<roundFunctionList.size();i++){
             RoundFunction function = roundFunctionList.get(i);
@@ -30,7 +38,6 @@ public class RoundResolver {
         for(int i = 0;i<roundFunctionList.size();i++){
             RoundFunction function = roundFunctionList.get(i);
             if(feature.isInstance(function)){
-
                 if(function.supports(roundUtils.getRound(arg.getRoundId()))){
                     function.feature(arg) ;
                     return ;
